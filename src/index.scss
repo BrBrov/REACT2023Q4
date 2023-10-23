@@ -1,0 +1,15 @@
+body {
+  margin: 0;
+  padding: 0;
+  background:url('./background.webp')  no-repeat center/cover;
+}
+
+.beer {
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  padding-bottom: 10px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

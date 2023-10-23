@@ -1,0 +1,10 @@
+.beer__container {
+  display: flex;
+  width: 100%;
+  max-width: 1440px;
+  min-height: calc(100vh - 10px);
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+

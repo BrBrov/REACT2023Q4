@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
-import './index.css';
+import Beer from './Beer';
+import './index.scss';
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(document.querySelector('.beer')!).render(
   <React.StrictMode>
-    <App />
+    <Beer />
   </React.StrictMode>
 );
