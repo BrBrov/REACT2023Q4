@@ -1,12 +1,24 @@
 import { Component, ReactElement } from 'react';
-import './Main.scss';
 
-class Main extends Component {
+import './Main.scss';
+import { MainProps, MainState } from '../../models/Main-models';
+class Main extends Component<MainProps, MainState> {
+  public static readonly defaultProps: Readonly<MainProps> | null;
+
+  constructor(props: MainProps) {
+    super(props);
+  }
   public render(): ReactElement {
+    const { cards } = this.props as unknown as MainProps;
+
     return (
       <>
         <main className="main">
-          <span>Main</span>
+          {cards ? (
+            <div className="main__cards-wrapper">{cards}</div>
+          ) : (
+            <span>Loading...</span>
+          )}
         </main>
       </>
     );

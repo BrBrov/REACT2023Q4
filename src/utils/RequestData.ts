@@ -14,7 +14,7 @@ class RequestData {
     this.storage = new StorageProcessor();
   }
 
-  public getResponseData(search: string | null): Promise<ResponseData> {
+  public getResponseData(search: string | null): Promise<Array<ResponseData>> {
     const url: string = this.generateURL(search);
 
     return fetch(url, { method: 'GET', mode: 'cors' }).then(

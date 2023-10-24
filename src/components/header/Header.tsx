@@ -12,7 +12,6 @@ class Header extends Component<PropHeader, HeaderState> {
       : { search: '' };
   }
   public render(): ReactNode {
-    console.log(this.props);
     return (
       <>
         <header className="header">

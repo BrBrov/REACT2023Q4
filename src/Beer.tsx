@@ -5,14 +5,22 @@ import Header from './components/header/Header';
 import Main from './components/main/Main';
 import RequestData from './utils/RequestData';
 import ResponseData from './models/ResponseData';
+import { BeerProps, BeerState } from './models/Beer-models';
+import CardCreator from './utils/CardCreator';
 
-class Beer extends PureComponent<Record<string, never>> {
+class Beer extends PureComponent<BeerProps, BeerState> {
   public static readonly defaultProps: Readonly<Record<string, never>>;
 
   private fetcher: RequestData = new RequestData();
 
+  constructor(props: Record<string, never>) {
+    super(props);
+    this.state = {
+      cards: null,
+    };
+  }
+
   public render(): ReactNode {
-    console.log(this.state);
     return (
       <>
         <div className="beer__container">
@@ -22,7 +30,7 @@ class Beer extends PureComponent<Record<string, never>> {
               searchString: this.fetcher.getSearchString(),
             }}
           />
-          <Main />
+          <Main {...{ cards: this.state.cards }} />
         </div>
       </>
     );
@@ -37,9 +45,21 @@ class Beer extends PureComponent<Record<string, never>> {
   }
 
   private getData(search: string | null): void {
-    this.fetcher
-      .getResponseData(search)
-      .then((data: ResponseData) => this.setState(data));
+    this.fetcher.getResponseData(search).then((data: Array<ResponseData>) => {
+      const cards = this.createCards(data);
+      this.setState({ cards: cards });
+    });
+  }
+
+  private createCards(
+    data: Array<ResponseData> | null
+  ): Array<ReactNode> | null {
+    if (!data) return null;
+
+    return data.map((item: ResponseData) => {
+      const cardCreator = new CardCreator(item);
+      return cardCreator.getCard();
+    });
   }
 }
 
