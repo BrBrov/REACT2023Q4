@@ -1,11 +1,11 @@
-import {Component, ReactElement} from 'react';
+import { Component, ReactElement } from 'react';
 import './Main.scss';
 
 class Main extends Component {
   public render(): ReactElement {
     return (
       <>
-        <main className='main'>
+        <main className="main">
           <span>Main</span>
         </main>
       </>
