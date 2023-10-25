@@ -9,7 +9,7 @@ class RequestData {
 
   constructor() {
     this.page = 1;
-    this.countCards = 10;
+    this.countCards = 12;
     this.baseURL = `https://api.punkapi.com/v2/beers?page=${this.page}&per_page=${this.countCards}`;
     this.storage = new StorageProcessor();
   }
@@ -27,6 +27,8 @@ class RequestData {
   }
 
   private generateURL(search: string | null): string {
+    this.storage.search = search ? search : null;
+
     if (search) {
       this.storage.search = search;
       return (

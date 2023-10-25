@@ -8,7 +8,7 @@ interface ResponseData {
   tagline: string;
   first_brewed: string;
   description: string;
-  image_url: string;
+  image_url: string | null;
   abv: number;
   ibu: number;
   target_fg: number;

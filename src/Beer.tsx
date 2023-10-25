@@ -37,7 +37,7 @@ class Beer extends PureComponent<BeerProps, BeerState> {
   }
 
   componentDidMount(): void {
-    this.getData(null);
+    this.getData(this.fetcher.getSearchString());
   }
 
   public setSearch(search: string | null): void {

@@ -9,9 +9,13 @@ class StorageProcessor {
     return this.searchString;
   }
 
-  set search(searchString: string) {
+  set search(searchString: string | null) {
     this.searchString = searchString;
-    localStorage.setItem('search', searchString);
+    if (!this.searchString) {
+      localStorage.clear();
+    } else {
+      localStorage.setItem('search', this.searchString);
+    }
   }
 }
 
