@@ -1,4 +1,4 @@
-import { PureComponent, ReactNode } from 'react';
+import { Component, ReactNode } from 'react';
 
 import './Beer.scss';
 import Header from './components/header/Header';
@@ -7,8 +7,9 @@ import RequestData from './utils/RequestData';
 import ResponseData from './models/ResponseData';
 import { BeerProps, BeerState } from './models/Beer-models';
 import CardCreator from './utils/CardCreator';
+import NotFound from './components/not-found/Not-Found';
 
-class Beer extends PureComponent<BeerProps, BeerState> {
+class Beer extends Component<BeerProps, BeerState> {
   public static readonly defaultProps: Readonly<Record<string, never>>;
 
   private fetcher: RequestData = new RequestData();
@@ -55,6 +56,8 @@ class Beer extends PureComponent<BeerProps, BeerState> {
     data: Array<ResponseData> | null
   ): Array<ReactNode> | null {
     if (!data) return null;
+
+    if (!data.length) return [ <NotFound key={1}/> ];
 
     return data.map((item: ResponseData) => {
       const cardCreator = new CardCreator(item);

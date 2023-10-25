@@ -22,7 +22,7 @@ class Card extends Component<CardProps, Record<string, never>> {
             <div className="card__image-container">
               <img
                 className="card__image"
-                src={image_url}
+                src={image_url ? image_url : '/image.png'}
                 alt={`Image of ${description}`}
               />
             </div>

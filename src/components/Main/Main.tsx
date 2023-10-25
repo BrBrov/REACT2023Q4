@@ -2,6 +2,8 @@ import { Component, ReactElement } from 'react';
 
 import './Main.scss';
 import { MainProps, MainState } from '../../models/Main-models';
+import ErrorButton from '../error-button/Error-Button';
+
 class Main extends Component<MainProps, MainState> {
   public static readonly defaultProps: Readonly<MainProps> | null;
 
@@ -14,11 +16,8 @@ class Main extends Component<MainProps, MainState> {
     return (
       <>
         <main className="main">
-          {cards ? (
-            <div className="main__cards-wrapper">{cards}</div>
-          ) : (
-            <span>Loading...</span>
-          )}
+          <div className="main__cards-wrapper">{cards}</div>
+          <ErrorButton />
         </main>
       </>
     );

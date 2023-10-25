@@ -1,0 +1,26 @@
+.main__smell-section {
+  display: flex;
+  width: 100%;
+  height: 60px;
+  justify-content: center;
+  align-items: center;
+}
+
+.main__button-wrapper {
+  display: flex;
+  max-width: 320px;
+  height: 85%;
+  min-width: 320px;
+  justify-content: center;
+  align-items: center;
+  border: 1px #0b0118 dotted;
+  border-radius: 5px;
+}
+
+.main__smell-button {
+  width: 130px;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  background: linear-gradient(45deg, #ee4c4c, #ee3333, #ee0707, #ee3333, #ee4c4c);
+}

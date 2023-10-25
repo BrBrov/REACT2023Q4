@@ -1,0 +1,30 @@
+@import './../../styles/fonts';
+@import './../../styles/colors';
+
+.main__result-apson {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.main__absent-wrapper {
+  display: flex;
+  width: 55%;
+  height: 55%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 10px;
+  background: $card-background;
+  box-shadow: $box-shadow-card;
+}
+
+.main__not-found {
+  @include CardoBold(1.5em);
+  color: $title-color;
+}
+
