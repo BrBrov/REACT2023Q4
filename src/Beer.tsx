@@ -2,7 +2,7 @@ import { Component, ReactNode } from 'react';
 
 import './Beer.scss';
 import Header from './components/header/Header';
-import Main from './components/main/Main';
+import Main from './components/Main/Main';
 import RequestData from './utils/RequestData';
 import ResponseData from './models/ResponseData';
 import { BeerProps, BeerState } from './models/Beer-models';
