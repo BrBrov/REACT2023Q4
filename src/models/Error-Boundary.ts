@@ -1,4 +1,4 @@
-import {ReactNode} from 'react';
+import { ReactNode } from 'react';
 
 export interface ErrorBoundaryState {
   wasError: boolean;
@@ -10,4 +10,4 @@ export interface ErrorBoundaryProps {
 
 export type ErrorStack = {
   componentStack: string;
-}
+};

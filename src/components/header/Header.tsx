@@ -1,4 +1,4 @@
-import {Component, FormEvent, ReactNode, SyntheticEvent} from 'react';
+import { Component, FormEvent, ReactNode, SyntheticEvent } from 'react';
 
 import './Header.scss';
 import { HeaderState, PropHeader } from '../../models/Header-models';
@@ -19,8 +19,8 @@ class Header extends Component<PropHeader, HeaderState> {
             className="header__input"
             type="text"
             name="search"
-            onInput={ this.onInputSearch.bind(this) }
-            onKeyDown={ this.onEnterPress.bind(this) }
+            onInput={this.onInputSearch.bind(this)}
+            onKeyDown={this.onEnterPress.bind(this)}
             value={this.state.search}
           />
           <button
@@ -47,7 +47,7 @@ class Header extends Component<PropHeader, HeaderState> {
 
   private onEnterPress(e: SyntheticEvent): void {
     const { key } = e.nativeEvent as KeyboardEvent;
-    if(key === 'Enter') return this.onBtnClick();
+    if (key === 'Enter') return this.onBtnClick();
   }
 }
 

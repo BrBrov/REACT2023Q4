@@ -57,7 +57,7 @@ class Beer extends Component<BeerProps, BeerState> {
   ): Array<ReactNode> | null {
     if (!data) return null;
 
-    if (!data.length) return [ <NotFound key={1}/> ];
+    if (!data.length) return [<NotFound key={1} />];
 
     return data.map((item: ResponseData) => {
       const cardCreator = new CardCreator(item);
