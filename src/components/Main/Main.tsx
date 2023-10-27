@@ -7,9 +7,6 @@ import ErrorButton from '../error-button/Error-Button';
 class Main extends Component<MainProps, MainState> {
   public static readonly defaultProps: Readonly<MainProps> | null;
 
-  constructor(props: MainProps) {
-    super(props);
-  }
   public render(): ReactElement {
     const { cards } = this.props as unknown as MainProps;
 

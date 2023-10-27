@@ -16,11 +16,7 @@ class ErrorButton extends Component<Record<string, never>, ErrorButtonState> {
     };
   }
   render(): ReactNode {
-    if (this.state.error) {
-      const error: Error = new Error('Smell button caused this error');
-      error.name = 'Smell button click';
-      throw error;
-    }
+    if (this.state.error) this.pageBroker();
 
     return (
       <>
@@ -41,6 +37,12 @@ class ErrorButton extends Component<Record<string, never>, ErrorButtonState> {
 
   private throwError(): void {
     this.setState({ error: true });
+  }
+
+  private pageBroker(): void {
+    const error: Error = new Error('Smell button caused this error');
+    error.name = 'Smell button click';
+    throw error;
   }
 }
 

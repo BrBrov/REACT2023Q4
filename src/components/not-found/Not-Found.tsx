@@ -5,10 +5,6 @@ import './Not-Found.scss';
 class NotFound extends Component<Record<string, number>> {
   public static readonly defaultProps: Readonly<Record<string, number>>;
 
-  constructor(props: Record<string, number>) {
-    super(props);
-  }
-
   render() {
     return (
       <div className="main__result-apson">

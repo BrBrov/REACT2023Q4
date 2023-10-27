@@ -4,11 +4,8 @@ import './Card.scss';
 import { CardProps } from '../../models/Card-model';
 
 class Card extends Component<CardProps, Record<string, never>> {
-  public static readonly defaultProps: Readonly<CardProps>;
+  public static readonly defaultProps: Readonly<CardProps>
 
-  constructor(props: CardProps) {
-    super(props);
-  }
   render(): ReactNode {
     const { name, description, image_url, volume, ibu, srm, abv } = this
       .props as unknown as Readonly<CardProps>;

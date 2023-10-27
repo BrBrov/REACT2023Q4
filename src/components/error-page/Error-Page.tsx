@@ -6,9 +6,6 @@ import { ErrorPageProps, ErrorPageState } from '../../models/ErrorPage-model';
 class ErrorPage extends Component<ErrorPageProps, ErrorPageState> {
   public static readonly defaultProps: Readonly<ErrorPageProps>;
 
-  constructor(props: ErrorPageProps) {
-    super(props);
-  }
   render(): ReactNode {
     return (
       <>
