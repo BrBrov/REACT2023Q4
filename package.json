@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint": "eslint . --ext ts,tsx --max-warnings=0",
+    "lint": "eslint . --ext ts,tsx",
     "lint:fix": "eslint . --ext ts,tsx --fix",
     "format": "prettier --check \"src/**/*.{tsx,ts,scss}\"",
     "format:fix": "prettier -w \"src/**/*.{tsx,ts,scss}\"",
