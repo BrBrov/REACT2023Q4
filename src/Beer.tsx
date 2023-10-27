@@ -5,12 +5,14 @@ import Header from './components/header/Header';
 import Main from './components/main/Main';
 import RequestData from './utils/RequestData';
 import ResponseData from './models/ResponseData';
-import { BeerProps, BeerState } from './models/Beer-models';
+import { BeerState } from './models/Beer-models';
 import CardCreator from './utils/CardCreator';
 import NotFound from './components/not-found/Not-Found';
 
+type BeerProps = Record<string, never>;
+
 class Beer extends Component<BeerProps, BeerState> {
-  public static readonly defaultProps: Readonly<Record<string, never>>;
+  public static readonly defaultProps: Readonly<BeerProps>;
 
   private fetcher: RequestData = new RequestData();
 

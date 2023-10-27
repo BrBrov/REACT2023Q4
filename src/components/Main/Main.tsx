@@ -1,8 +1,10 @@
 import { Component, ReactElement } from 'react';
 
 import './Main.scss';
-import { MainProps, MainState } from '../../models/Main-models';
+import { MainProps } from '../../models/Main-models';
 import ErrorButton from '../error-button/Error-Button';
+
+type MainState = Record<string, never>;
 
 class Main extends Component<MainProps, MainState> {
   public static readonly defaultProps: Readonly<MainProps> | null;

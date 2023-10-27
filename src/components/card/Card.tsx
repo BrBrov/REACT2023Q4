@@ -3,7 +3,9 @@ import { Component, ReactNode } from 'react';
 import './Card.scss';
 import { CardProps } from '../../models/Card-model';
 
-class Card extends Component<CardProps, Record<string, never>> {
+type CardState = Record<string, never>;
+
+class Card extends Component<CardProps, CardState> {
   public static readonly defaultProps: Readonly<CardProps>;
 
   render(): ReactNode {

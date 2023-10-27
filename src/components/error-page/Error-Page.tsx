@@ -1,7 +1,9 @@
 import { Component, ReactNode } from 'react';
 
 import './Error-Page.scss';
-import { ErrorPageProps, ErrorPageState } from '../../models/ErrorPage-model';
+import { ErrorPageProps } from '../../models/ErrorPage-model';
+
+type ErrorPageState = Record<string, never>;
 
 class ErrorPage extends Component<ErrorPageProps, ErrorPageState> {
   public static readonly defaultProps: Readonly<ErrorPageProps>;
