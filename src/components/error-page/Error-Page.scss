@@ -26,6 +26,11 @@
 .error__text {
   @include CardoBold(1.5em);
   color: #c20303;
+
+  @media screen and (max-width: 957px) {
+    text-align: center;
+    padding: 5px;
+  }
 }
 
 .error__page-reload {

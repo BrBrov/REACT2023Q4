@@ -32,7 +32,7 @@
     4. - [x]   package.json commands
         - Add the following npm scripts:
             - - [x]   `lint`: For running the lint command.
-            - - [ ]  `format:fix`: For running Prettier's --write command.
+            - - [x]  `format:fix`: For running Prettier's --write command.
 5. - [x]   Pick a RESTfull api which supports search and pagination (pagination might be reffered as *offset* and *limit* params). 
 6. - [x]   Implement the following requirements:
     -  - [x]  Create a page comprised of 2 horizontal section (a smaller top one, and a bigger bottom one);
@@ -54,7 +54,7 @@ The task will be checked during cross-check and cross-code-review.
 1. - [x]   Clone the repository you are going to review
 2. - [x]   Install all the required dependencies
 3. - [x]   Run linting using special command in package.json file, output should not produce any errors or warnings
-4. - [ ]   Run prettier using special command in package.json file, make sure that fix commands fixes issues
+4. - [x]   Run prettier using special command in package.json file, make sure that fix commands fixes issues
 5. - [x]   Review the code. Pay attention at the following "code smells":
     - props drilling;
     - large, complex components aka "god" components;
