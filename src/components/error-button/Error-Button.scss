@@ -1,3 +1,6 @@
+@import '../../styles/fonts';
+@import '../../styles/colors';
+
 .main__smell-section {
   display: flex;
   width: 100%;
@@ -30,4 +33,36 @@
     #ee3333,
     #ee4c4c
   );
+  cursor: pointer;
+}
+
+.main__smell-button:hover {
+  box-shadow: 0 0 2px 3px #5e0303;
+  background: linear-gradient(
+      45deg,
+      #f60606,
+      #ee4c4c,
+      #ec8585,
+      #ee4c4c,
+      #f60606
+  );
+}
+
+.main__smell-button:active {
+  width: 120px;
+  height: 35px;
+  box-shadow: 0 0 0 2px #5e0303;
+  background: linear-gradient(
+      45deg,
+      #f60606,
+      #ee4c4c,
+      #ec8585,
+      #ee4c4c,
+      #f60606
+  );
+}
+
+.main__smell-text {
+  @include CardoBold(1.1em);
+  color: $text-color;
 }
