@@ -6,7 +6,7 @@ body {
   padding: 0;
   background: $bg-descktop;
 
-  @media screen and (max-width: 750px){
+  @media screen and (max-width: 750px) {
     background: $bg-mobile;
   }
 }
