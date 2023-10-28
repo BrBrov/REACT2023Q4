@@ -14,10 +14,10 @@ class Main extends Component<MainProps, MainState> {
 
     return (
       <>
-        <main className="main">
-          <div className="main__cards-wrapper">{cards}</div>
+        <div className="main">
+          <main className="main__cards-wrapper">{cards}</main>
           <ErrorButton />
-        </main>
+        </div>
       </>
     );
   }

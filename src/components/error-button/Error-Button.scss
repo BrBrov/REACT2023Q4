@@ -1,7 +1,7 @@
 @import '../../styles/fonts';
 @import '../../styles/colors';
 
-.main__smell-section {
+.footer__smell-section {
   display: flex;
   width: 100%;
   height: 60px;
@@ -9,7 +9,7 @@
   align-items: center;
 }
 
-.main__button-wrapper {
+.footer__button-wrapper {
   display: flex;
   max-width: 320px;
   height: 85%;
@@ -20,7 +20,7 @@
   border-radius: 5px;
 }
 
-.main__smell-button {
+.footer__smell-button {
   width: 130px;
   height: 40px;
   border: none;
@@ -36,7 +36,7 @@
   cursor: pointer;
 }
 
-.main__smell-button:hover {
+.footer__smell-button:hover {
   box-shadow: 0 0 2px 3px #5e0303;
   background: linear-gradient(
     45deg,
@@ -48,7 +48,7 @@
   );
 }
 
-.main__smell-button:active {
+.footer__smell-button:active {
   width: 120px;
   height: 35px;
   box-shadow: 0 0 0 2px #5e0303;
@@ -62,7 +62,7 @@
   );
 }
 
-.main__smell-text {
+.footer__smell-text {
   @include CardoBold(1.1em);
   color: $text-color;
 }

@@ -4,8 +4,9 @@
 .error {
   display: flex;
   width: 80%;
-  min-width: 300px;
+  max-width: 680px;
   height: calc(100vh - 500px);
+  min-height: 255px;
   flex-direction: column;
   justify-content: center;
   align-items: center;

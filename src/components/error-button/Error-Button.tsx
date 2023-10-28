@@ -20,17 +20,17 @@ class ErrorButton extends Component<Record<string, never>, ErrorButtonState> {
 
     return (
       <>
-        <div className="main__smell-section">
-          <div className="main__button-wrapper">
+        <footer className="footer__smell-section">
+          <div className="footer__button-wrapper">
             <button
               type="button"
-              className="main__smell-button"
+              className="footer__smell-button"
               onClick={this.throwError.bind(this)}
             >
-              <span className="main__smell-text">Click for error!</span>
+              <span className="footer__smell-text">Click for error!</span>
             </button>
           </div>
-        </div>
+        </footer>
       </>
     );
   }

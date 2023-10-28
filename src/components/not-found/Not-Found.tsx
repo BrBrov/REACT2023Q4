@@ -12,7 +12,7 @@ class NotFound extends Component<Record<string, number>> {
           <span className="main__not-found">
             The beer you are looking for was not found!
           </span>
-          <span className="main__not-found">Try looking for another beer</span>
+          <span className="main__not-found">Try looking for another beer.</span>
         </div>
       </div>
     );

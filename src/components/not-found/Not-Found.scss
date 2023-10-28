@@ -13,6 +13,7 @@
 .main__absent-wrapper {
   display: flex;
   width: 55%;
+  min-width: 280px;
   height: calc(100vh / 2);
   box-sizing: border-box;
   padding: 4px;
