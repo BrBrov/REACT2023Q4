@@ -1,12 +1,12 @@
 import { Component, ReactNode } from 'react';
 
 import './Beer.scss';
-import Header from './components/header/Header';
-import Main from './components/main/Main';
+import { BeerState } from './models/Beer-models';
 import RequestData from './utils/RequestData';
 import ResponseData from './models/ResponseData';
-import { BeerState } from './models/Beer-models';
 import CardCreator from './utils/CardCreator';
+import Header from './components/header/Header';
+import Main from './components/main/Main';
 import NotFound from './components/not-found/Not-Found';
 
 type BeerProps = Record<string, never>;
