@@ -1,0 +1,37 @@
+@import './../../styles/fonts';
+@import './../../styles/colors';
+
+.main__result-apson {
+  display: flex;
+  width: 100%;
+  min-height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.main__absent-wrapper {
+  display: flex;
+  width: 55%;
+  min-width: 280px;
+  height: calc(100vh / 2);
+  box-sizing: border-box;
+  padding: 4px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 10px;
+  background: $card-background;
+  box-shadow: $box-shadow-card;
+}
+
+.main__not-found {
+  @include CardoBold(1.5em);
+  color: $title-color;
+
+  @media screen and (max-width: 957px) {
+    text-align: center;
+    padding: 5px;
+  }
+}
