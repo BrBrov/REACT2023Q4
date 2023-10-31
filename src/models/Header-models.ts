@@ -1,4 +1,4 @@
-export interface PropHeader {
+export interface HeaderProps {
   search(param: string | null): void;
   searchString: string | null;
 }
