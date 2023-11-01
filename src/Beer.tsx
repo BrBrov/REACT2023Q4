@@ -1,45 +1,20 @@
-import {
-  Dispatch,
-  ReactNode,
-  SetStateAction,
-  useEffect,
-  useState,
-} from 'react';
+import { ReactNode } from 'react';
 
 import './Beer.scss';
-import { BeerState } from './models/Beer-models';
 import ResponseData from './models/ResponseData';
 import CardCreator from './utils/CardCreator';
-import Header from './components/header/Header';
-import Main from './components/main/Main';
 import NotFound from './components/not-found/Not-Found';
-import fetchData from './utils/RequestData';
+import { Outlet, useLoaderData } from 'react-router-dom';
 
 function Beer(): ReactNode {
-  const [state, setState]: [BeerState, Dispatch<SetStateAction<BeerState>>] =
-    useState<BeerState>({ cards: null });
+  const data = useLoaderData() as Array<ResponseData>;
 
-  function getData(search: string | null): void {
-    fetchData
-      .getResponseData(search)
-      .then((data: Array<ResponseData>): void => {
-        const cards: Array<ReactNode> | null = createCards(data);
-        setState({ cards: cards });
-      });
-  }
-
-  useEffect(() => getData(fetchData.getSearchString()), []);
+  const cards: Array<ReactNode> | null = createCards(data);
 
   return (
     <>
       <div className="beer__container">
-        <Header
-          {...{
-            search: getData,
-            searchString: fetchData.getSearchString(),
-          }}
-        />
-        <Main {...{ cards: state.cards }} />
+        <Outlet context={cards} />
       </div>
     </>
   );

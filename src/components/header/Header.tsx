@@ -1,38 +1,15 @@
-import {
-  Dispatch,
-  FormEvent,
-  ReactNode,
-  SetStateAction,
-  SyntheticEvent,
-  useState,
-} from 'react';
+import { ReactNode, SyntheticEvent, useState } from 'react';
 
 import './Header.scss';
-import { HeaderState, HeaderProps } from '../../models/Header-models';
+import { Link } from 'react-router-dom';
+import UrlBuilder from '../../utils/UrlBuilder';
+import fetchData from '../../utils/RequestData';
 
-function Header(props: HeaderProps): ReactNode {
-  const initState: HeaderState = props.searchString
-    ? { search: props.searchString }
-    : { search: '' };
-  const [state, setState]: [
-    HeaderState,
-    Dispatch<SetStateAction<HeaderState>>,
-  ] = useState<HeaderState>(initState);
+function Header(): ReactNode {
+  const [inputData, setInput] = useState<string | null>(
+    fetchData.getSearchString()
+  );
 
-  function onInputSearch(e: FormEvent<HTMLInputElement>): void {
-    const { value } = e.target as HTMLInputElement;
-    setState({ search: value });
-  }
-
-  function onBtnClick(): void {
-    const { search } = props;
-    search(state.search);
-  }
-
-  function onEnterPress(e: SyntheticEvent): void {
-    const { key } = e.nativeEvent as KeyboardEvent;
-    if (key === 'Enter') return onBtnClick();
-  }
   return (
     <>
       <header className="header">
@@ -40,16 +17,26 @@ function Header(props: HeaderProps): ReactNode {
           className="header__input"
           type="text"
           name="search"
-          onInput={onInputSearch}
-          onKeyDown={onEnterPress}
-          value={state.search}
+          value={inputData || ''}
+          onInput={onInput}
         />
-        <button className="header__button" type="button" onClick={onBtnClick}>
-          <span className="header__button-text">Search</span>
+        <button
+          className="header__button"
+          type="button"
+          onClick={() => console.log('click')}
+        >
+          <Link to={new UrlBuilder().createURL(fetchData.getPage(), inputData)}>
+            <span className="header__button-text">Search</span>
+          </Link>
         </button>
       </header>
     </>
   );
+
+  function onInput(event: SyntheticEvent): void {
+    const input = event.target as HTMLInputElement;
+    setInput(input.value);
+  }
 }
 
 export default Header;

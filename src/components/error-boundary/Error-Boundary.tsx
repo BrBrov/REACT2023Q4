@@ -6,7 +6,7 @@ import ErrorPage from '../error-page/Error-Page';
 function ErrorBoundary(): ReactNode {
   const error = useRouteError() as Error;
   console.log("You caused this error: '" + error.name + "'!!!");
-  console.log("Reason for error: '" + error.cause + "'!!!!");
+  console.log("Reason for error: '" + error.message + "'!!!!");
 
   return <ErrorPage />;
 }

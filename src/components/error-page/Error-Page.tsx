@@ -2,6 +2,8 @@ import { ReactNode } from 'react';
 
 import './Error-Page.scss';
 import { Link } from 'react-router-dom';
+import UrlBuilder from '../../utils/UrlBuilder';
+import fetchData from '../../utils/RequestData';
 
 function ErrorPage(): ReactNode {
   return (
@@ -11,9 +13,15 @@ function ErrorPage(): ReactNode {
           <span className="error__text">
             You pressed that smell button and broke the site!!!
           </span>
+
           <button className="error__page-reload" type="button">
-            <Link to={'/'} className="error__reload-text">
-              Reload the page
+            <Link
+              to={new UrlBuilder().createURL(
+                fetchData.getPage(),
+                fetchData.getSearchString()
+              )}
+            >
+              <span className="error__reload-text">Reload the page</span>
             </Link>
           </button>
         </div>

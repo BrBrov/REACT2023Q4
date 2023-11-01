@@ -1,8 +1,8 @@
 import ResponseData from '../models/ResponseData';
 import StorageProcessor from './StorageProcessor';
 
-class RequestData {
-  private readonly page: number;
+export class RequestData {
+  private page: number;
   private readonly countCards: number;
   private readonly baseURL: string;
   private storage: StorageProcessor;
@@ -12,6 +12,14 @@ class RequestData {
     this.countCards = 12;
     this.baseURL = `https://api.punkapi.com/v2/beers?page=${this.page}&per_page=${this.countCards}`;
     this.storage = new StorageProcessor();
+  }
+
+  public getPage(): number {
+    return this.page;
+  }
+
+  public setPage(page: number | null): void {
+    this.page = page ? page : 1;
   }
 
   public getResponseData(search: string | null): Promise<Array<ResponseData>> {
