@@ -1,13 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import Beer from './Beer';
+import { RouterProvider } from 'react-router-dom';
+
 import './index.scss';
-import ErrorBoundary from './components/error-boundary/Error-Boundary';
+import router from './main-router';
 
 ReactDOM.createRoot(document.querySelector('.beer')!).render(
   <React.StrictMode>
-    <ErrorBoundary>
-      <Beer />
-    </ErrorBoundary>
+    <RouterProvider router={router} />
   </React.StrictMode>
 );

@@ -52,4 +52,6 @@ class RequestData {
   }
 }
 
-export default RequestData;
+const fetchData = new RequestData();
+
+export default fetchData;

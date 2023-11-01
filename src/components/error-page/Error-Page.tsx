@@ -1,14 +1,9 @@
 import { ReactNode } from 'react';
 
 import './Error-Page.scss';
-import { ErrorPageProps } from '../../models/ErrorPage-model';
+import { Link } from 'react-router-dom';
 
-function ErrorPage(props: ErrorPageProps): ReactNode {
-  function onClick(): void {
-    const { reloader } = props;
-    reloader();
-  }
-
+function ErrorPage(): ReactNode {
   return (
     <>
       <div className="error">
@@ -16,12 +11,10 @@ function ErrorPage(props: ErrorPageProps): ReactNode {
           <span className="error__text">
             You pressed that smell button and broke the site!!!
           </span>
-          <button
-            className="error__page-reload"
-            type="button"
-            onClick={onClick}
-          >
-            <span className="error__reload-text">Reload the page</span>
+          <button className="error__page-reload" type="button">
+            <Link to={'/'} className="error__reload-text">
+              Reload the page
+            </Link>
           </button>
         </div>
       </div>

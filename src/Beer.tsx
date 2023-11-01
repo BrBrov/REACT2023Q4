@@ -8,26 +8,27 @@ import {
 
 import './Beer.scss';
 import { BeerState } from './models/Beer-models';
-import RequestData from './utils/RequestData';
 import ResponseData from './models/ResponseData';
 import CardCreator from './utils/CardCreator';
 import Header from './components/header/Header';
 import Main from './components/main/Main';
 import NotFound from './components/not-found/Not-Found';
+import fetchData from './utils/RequestData';
 
-const fetcher: RequestData = new RequestData();
 function Beer(): ReactNode {
   const [state, setState]: [BeerState, Dispatch<SetStateAction<BeerState>>] =
     useState<BeerState>({ cards: null });
 
   function getData(search: string | null): void {
-    fetcher.getResponseData(search).then((data: Array<ResponseData>): void => {
-      const cards: Array<ReactNode> | null = createCards(data);
-      setState({ cards: cards });
-    });
+    fetchData
+      .getResponseData(search)
+      .then((data: Array<ResponseData>): void => {
+        const cards: Array<ReactNode> | null = createCards(data);
+        setState({ cards: cards });
+      });
   }
 
-  useEffect(() => getData(fetcher.getSearchString()), []);
+  useEffect(() => getData(fetchData.getSearchString()), []);
 
   return (
     <>
@@ -35,7 +36,7 @@ function Beer(): ReactNode {
         <Header
           {...{
             search: getData,
-            searchString: fetcher.getSearchString(),
+            searchString: fetchData.getSearchString(),
           }}
         />
         <Main {...{ cards: state.cards }} />
