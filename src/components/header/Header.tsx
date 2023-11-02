@@ -1,15 +1,14 @@
 import { ReactNode, SyntheticEvent, useState } from 'react';
 
 import './Header.scss';
-import { Link } from 'react-router-dom';
+import { createSearchParams, Link, useLocation } from 'react-router-dom';
 import UrlBuilder from '../../utils/UrlBuilder';
-import fetchData from '../../utils/RequestData';
 
 function Header(): ReactNode {
-  const [inputData, setInput] = useState<string | null>(
-    fetchData.getSearchString()
-  );
+  const location = useLocation();
+  const sParams = createSearchParams(location.search);
 
+  const [inputData, setInput] = useState<string | null>(sParams.get('search'));
   return (
     <>
       <header className="header">
@@ -20,15 +19,13 @@ function Header(): ReactNode {
           value={inputData || ''}
           onInput={onInput}
         />
-        <button
-          className="header__button"
-          type="button"
-          onClick={() => console.log('click')}
+        <Link
+          to={new UrlBuilder().createURL(sParams.get('page') || 1, inputData)}
         >
-          <Link to={new UrlBuilder().createURL(fetchData.getPage(), inputData)}>
+          <button className="header__button" type="button">
             <span className="header__button-text">Search</span>
-          </Link>
-        </button>
+          </button>
+        </Link>
       </header>
     </>
   );

@@ -1,7 +1,7 @@
 import ResponseData from '../models/ResponseData';
 import StorageProcessor from './StorageProcessor';
 
-export class RequestData {
+class RequestData {
   private page: number;
   private readonly countCards: number;
   private readonly baseURL: string;
@@ -34,6 +34,13 @@ export class RequestData {
     return this.storage.search;
   }
 
+  public getSingleData(id: number | string): Promise<Array<ResponseData>> {
+    const url = this.baseURL + `&ids=${id}`;
+    return fetch(url, { mode: 'cors', method: 'GET' }).then((resp: Response) =>
+      resp.json()
+    );
+  }
+
   private generateURL(search: string | null): string {
     this.storage.search = search ? search : null;
 
@@ -60,6 +67,4 @@ export class RequestData {
   }
 }
 
-const fetchData = new RequestData();
-
-export default fetchData;
+export default RequestData;

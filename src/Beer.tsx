@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 
 import './Beer.scss';
 import ResponseData from './models/ResponseData';

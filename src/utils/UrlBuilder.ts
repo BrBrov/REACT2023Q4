@@ -2,7 +2,13 @@ class UrlBuilder {
   private readonly pageTitle: string = '?page=';
   private readonly searchTitle: string = '&search=';
 
-  public createURL(page: number, searchString: string | null): string {
+  public createURL(
+    pageCount: number | string,
+    searchString: string | null
+  ): string {
+    const page: string =
+      typeof pageCount === 'number' ? pageCount.toString() : pageCount;
+
     let urlPath = this.pageTitle + `${page}`;
 
     urlPath = searchString

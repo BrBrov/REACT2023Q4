@@ -1,4 +1,4 @@
-import fetchData from './RequestData';
+import RequestData from './RequestData';
 import ResponseData from '../models/ResponseData';
 
 export default async function routerLoader({
@@ -6,6 +6,7 @@ export default async function routerLoader({
 }: {
   request: Request;
 }): Promise<Array<ResponseData>> {
+  const fetchData = new RequestData();
   const url: URL = new URL(request.url);
   const page: number | null = url.searchParams.get('page')
     ? parseInt(url.searchParams.get('page')!)

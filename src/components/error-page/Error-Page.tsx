@@ -1,11 +1,12 @@
 import { ReactNode } from 'react';
 
 import './Error-Page.scss';
-import { Link } from 'react-router-dom';
-import UrlBuilder from '../../utils/UrlBuilder';
-import fetchData from '../../utils/RequestData';
+import { Link, useLocation } from 'react-router-dom';
 
 function ErrorPage(): ReactNode {
+  const location = useLocation();
+
+  const linkToReload = location.pathname + location.search;
   return (
     <>
       <div className="error">
@@ -13,17 +14,11 @@ function ErrorPage(): ReactNode {
           <span className="error__text">
             You pressed that smell button and broke the site!!!
           </span>
-
-          <button className="error__page-reload" type="button">
-            <Link
-              to={new UrlBuilder().createURL(
-                fetchData.getPage(),
-                fetchData.getSearchString()
-              )}
-            >
+          <Link to={linkToReload}>
+            <button className="error__page-reload" type="button">
               <span className="error__reload-text">Reload the page</span>
-            </Link>
-          </button>
+            </button>
+          </Link>
         </div>
       </div>
     </>
