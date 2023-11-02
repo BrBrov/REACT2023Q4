@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { RequestData } from '../utils/RequestData';
+import RequestData from '../utils/RequestData';
 
 export default interface OutletContext {
   cards: Array<ReactNode> | null;
