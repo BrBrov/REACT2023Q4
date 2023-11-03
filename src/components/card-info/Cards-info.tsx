@@ -1,10 +1,10 @@
 import { ReactNode } from 'react';
 import {
   createSearchParams,
-  Link,
   Location,
   useLoaderData,
   useLocation,
+  useNavigate,
 } from 'react-router-dom';
 
 import './Cards-info.scss';
@@ -12,10 +12,9 @@ import ResponseData from '../../models/ResponseData';
 
 function CardsInfo(): ReactNode {
   const location = useLocation();
+  const navigate = useNavigate();
 
-  const sParams = createSearchParams(location.search);
-
-  const closeURL = createCloseLink(location, sParams);
+  const closeURL: 0 | -1 = createCloseLink(location);
 
   const data = useLoaderData() as Array<ResponseData> | null;
 
@@ -28,14 +27,12 @@ function CardsInfo(): ReactNode {
   return (
     <div className="main__single-card">
       <div className="main__close-wrapper">
-        <div className="main__close-img">
-          <Link to={closeURL}>
-            <img
-              className="main__close-image"
-              src={'./close.svg'}
-              alt="Close card"
-            />
-          </Link>
+        <div className="main__close-img" onClick={onClickCLose}>
+          <img
+            className="main__close-image"
+            src={'./close.svg'}
+            alt="Close card"
+          />
         </div>
       </div>
       <div className="main__info-wrapper">
@@ -76,17 +73,16 @@ function CardsInfo(): ReactNode {
     ));
   }
 
-  function createCloseLink(
-    location: Location,
-    sParams: URLSearchParams
-  ): string {
-    const page = sParams.get('page') || '1';
+  function createCloseLink(location: Location): 0 | -1 {
+    const sParams = createSearchParams(location.search);
 
-    const search = sParams.get('search');
+    if (!sParams.get('ids')) return 0;
 
-    const closeURL = location.pathname + `?page=` + page;
+    return -1;
+  }
 
-    return closeURL + (search ? `&search=${search}` : '');
+  function onClickCLose(): void {
+    navigate(closeURL);
   }
 }
 

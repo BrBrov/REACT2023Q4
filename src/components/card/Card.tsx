@@ -1,27 +1,26 @@
-import { ReactNode, useDeferredValue } from 'react';
+import { ReactNode } from 'react';
 
 import './Card.scss';
 import { CardProps } from '../../models/Card-model';
 import {
   createSearchParams,
-  Link,
   Location,
   useLocation,
+  useNavigate,
 } from 'react-router-dom';
 
 function Card(props: CardProps): ReactNode {
   const { id, name, description, image_url, volume, ibu, srm, abv } = props;
-  const ids: number = useDeferredValue(id);
+  const ids: number = id;
 
   const location = useLocation();
+  const navigate = useNavigate();
 
-  const sParams = createSearchParams(location.search);
-
-  const linkToShowInfo = createLinkToCardInfo(location, sParams);
+  const linkToShowInfo = createLinkToCardInfo(location);
 
   return (
     <>
-      <Link to={linkToShowInfo} className="card">
+      <div className="card" onClick={toCardInfo}>
         <div className="card__top">
           <span className="card__beer-name">{name}</span>
         </div>
@@ -45,14 +44,13 @@ function Card(props: CardProps): ReactNode {
           <span className="card__beer-srm">{`Color SRM: ${srm}`}</span>
           <span className="card__beer-ibu">{`Bitterness: ${ibu}`}</span>
         </div>
-      </Link>
+      </div>
     </>
   );
 
-  function createLinkToCardInfo(
-    location: Location,
-    sParams: URLSearchParams
-  ): string {
+  function createLinkToCardInfo(location: Location): string {
+    const sParams = createSearchParams(location.search);
+
     let linkToShowInfo: string =
       location.pathname + '?page=' + (sParams.get('page') || '1');
 
@@ -60,9 +58,14 @@ function Card(props: CardProps): ReactNode {
       ? `&search=${sParams.get('search')}`
       : '';
 
-    linkToShowInfo += `&ids=${ids}`;
+    if (!sParams.get('ids')) linkToShowInfo += `&ids=${ids}`;
 
     return linkToShowInfo;
+  }
+
+  function toCardInfo(): void {
+    console.log(linkToShowInfo);
+    navigate(linkToShowInfo, { replace: false });
   }
 }
 
