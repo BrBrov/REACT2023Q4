@@ -9,7 +9,7 @@ class RequestData {
 
   constructor() {
     this.page = 1;
-    this.countCards = 12;
+    this.countCards = 6;
     this.baseURL = this.updateBaseURL();
     this.storage = new StorageProcessor();
   }
