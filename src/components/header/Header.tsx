@@ -1,14 +1,22 @@
 import { ReactNode, SyntheticEvent, useState } from 'react';
 
 import './Header.scss';
-import { createSearchParams, Link, useLocation } from 'react-router-dom';
-import UrlBuilder from '../../utils/UrlBuilder';
+import {
+  createSearchParams,
+  Location,
+  useLocation,
+  useNavigate,
+} from 'react-router-dom';
 
 function Header(): ReactNode {
   const location = useLocation();
+  const navigate = useNavigate();
   const sParams = createSearchParams(location.search);
 
   const [inputData, setInput] = useState<string | null>(sParams.get('search'));
+
+  const searchURL = createSearchLink(location, inputData);
+
   return (
     <>
       <header className="header">
@@ -19,13 +27,9 @@ function Header(): ReactNode {
           value={inputData || ''}
           onInput={onInput}
         />
-        <Link
-          to={new UrlBuilder().createURL(sParams.get('page') || 1, inputData)}
-        >
-          <button className="header__button" type="button">
-            <span className="header__button-text">Search</span>
-          </button>
-        </Link>
+        <button className="header__button" type="button" onClick={onSearch}>
+          <span className="header__button-text">Search</span>
+        </button>
       </header>
     </>
   );
@@ -33,6 +37,18 @@ function Header(): ReactNode {
   function onInput(event: SyntheticEvent): void {
     const input = event.target as HTMLInputElement;
     setInput(input.value);
+  }
+
+  function onSearch(): void {
+    navigate(searchURL, { replace: false });
+  }
+
+  function createSearchLink(location: Location, input: string | null): string {
+    let url = location.pathname + `?page=1`;
+
+    if (input) url += `&search=${input}`;
+
+    return url;
   }
 }
 

@@ -8,6 +8,32 @@ $card-background: linear-gradient(
   #9d8878,
   #878787
 );
+
+$btn-background: linear-gradient(
+  90deg,
+  #814504,
+  #be6806,
+  #ee830a,
+  #be6806,
+  #814504
+);
+$btn-hover-background: radial-gradient(
+  circle,
+  #efc709,
+  #efcd41,
+  #efd17b,
+  #efcd41,
+  #efc709
+);
+$btn-active-background: radial-gradient(
+  circle,
+  #e3703f,
+  #e8520f,
+  #e8520f,
+  #e8520f,
+  #e3703f
+);
+
 $title-color: #6325ef;
 $text-color: #010226;
 $text-sign-color: #330303;

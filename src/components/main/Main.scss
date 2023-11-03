@@ -47,44 +47,12 @@
 }
 
 .main__cards-panel::-webkit-scrollbar {
-  width: 7px;
-}
-
-.main__cards-panel::-webkit-scrollbar-track {
-  background: #9f7400;
-  border-radius: 3px;
-}
-
-.main__cards-panel::-webkit-scrollbar-thumb {
-  position: relative;
-  appearance: none;
-  width: 25px;
-  height: 25px;
-  border-radius: 3px;
-  background: #fdb700;
-}
-
-.main__cards-panel::-webkit-scrollbar-thumb::before {
-  display: block;
-  width: 25px;
-  height: 25px;
-  background: #4fb4ea;
-}
-
-.main__cards-panel::-webkit-scrollbar-button {
-  display: none;
+  width: 0;
 }
 
 .main__card-info {
   display: flex;
   align-self: flex-start;
-  justify-content: center;
-  align-items: center;
-}
-
-.main__pagination-wrapper {
-  display: flex;
-  height: 30px;
   justify-content: center;
   align-items: center;
 }

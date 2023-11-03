@@ -42,45 +42,27 @@
   align-items: center;
   border: none;
   border-radius: 5px;
-  background: linear-gradient(
-    180deg,
-    #02f893,
-    #4ef6b2,
-    #94f3c9,
-    #4ef6b2,
-    #02f893
-  );
+  background: $btn-background;
   cursor: pointer;
+  @include Cardo(1em);
+  color: $text-color;
 }
 
 .error__page-reload:hover {
   @include CardoItalic(1em);
-  color: #b9050b;
-  background: linear-gradient(
-    180deg,
-    #027df8,
-    #4fb4ea,
-    #94e2f3,
-    #4fb4ea,
-    #027df8
-  );
+  color: $text-sign-color;
+  font-weight: 700;
+  background: $btn-hover-background;
   box-shadow: 0 0 3px 5px #033359;
 }
 
 .error__page-reload:active {
   @include CardoItalic(1em);
-  color: #f30606;
-  background: linear-gradient(
-    180deg,
-    #23f802,
-    #62f14e,
-    #a4ee99,
-    #62f14e,
-    #23f802
-  );
+  color: $title-color;
+  background: $btn-active-background;
   box-shadow: 0 0 0 2px #035612;
 }
 
 .error__reload-text {
-  text-decoration-style: wavy;
+  text-decoration-style: dotted;
 }

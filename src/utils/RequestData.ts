@@ -4,13 +4,13 @@ import StorageProcessor from './StorageProcessor';
 class RequestData {
   private page: number;
   private readonly countCards: number;
-  private readonly baseURL: string;
+  private baseURL: string;
   private storage: StorageProcessor;
 
   constructor() {
     this.page = 1;
     this.countCards = 12;
-    this.baseURL = `https://api.punkapi.com/v2/beers?page=${this.page}&per_page=${this.countCards}`;
+    this.baseURL = this.updateBaseURL();
     this.storage = new StorageProcessor();
   }
 
@@ -20,6 +20,7 @@ class RequestData {
 
   public setPage(page: number | null): void {
     this.page = page ? page : 1;
+    this.baseURL = this.updateBaseURL();
   }
 
   public getResponseData(search: string | null): Promise<Array<ResponseData>> {
@@ -64,6 +65,10 @@ class RequestData {
   private deleteSpaceFromSearchString(search: string): string {
     const prepareSearch: string = search.trim();
     return prepareSearch.replaceAll(' ', '_');
+  }
+
+  private updateBaseURL(): string {
+    return `https://api.punkapi.com/v2/beers?page=${this.page}&per_page=${this.countCards}`;
   }
 }
 

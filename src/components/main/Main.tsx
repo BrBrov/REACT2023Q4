@@ -10,6 +10,7 @@ import {
   useNavigate,
   useOutletContext,
 } from 'react-router-dom';
+import Pagination from '../pagination/Pagination';
 
 function Main(): ReactNode {
   const location = useLocation();
@@ -31,9 +32,7 @@ function Main(): ReactNode {
               <Outlet />
             </div>
           </div>
-          <div className="main__pagination-wrapper">
-            <span>Pagination</span>
-          </div>
+          <Pagination />
         </main>
         <ErrorButton />
       </div>
