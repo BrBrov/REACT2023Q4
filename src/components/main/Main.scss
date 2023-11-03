@@ -2,7 +2,7 @@
   display: flex;
   width: 95%;
   max-width: 1440px;
-  min-height: calc(100vh - 110px);
+  min-height: calc(100vh - 140px);
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -14,7 +14,6 @@
   display: flex;
   width: 100%;
   max-width: 980px;
-  min-height: calc(100vh - 170px);
   box-sizing: border-box;
   padding: 10px;
   flex-direction: column;
@@ -30,15 +29,50 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  gap: 25px;
 }
 
 .main__cards-panel {
   display: flex;
+  min-width: 300px;
+  height: calc(100vh - 230px);
+  box-sizing: border-box;
+  padding: 0 5px;
   flex-direction: row;
   flex-wrap: wrap;
+  overflow-y: scroll;
   justify-content: space-evenly;
   align-items: center;
   gap: 30px;
+}
+
+.main__cards-panel::-webkit-scrollbar {
+  width: 7px;
+}
+
+.main__cards-panel::-webkit-scrollbar-track {
+  background: #9f7400;
+  border-radius: 3px;
+}
+
+.main__cards-panel::-webkit-scrollbar-thumb {
+  position: relative;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 3px;
+  background: #fdb700;
+}
+
+.main__cards-panel::-webkit-scrollbar-thumb::before {
+  display: block;
+  width: 25px;
+  height: 25px;
+  background: #4fb4ea;
+}
+
+.main__cards-panel::-webkit-scrollbar-button {
+  display: none;
 }
 
 .main__card-info {

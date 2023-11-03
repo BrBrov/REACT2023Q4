@@ -1,0 +1,12 @@
+.fallback {
+  display: flex;
+  width: calc(30wv);
+  height: calc(30wv);
+  justify-content: center;
+  align-self: center;
+}
+
+.fallback__text {
+  color: #02f893;
+  font-size: 1em;
+}

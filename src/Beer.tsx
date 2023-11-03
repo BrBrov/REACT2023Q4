@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 
 import './Beer.scss';
 import ResponseData from './models/ResponseData';
@@ -12,11 +12,9 @@ function Beer(): ReactNode {
   const cards: Array<ReactNode> | null = createCards(data);
 
   return (
-    <>
-      <div className="beer__container">
-        <Outlet context={cards} />
-      </div>
-    </>
+    <div className="beer__container">
+      <Outlet context={cards} />
+    </div>
   );
 }
 
@@ -25,7 +23,7 @@ function createCards(
 ): Array<ReactNode> | null {
   if (!data) return null;
 
-  if (!data.length) return [<NotFound key={1} />];
+  if (!data.length) return [<NotFound key={-1} />];
 
   return data.map((item: ResponseData) => {
     const cardCreator: CardCreator = new CardCreator(item);

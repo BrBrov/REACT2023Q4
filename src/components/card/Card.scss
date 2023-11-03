@@ -4,7 +4,7 @@
 .card {
   display: flex;
   width: 25%;
-  min-width: 300px;
+  min-width: 280px;
   height: 400px;
   box-sizing: border-box;
   padding: 3px 15px;
@@ -98,6 +98,6 @@
 .card__beer-abv,
 .card__beer-srm,
 .card__beer-ibu {
-  @include CardoItalic(0.9em);
+  @include CardoItalic(0.8em);
   color: $text-sign-color;
 }

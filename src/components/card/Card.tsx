@@ -64,7 +64,6 @@ function Card(props: CardProps): ReactNode {
   }
 
   function toCardInfo(): void {
-    console.log(linkToShowInfo);
     navigate(linkToShowInfo, { replace: false });
   }
 }

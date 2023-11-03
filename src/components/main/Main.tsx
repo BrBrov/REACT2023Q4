@@ -28,7 +28,7 @@ function Main(): ReactNode {
               {cards}
             </div>
             <div className="main__card-info">
-              <Outlet key={'card'} />
+              <Outlet />
             </div>
           </div>
           <div className="main__pagination-wrapper">
