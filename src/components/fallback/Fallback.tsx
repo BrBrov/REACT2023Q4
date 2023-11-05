@@ -1,8 +1,6 @@
 import { ReactNode } from 'react';
 
 function Fallback(): ReactNode {
-  //TODO: delete!!!
-  console.log('Suspense');
   return (
     <>
       <div className="fallback">

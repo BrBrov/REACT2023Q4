@@ -21,22 +21,20 @@ function Main(): ReactNode {
   const cards = useOutletContext<Array<ReactNode> | null>();
 
   return (
-    <>
-      <div className="main">
-        <main className="main__cards-wrapper">
-          <div className="main__main-wrapper">
-            <div className="main__cards-panel" onClick={onClickPanel}>
-              {cards}
-            </div>
-            <div className="main__card-info">
-              <Outlet />
-            </div>
+    <div className="main">
+      <main className="main__cards-wrapper">
+        <div className="main__main-wrapper">
+          <div className="main__cards-panel" onClick={onClickPanel}>
+            {cards}
           </div>
-          <Pagination />
-        </main>
-        <ErrorButton />
-      </div>
-    </>
+          <div className="main__card-info">
+            <Outlet />
+          </div>
+        </div>
+        <Pagination />
+      </main>
+      <ErrorButton />
+    </div>
   );
 
   function closeCardInfoPanel(location: Location): 0 | -1 {

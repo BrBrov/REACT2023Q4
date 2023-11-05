@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import RequestData from '../../utils/RequestData';
-import { Navigate, useLocation } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 function Redirect(): ReactNode {
   const fetchData = new RequestData();
@@ -14,12 +14,6 @@ function Redirect(): ReactNode {
           : ``
       }`,
   };
-
-  //TODO: For control links. Must be delete!!!!
-  console.dir('Redirect');
-
-  const location = useLocation();
-  console.log(location);
 
   return (
     <>
