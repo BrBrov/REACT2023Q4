@@ -15,11 +15,7 @@ function Redirect(): ReactNode {
       }`,
   };
 
-  return (
-    <>
-      <Navigate to={linkTO} replace={true} />
-    </>
-  );
+  return <Navigate to={linkTO} replace={true} />;
 }
 
 export default Redirect;

@@ -1,14 +1,13 @@
-import { ReactNode, Suspense } from 'react';
+import { ReactNode } from 'react';
 
 import './Beer.scss';
 import ResponseData from './models/ResponseData';
 import CardCreator from './utils/CardCreator';
 import NotFound from './components/not-found/Not-Found';
-import { Await, Outlet, useLoaderData } from 'react-router-dom';
+import { Outlet, useLoaderData } from 'react-router-dom';
 import MissingPage from './components/missing-page/MissingPage';
 import Header from './components/header/Header';
 import ErrorButton from './components/error-button/Error-Button';
-import Fallback from './components/fallback/Fallback';
 
 function Beer(): ReactNode {
   const { data } = useLoaderData() as { data: Array<ResponseData> | null };
@@ -27,13 +26,9 @@ function Beer(): ReactNode {
   const cards: Array<ReactNode> | null = createCards(data);
 
   return (
-    <Suspense fallback={<Fallback />}>
-      <Await resolve={data}>
-        <div className="beer__container">
-          <Outlet context={cards} />
-        </div>
-      </Await>
-    </Suspense>
+    <div className="beer__container">
+      <Outlet context={cards} />
+    </div>
   );
 
   function createCards(

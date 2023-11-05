@@ -27,6 +27,7 @@
 }
 
 .main__not-found {
+  text-align: center;
   @include CardoBold(1.5em);
   color: $title-color;
 

@@ -36,7 +36,7 @@ export default async function routerLoader({
     throw error;
   }
 
-  if (!data.length && page > 1) return null;
+  if (!data.length && page > 1) return { data: null };
 
   return defer({ data: data });
 }

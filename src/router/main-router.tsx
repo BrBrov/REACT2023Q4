@@ -4,20 +4,18 @@ import ErrorBoundary from '../components/error-boundary/Error-Boundary';
 import routerLoader from '../utils/routerLoader';
 import Redirect from '../components/redirect/Redirect';
 import pageRoutes from './page-router';
+import Beer from '../Beer';
 
 const routes: Array<RouteObject> = [
   {
     path: 'main',
     errorElement: <ErrorBoundary />,
     loader: routerLoader,
-    lazy: async () => {
-      const m = await import('./../Beer');
-      return { Component: m.default };
-    },
+    element: <Beer />,
     children: pageRoutes,
   },
   {
-    path: '*',
+    path: '/',
     element: <Redirect />,
   },
 ];
