@@ -1,0 +1,68 @@
+@import './../../styles/fonts';
+@import './../../styles/colors';
+
+.error {
+  display: flex;
+  width: 80%;
+  max-width: 680px;
+  height: calc(100vh - 500px);
+  min-height: 255px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: $card-background;
+  border-radius: 10px;
+  box-shadow: $box-shadow-card;
+}
+
+.error__text-wrapper {
+  display: flex;
+  width: 80%;
+  height: 80%;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.error__text {
+  @include CardoBold(1.5em);
+  color: #c20303;
+
+  @media screen and (max-width: 957px) {
+    text-align: center;
+    padding: 5px;
+  }
+}
+
+.error__page-reload {
+  display: flex;
+  width: 120px;
+  height: 45px;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 5px;
+  background: $btn-background;
+  cursor: pointer;
+  @include Cardo(1em);
+  color: $text-color;
+}
+
+.error__page-reload:hover {
+  @include CardoItalic(1em);
+  color: $text-sign-color;
+  font-weight: 700;
+  background: $btn-hover-background;
+  box-shadow: 0 0 3px 5px #033359;
+}
+
+.error__page-reload:active {
+  @include CardoItalic(1em);
+  color: $title-color;
+  background: $btn-active-background;
+  box-shadow: 0 0 0 2px #035612;
+}
+
+.error__reload-text {
+  text-decoration-style: dotted;
+}
