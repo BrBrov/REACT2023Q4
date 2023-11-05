@@ -37,7 +37,8 @@ function ErrorButton(): ReactNode {
 
 function pageBroker(): void {
   const error: Error = new Error('Smell button caused this error');
-  error.name = 'Smell button click';
+  error.name = 'Smell button was clicked';
+  error.cause = 'Press button';
   throw error;
 }
 

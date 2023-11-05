@@ -1,5 +1,7 @@
 import RequestData from './RequestData';
 import { defer } from 'react-router-dom';
+import ResponseData from '../models/ResponseData';
+import ServerError from '../models/ServerError';
 
 async function loaderSingleCard({
   request,
@@ -12,7 +14,18 @@ async function loaderSingleCard({
 
   if (!id) return null;
 
-  return defer({ card: await fetchData.getSingleData(id) });
+  const data: Array<ResponseData> | ServerError =
+    await fetchData.getSingleData(id);
+
+  if ('statusCode' in data) {
+    const error = new Error(data.message);
+    error.name = data.error;
+    error.cause = data.statusCode;
+
+    throw error;
+  }
+
+  return defer({ card: data });
 }
 
 export default loaderSingleCard;

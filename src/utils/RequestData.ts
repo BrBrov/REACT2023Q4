@@ -1,5 +1,6 @@
 import ResponseData from '../models/ResponseData';
 import StorageProcessor from './StorageProcessor';
+import ServerError from '../models/ServerError';
 
 class RequestData {
   private page: number;
@@ -23,7 +24,9 @@ class RequestData {
     this.baseURL = this.updateBaseURL();
   }
 
-  public getResponseData(search: string | null): Promise<Array<ResponseData>> {
+  public getResponseData(
+    search: string | null
+  ): Promise<Array<ResponseData> | ServerError> {
     const url: string = this.generateURL(search);
 
     return fetch(url, { method: 'GET', mode: 'cors' }).then(
@@ -35,7 +38,9 @@ class RequestData {
     return this.storage.search;
   }
 
-  public getSingleData(id: number | string): Promise<Array<ResponseData>> {
+  public getSingleData(
+    id: number | string
+  ): Promise<Array<ResponseData> | ServerError> {
     const url = this.baseURL + `&ids=${id}`;
     return fetch(url, { mode: 'cors', method: 'GET' }).then((resp: Response) =>
       resp.json()

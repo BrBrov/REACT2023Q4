@@ -1,12 +1,13 @@
 import RequestData from './RequestData';
 import ResponseData from '../models/ResponseData';
-import { redirect } from 'react-router-dom';
+import { defer, redirect } from 'react-router-dom';
+import ServerError from '../models/ServerError';
 
 export default async function routerLoader({
   request,
 }: {
   request: Request;
-}): Promise<Array<ResponseData> | Response | null> {
+}): Promise<object | Response | null> {
   const fetchData = new RequestData();
   const url: URL = new URL(request.url);
   const sParams: URLSearchParams = url.searchParams;
@@ -24,11 +25,18 @@ export default async function routerLoader({
   }
 
   fetchData.setPage(page);
-  const data: Array<ResponseData> = await fetchData.getResponseData(
-    url.searchParams.get('search')
-  );
+  const data: Array<ResponseData> | ServerError =
+    await fetchData.getResponseData(url.searchParams.get('search'));
+
+  if ('statusCode' in data) {
+    const error = new Error(data.message);
+    error.name = data.error;
+    error.cause = data.statusCode;
+
+    throw error;
+  }
 
   if (!data.length && page > 1) return null;
 
-  return data;
+  return defer({ data: data });
 }

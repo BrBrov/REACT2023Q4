@@ -10,7 +10,7 @@ import Header from './components/header/Header';
 import ErrorButton from './components/error-button/Error-Button';
 
 function Beer(): ReactNode {
-  const data = useLoaderData() as Array<ResponseData> | null;
+  const { data } = useLoaderData() as { data: Array<ResponseData> | null };
 
   if (!data)
     return (
