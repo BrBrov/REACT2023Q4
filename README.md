@@ -11,7 +11,7 @@ Tasks for REACT2023Q4 RSSchool
 > 
 > Do it for setup husky!
 > 
-> Open trminal and run:
+> Open terminal and run:
 > - chmod ug+x .husky/*
 > - chmod ug+x .git/hooks/*
 
