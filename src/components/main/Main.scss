@@ -37,13 +37,15 @@
   min-width: 300px;
   height: calc(100vh - 230px);
   box-sizing: border-box;
-  padding: 0 5px;
+  padding: 2px 5px;
   flex-direction: row;
   flex-wrap: wrap;
   overflow-y: scroll;
   justify-content: space-evenly;
   align-items: center;
   gap: 30px;
+  border-top: dashed #0b0118 2px;
+  border-bottom: dashed #0b0118 2px;
 }
 
 .main__cards-panel::-webkit-scrollbar {
