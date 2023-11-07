@@ -2,21 +2,15 @@ import { ReactNode } from 'react';
 
 import './Card.scss';
 import { CardProps } from '../../models/Card-model';
-import {
-  createSearchParams,
-  Location,
-  useLocation,
-  useNavigate,
-} from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 
 function Card(props: CardProps): ReactNode {
   const { id, name, description, image_url, volume, ibu, srm, abv } = props;
   const ids: number = id;
 
-  const location = useLocation();
-  const navigate = useNavigate();
+  const [sParams, setNewParams] = useSearchParams();
 
-  const linkToShowInfo = createLinkToCardInfo(location);
+  const urlToBack: string = createLinkToCardInfo(sParams);
 
   return (
     <>
@@ -48,11 +42,10 @@ function Card(props: CardProps): ReactNode {
     </>
   );
 
-  function createLinkToCardInfo(location: Location): string {
-    const sParams = createSearchParams(location.search);
+  function createLinkToCardInfo(sParams: URLSearchParams): string {
+    let linkToShowInfo: string = '?page=' + (sParams.get('page') || '1');
 
-    let linkToShowInfo: string =
-      location.pathname + '?page=' + (sParams.get('page') || '1');
+    linkToShowInfo += '&items=' + (sParams.get('items') || '6');
 
     linkToShowInfo += sParams.get('search')
       ? `&search=${sParams.get('search')}`
@@ -64,7 +57,7 @@ function Card(props: CardProps): ReactNode {
   }
 
   function toCardInfo(): void {
-    navigate(linkToShowInfo, { replace: false });
+    setNewParams(urlToBack);
   }
 }
 
