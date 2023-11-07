@@ -1,42 +1,29 @@
 import RequestData from './RequestData';
 import ResponseData from '../models/ResponseData';
-import { defer, redirect } from 'react-router-dom';
+import { defer } from 'react-router-dom';
 import ServerError from '../models/ServerError';
 
 export default async function routerLoader({
   request,
 }: {
   request: Request;
-}): Promise<object | Response | null> {
-  const fetchData = new RequestData();
-  const url: URL = new URL(request.url);
-  const sParams: URLSearchParams = url.searchParams;
-  const search = sParams.get('search');
-  const urlForRedirect = search ? `?page=1&search=${search}` : '?page=1';
+}): Promise<object> {
+  const fetchData = new RequestData(request.url);
 
-  const pageEntered: string | null = sParams.get('page');
-
-  if (pageEntered === null) return redirect(urlForRedirect);
-
-  const page = parseInt(pageEntered);
-
-  if (isNaN(page) || page < 1) {
-    return redirect(urlForRedirect);
-  }
-
-  fetchData.setPage(page);
   const data: Array<ResponseData> | ServerError =
-    await fetchData.getResponseData(url.searchParams.get('search'));
+    await fetchData.getResponseData();
 
   if ('statusCode' in data) {
-    const error = new Error(data.message);
-    error.name = data.error;
-    error.cause = data.statusCode;
+    const { statusCode, message, error } = data as ServerError;
 
-    throw error;
+    const errorThrow: Error = new Error(message);
+    errorThrow.name = error;
+    errorThrow.cause = statusCode;
+
+    throw errorThrow;
   }
 
-  if (!data.length && page > 1) return { data: null };
+  if (!Array.isArray(data) || !data.length) return { data: null };
 
   return defer({ data: data });
 }

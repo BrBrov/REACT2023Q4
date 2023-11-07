@@ -1,10 +1,9 @@
 import './MisingPage.scss';
 import { ReactNode } from 'react';
-import { createSearchParams, useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function MissingPage(): ReactNode {
   const navigate = useNavigate();
-  const location = useLocation();
 
   return (
     <div className="missing__wrapper">
@@ -16,19 +15,13 @@ function MissingPage(): ReactNode {
         className="missing__button"
         onClick={returnToFirstPage}
       >
-        <span className="missing__button-text">{'Go to first page'}</span>
+        <span className="missing__button-text">{'Go to previous page'}</span>
       </button>
     </div>
   );
 
   function returnToFirstPage(): void {
-    const sParams: URLSearchParams = createSearchParams(location.search);
-
-    let url: string = location.pathname + '?page=1';
-
-    if (sParams.get('search')) url += `&search=${sParams.get('search')}`;
-
-    navigate(url, { replace: false });
+    navigate(-1);
   }
 }
 

@@ -1,16 +1,15 @@
 import { ReactNode } from 'react';
-import RequestData from '../../utils/RequestData';
 import { Navigate } from 'react-router-dom';
 
 function Redirect(): ReactNode {
-  const fetchData = new RequestData();
   const linkTO = {
     pathname: 'main',
     search:
-      `?page=${fetchData.getPage()}` +
+      `?page=1` +
+      `&items=6` +
       `${
-        fetchData.getSearchString()
-          ? `&search=${fetchData.getSearchString()}`
+        localStorage.getItem('search')
+          ? `&search=${localStorage.getItem('search')}`
           : ``
       }`,
   };

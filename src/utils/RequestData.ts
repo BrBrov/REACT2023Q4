@@ -1,79 +1,47 @@
 import ResponseData from '../models/ResponseData';
 import StorageProcessor from './StorageProcessor';
 import ServerError from '../models/ServerError';
+import QueryParser from './QueryParser';
 
 class RequestData {
-  private page: number;
-  private readonly countCards: number;
-  private baseURL: string;
   private storage: StorageProcessor;
+  private queryParams: QueryParser;
 
-  constructor() {
-    this.page = 1;
-    this.countCards = 6;
-    this.baseURL = this.updateBaseURL();
+  constructor(url: string) {
     this.storage = new StorageProcessor();
+    this.queryParams = new QueryParser(url);
   }
 
-  public getPage(): number {
-    return this.page;
+  public async getResponseData(): Promise<Array<ResponseData> | ServerError> {
+    const url: string | null = this.generateURL();
+
+    if (!url)
+      return {
+        statusCode: 400,
+        message: 'You entered incorrect query parameters.',
+        error: 'Wrong query parameters!',
+      };
+
+    const response: Response = await fetch(url, {
+      method: 'GET',
+      mode: 'cors',
+    });
+    return response.json();
   }
 
-  public setPage(page: number | null): void {
-    this.page = page ? page : 1;
-    this.baseURL = this.updateBaseURL();
-  }
-
-  public getResponseData(
-    search: string | null
-  ): Promise<Array<ResponseData> | ServerError> {
-    const url: string = this.generateURL(search);
-
-    return fetch(url, { method: 'GET', mode: 'cors' }).then(
-      (response: Response) => response.json()
-    );
-  }
-
-  public getSearchString(): string | null {
-    return this.storage.search;
-  }
-
-  public getSingleData(
-    id: number | string
-  ): Promise<Array<ResponseData> | ServerError> {
-    const url = this.baseURL + `&ids=${id}`;
-    return fetch(url, { mode: 'cors', method: 'GET' }).then((resp: Response) =>
-      resp.json()
-    );
-  }
-
-  private generateURL(search: string | null): string {
-    this.storage.search = search ? search : null;
-
-    if (search) {
-      this.storage.search = search;
-      return (
-        this.baseURL + `&beer_name=${this.deleteSpaceFromSearchString(search)}`
-      );
+  private generateURL(): string | null {
+    if (this.storage.search !== this.queryParams.search) {
+      this.storage.search = this.queryParams.search;
     }
+    if (!this.queryParams.page || !this.queryParams) return null;
 
-    if (this.storage.search) {
-      return (
-        this.baseURL +
-        `&beer_name=${this.deleteSpaceFromSearchString(this.storage.search)}`
-      );
-    }
+    let url = `https://api.punkapi.com/v2/beers?page=${this.queryParams.page}&per_page=${this.queryParams.items}`;
 
-    return this.baseURL;
-  }
+    if (this.queryParams.search) url += `&beer_name=${this.storage.search}`;
 
-  private deleteSpaceFromSearchString(search: string): string {
-    const prepareSearch: string = search.trim();
-    return prepareSearch.replaceAll(' ', '_');
-  }
+    if (this.queryParams.ids) url += `&ids=${this.queryParams.ids}`;
 
-  private updateBaseURL(): string {
-    return `https://api.punkapi.com/v2/beers?page=${this.page}&per_page=${this.countCards}`;
+    return url;
   }
 }
 

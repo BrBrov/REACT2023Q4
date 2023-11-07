@@ -1,19 +1,18 @@
 import './Pagination.scss';
 import { ReactNode } from 'react';
-import { createSearchParams, useLocation, useNavigate } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
+import ItemsPerPage from '../items-page/ItemsPerPage';
 
 function Pagination(): ReactNode {
-  const location = useLocation();
-  const navigate = useNavigate();
-
-  const page = createSearchParams(location.search).get('page');
+  const [sParams, setNewParams] = useSearchParams();
 
   return (
     <div className="pagination">
       <div className="pagination__page-wrapper">
         <span className="pagination__text-page">{'Page: '}</span>
-        <span className="pagination__page">{page}</span>
+        <span className="pagination__page">{sParams.get('page')}</span>
       </div>
+      <ItemsPerPage />
       <div className="pagination__panel-wrapper">
         <button
           type="button"
@@ -30,19 +29,17 @@ function Pagination(): ReactNode {
   );
 
   function onPageDown(): void {
-    const sParams: URLSearchParams = createSearchParams(location.search);
     let enteredPage: number = checkEnteredPage(sParams.get('page')) - 1;
 
     enteredPage = enteredPage < 1 ? 1 : enteredPage;
 
-    goToPage(enteredPage, sParams);
+    goToPage(enteredPage);
   }
 
   function onPageUp(): void {
-    const sParams: URLSearchParams = createSearchParams(location.search);
     const enteredPage: number = checkEnteredPage(sParams.get('page')) + 1;
 
-    goToPage(enteredPage, sParams);
+    goToPage(enteredPage);
   }
 
   function checkEnteredPage(enteredPage: string | null): number {
@@ -50,17 +47,20 @@ function Pagination(): ReactNode {
 
     if (enteredPage) pageConverted = parseInt(enteredPage);
 
-    if (isNaN(pageConverted)) return pageConverted;
+    if (isNaN(pageConverted) || Array.isArray(enteredPage))
+      return pageConverted;
 
     return pageConverted;
   }
 
-  function goToPage(page: number, sParams: URLSearchParams): void {
-    let url: string = location.pathname + '?page=' + page;
+  function goToPage(page: number): void {
+    let url: string = '?page=' + page + '&items=' + sParams.get('items');
 
     if (sParams.get('search')) url = url + '&search=' + sParams.get('search');
 
-    navigate(url, { replace: false });
+    if (sParams.get('ids')) url += url + '&ids=' + sParams.get('ids');
+
+    setNewParams(url, { replace: false });
   }
 }
 

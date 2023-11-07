@@ -21,7 +21,7 @@
 
 .missing__button {
   display: flex;
-  width: 120px;
+  width: 155px;
   height: 30px;
   justify-content: center;
   align-items: center;
@@ -31,14 +31,14 @@
 }
 
 .missing__button:hover {
-  width: 122px;
-  height: 33px;
+  width: 150px;
+  height: 30px;
   background: $btn-hover-background;
 }
 
 .missing__button:active {
-  width: 118px;
-  height: 28px;
+  width: 160px;
+  height: 30px;
   background: $btn-active-background;
 }
 

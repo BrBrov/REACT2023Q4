@@ -1,21 +1,12 @@
 import { ReactNode, SyntheticEvent, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 import './Header.scss';
-import {
-  createSearchParams,
-  Location,
-  useLocation,
-  useNavigate,
-} from 'react-router-dom';
 
 function Header(): ReactNode {
-  const location = useLocation();
-  const navigate = useNavigate();
-  const sParams = createSearchParams(location.search);
+  const [sParams, setNewParams] = useSearchParams();
 
   const [inputData, setInput] = useState<string | null>(sParams.get('search'));
-
-  const searchURL = createSearchLink(location, inputData);
 
   return (
     <>
@@ -40,15 +31,11 @@ function Header(): ReactNode {
   }
 
   function onSearch(): void {
-    navigate(searchURL, { replace: false });
-  }
+    let url = `?page=1&items=` + sParams.get('items');
 
-  function createSearchLink(location: Location, input: string | null): string {
-    let url = location.pathname + `?page=1`;
+    if (inputData) url += `&search=${inputData}`;
 
-    if (input) url += `&search=${input}`;
-
-    return url;
+    setNewParams(url);
   }
 }
 
