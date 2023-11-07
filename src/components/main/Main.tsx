@@ -1,24 +1,24 @@
-import { ReactNode } from 'react';
+import { ReactNode, useContext } from 'react';
 
 import './Main.scss';
 import ErrorButton from '../error-button/Error-Button';
-import {
-  createSearchParams,
-  Location,
-  Outlet,
-  useLocation,
-  useNavigate,
-  useOutletContext,
-} from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import Pagination from '../pagination/Pagination';
+import ResponseData from '../../models/ResponseData';
+import NotFound from '../not-found/Not-Found';
+import CardCreator from '../../utils/CardCreator';
+import ContextResponseData from '../../context/DataContext';
+import DataContext from '../../models/DataContext-model';
 
 function Main(): ReactNode {
-  const location = useLocation();
-  const navigate = useNavigate();
+  //TODO
+  // const [sParams] = useSearchParams();
 
-  const hasOpenCardInfo: 0 | -1 = closeCardInfoPanel(location);
+  // const hasOpenCardInfo: boolean = closeCardInfoPanel(sParams);
 
-  const cards = useOutletContext<Array<ReactNode> | null>();
+  const contextData = useContext<DataContext>(ContextResponseData);
+
+  const cards = createCards(contextData.getAllCardsData());
 
   return (
     <div className="main">
@@ -37,16 +37,25 @@ function Main(): ReactNode {
     </div>
   );
 
-  function closeCardInfoPanel(location: Location): 0 | -1 {
-    const sParams = createSearchParams(location.search);
-    if (!sParams.get('ids')) return 0;
+  //TODO
+  // function closeCardInfoPanel(sParams: URLSearchParams): boolean {
+  //   return !sParams.get('ids');
+  // }
 
-    return -1;
+  function createCards(
+    data: Array<ResponseData> | null
+  ): Array<ReactNode> | null {
+    if (!data) return null;
+
+    if (!data.length) return [<NotFound key={-1} />];
+
+    return data.map((item: ResponseData) => {
+      const cardCreator: CardCreator = new CardCreator(item);
+      return cardCreator.getCard();
+    });
   }
 
-  function onClickPanel(): void {
-    if (hasOpenCardInfo) navigate(hasOpenCardInfo);
-  }
+  function onClickPanel(): void {}
 }
 
 export default Main;
