@@ -10,4 +10,8 @@ export default defineConfig({
   build: {
     outDir: 'react-components',
   },
+  test: {
+    globals: true,
+    environment: 'jsdom',
+  },
 });
