@@ -1,12 +1,17 @@
-import { ReactNode, SyntheticEvent, useState } from 'react';
+import { ReactNode, SyntheticEvent, useContext, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import './Header.scss';
+import ContextResponseData from '../../context/DataContext';
 
 function Header(): ReactNode {
   const [sParams, setNewParams] = useSearchParams();
 
-  const [inputData, setInput] = useState<string | null>(sParams.get('search'));
+  const context = useContext(ContextResponseData);
+
+  const [inputData, setInput] = useState<string | null>(
+    context.getSearchString()
+  );
 
   return (
     <>
@@ -28,6 +33,7 @@ function Header(): ReactNode {
   function onInput(event: SyntheticEvent): void {
     const input = event.target as HTMLInputElement;
     setInput(input.value);
+    context.setSearchString(input.value || null);
   }
 
   function onSearch(): void {

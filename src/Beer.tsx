@@ -1,4 +1,4 @@
-import React, { ReactNode, useContext } from 'react';
+import React, { ReactNode } from 'react';
 
 import './Beer.scss';
 import ResponseData from './models/ResponseData';
@@ -10,7 +10,7 @@ import DataContext from './models/DataContext-model';
 import ContextResponseData from './context/DataContext';
 
 function Beer(): ReactNode {
-  const ContextData = useContext<DataContext>(ContextResponseData);
+  const ContextData = new DataContext();
   const { data } = useLoaderData() as { data: Array<ResponseData> | null };
 
   if (!data)

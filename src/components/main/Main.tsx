@@ -11,7 +11,6 @@ import ContextResponseData from '../../context/DataContext';
 import DataContext from '../../models/DataContext-model';
 
 function Main(): ReactNode {
-  //TODO
   // const [sParams] = useSearchParams();
 
   // const hasOpenCardInfo: boolean = closeCardInfoPanel(sParams);
@@ -37,7 +36,6 @@ function Main(): ReactNode {
     </div>
   );
 
-  //TODO
   // function closeCardInfoPanel(sParams: URLSearchParams): boolean {
   //   return !sParams.get('ids');
   // }
