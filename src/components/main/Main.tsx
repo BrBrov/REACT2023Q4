@@ -2,7 +2,7 @@ import { ReactNode, useContext } from 'react';
 
 import './Main.scss';
 import ErrorButton from '../error-button/Error-Button';
-import { Outlet, useSearchParams } from 'react-router-dom';
+import { Outlet, useNavigate, useSearchParams } from 'react-router-dom';
 import Pagination from '../pagination/Pagination';
 import ResponseData from '../../models/ResponseData';
 import NotFound from '../not-found/Not-Found';
@@ -12,6 +12,7 @@ import DataContext from '../../models/DataContext-model';
 
 function Main(): ReactNode {
   const [sParams] = useSearchParams();
+  const navigate = useNavigate();
 
   const contextData = useContext<DataContext>(ContextResponseData);
 
@@ -35,7 +36,6 @@ function Main(): ReactNode {
   );
 
   function closeCardInfoPanel(): boolean {
-    console.log(sParams.get('ids'));
     return !!sParams.get('ids');
   }
 
@@ -53,7 +53,8 @@ function Main(): ReactNode {
   }
 
   function onClickPanel(): void {
-    console.log(closeCardInfoPanel());
+    const isOpenCardsInfo: boolean = closeCardInfoPanel();
+    if (isOpenCardsInfo) navigate(-1);
   }
 }
 

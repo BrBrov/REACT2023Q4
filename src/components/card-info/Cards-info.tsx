@@ -20,8 +20,6 @@ function CardsInfo(): ReactNode {
 
   const data: ResponseData | null = context.getSingleCardData(ids);
 
-  console.log(data);
-
   if (!data)
     return (
       <div className="main__single-card">
