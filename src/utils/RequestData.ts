@@ -5,7 +5,7 @@ import QueryParser from './QueryParser';
 
 class RequestData {
   private storage: StorageProcessor;
-  private queryParams: QueryParser;
+  private readonly queryParams: QueryParser;
 
   constructor(url: string) {
     this.storage = new StorageProcessor();
@@ -34,6 +34,8 @@ class RequestData {
       this.storage.search = this.queryParams.search;
     }
     if (!this.queryParams.page || !this.queryParams) return null;
+
+    if (!this.queryParams.items) return null;
 
     let url = `https://api.punkapi.com/v2/beers?page=${this.queryParams.page}&per_page=${this.queryParams.items}`;
 

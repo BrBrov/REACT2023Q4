@@ -4,6 +4,7 @@ import './Card.scss';
 import { useSearchParams } from 'react-router-dom';
 import ContextResponseData from '../../context/DataContext';
 import DataContext from '../../models/DataContext-model';
+import { CardProps } from '../../models/Card-model';
 
 function Card(props: { id: number }): ReactNode {
   const context = useContext<DataContext>(ContextResponseData);
@@ -16,7 +17,8 @@ function Card(props: { id: number }): ReactNode {
 
   if (!card) return <span className="card__beer-name">Card was not found</span>;
 
-  const { abv, srm, volume, name, description, ibu, image_url } = card;
+  const { abv, srm, volume, name, description, ibu, image_url }: CardProps =
+    card;
 
   const urlToBack: string = createLinkToCardInfo(sParams);
 

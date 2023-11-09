@@ -140,3 +140,11 @@
   @include Cardo(0.9em);
   color: $text-color;
 }
+
+.main__card-wrong {
+  display: flex;
+  width: 98%;
+  height: calc(100vh / 1.6);
+  justify-content: center;
+  align-items: center;
+}

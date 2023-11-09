@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 import Beer from './Beer';
 import ResponseData from './models/ResponseData';

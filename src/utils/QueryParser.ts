@@ -49,6 +49,9 @@ class QueryParser {
 
     if (isNaN(countNumber)) return null;
 
+    if (countNumber !== 6 && countNumber !== 12 && countNumber !== 24)
+      return null;
+
     return count;
   }
 

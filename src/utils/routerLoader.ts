@@ -14,13 +14,7 @@ export default async function routerLoader({
     await fetchData.getResponseData();
 
   if ('statusCode' in data) {
-    const { statusCode, message, error } = data as ServerError;
-
-    const errorThrow: Error = new Error(message);
-    errorThrow.name = error;
-    errorThrow.cause = statusCode;
-
-    throw errorThrow;
+    return { data: data };
   }
 
   if (!Array.isArray(data) || !data.length) return { data: null };
