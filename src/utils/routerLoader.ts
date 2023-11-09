@@ -10,6 +10,17 @@ export default async function routerLoader({
 }): Promise<object> {
   const fetchData = new RequestData(request.url);
 
+  if (!fetchData.checkQueryParams()) {
+    const redirectURL = fetchData.getURLForRedirect();
+    const data: ServerError = {
+      statusCode: -1,
+      message: redirectURL,
+      error: 'Redirect',
+    };
+
+    return { data: data };
+  }
+
   const data: Array<ResponseData> | ServerError =
     await fetchData.getResponseData();
 

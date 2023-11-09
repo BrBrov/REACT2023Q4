@@ -20,7 +20,7 @@ function PageNotFound(): ReactNode {
   );
 
   function onRedirect(): void {
-    navigate('/main?page=1', { replace: false });
+    navigate('/main?page=1&items=6', { replace: false });
   }
 }
 

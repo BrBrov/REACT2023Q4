@@ -29,6 +29,23 @@ class RequestData {
     return response.json();
   }
 
+  public checkQueryParams(): boolean {
+    const page: string | null = this.queryParams.page;
+    const items: string | null = this.queryParams.items;
+
+    return !(!page && !items);
+  }
+
+  public getURLForRedirect(): string {
+    let url = 'main';
+
+    url += '?page=' + `${this.queryParams.page ? this.queryParams.page : '1'}`;
+    url +=
+      '&items=' + `${this.queryParams.items ? this.queryParams.items : '6'}`;
+    url += this.queryParams.search ? `&search=${this.queryParams.search}` : '';
+
+    return url;
+  }
   private generateURL(): string | null {
     if (this.storage.search !== this.queryParams.search) {
       this.storage.search = this.queryParams.search;
