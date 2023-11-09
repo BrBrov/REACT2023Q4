@@ -26,7 +26,11 @@ class DataContext {
     return this.searchString.search;
   }
 
-  public getSingleCardData(ids: number): ResponseData | null {
+  public getSingleCardData(ids: number | string): ResponseData | null {
+    const id: number = typeof ids !== 'number' ? parseInt(ids) : ids;
+
+    if (isNaN(id)) return null;
+
     if (!this.cardsData) return null;
 
     return this.cardsData.find((item: ResponseData) => ids === item.id) || null;

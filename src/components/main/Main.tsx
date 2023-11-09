@@ -2,7 +2,7 @@ import { ReactNode, useContext } from 'react';
 
 import './Main.scss';
 import ErrorButton from '../error-button/Error-Button';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useSearchParams } from 'react-router-dom';
 import Pagination from '../pagination/Pagination';
 import ResponseData from '../../models/ResponseData';
 import NotFound from '../not-found/Not-Found';
@@ -11,13 +11,11 @@ import ContextResponseData from '../../context/DataContext';
 import DataContext from '../../models/DataContext-model';
 
 function Main(): ReactNode {
-  // const [sParams] = useSearchParams();
-
-  // const hasOpenCardInfo: boolean = closeCardInfoPanel(sParams);
+  const [sParams] = useSearchParams();
 
   const contextData = useContext<DataContext>(ContextResponseData);
 
-  const cards = createCards(contextData.getAllCardsData());
+  const cards: Array<ReactNode> | null = createCards(contextData);
 
   return (
     <div className="main">
@@ -36,24 +34,27 @@ function Main(): ReactNode {
     </div>
   );
 
-  // function closeCardInfoPanel(sParams: URLSearchParams): boolean {
-  //   return !sParams.get('ids');
-  // }
+  function closeCardInfoPanel(): boolean {
+    console.log(sParams.get('ids'));
+    return !!sParams.get('ids');
+  }
 
-  function createCards(
-    data: Array<ResponseData> | null
-  ): Array<ReactNode> | null {
+  function createCards(contextData: DataContext): Array<ReactNode> | null {
+    const data: Array<ResponseData> | null = contextData.getAllCardsData();
+
     if (!data) return null;
 
     if (!data.length) return [<NotFound key={-1} />];
 
     return data.map((item: ResponseData) => {
-      const cardCreator: CardCreator = new CardCreator(item);
+      const cardCreator: CardCreator = new CardCreator(contextData, item.id);
       return cardCreator.getCard();
     });
   }
 
-  function onClickPanel(): void {}
+  function onClickPanel(): void {
+    console.log(closeCardInfoPanel());
+  }
 }
 
 export default Main;

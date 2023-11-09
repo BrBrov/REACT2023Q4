@@ -1,14 +1,22 @@
-import { ReactNode } from 'react';
+import { ReactNode, useContext } from 'react';
 
 import './Card.scss';
-import { CardProps } from '../../models/Card-model';
 import { useSearchParams } from 'react-router-dom';
+import ContextResponseData from '../../context/DataContext';
+import DataContext from '../../models/DataContext-model';
 
-function Card(props: CardProps): ReactNode {
-  const { id, name, description, image_url, volume, ibu, srm, abv } = props;
-  const ids: number = id;
+function Card(props: { id: number }): ReactNode {
+  const context = useContext<DataContext>(ContextResponseData);
+
+  const ids: number = props.id;
 
   const [sParams, setNewParams] = useSearchParams();
+
+  const card = context.getSingleCardData(ids);
+
+  if (!card) return <span className="card__beer-name">Card was not found</span>;
+
+  const { abv, srm, volume, name, description, ibu, image_url } = card;
 
   const urlToBack: string = createLinkToCardInfo(sParams);
 

@@ -1,22 +1,18 @@
-import ResponseData from '../models/ResponseData';
 import Card from '../components/card/Card';
-import { CardProps } from '../models/Card-model';
 import { ReactNode } from 'react';
+import DataContext from '../models/DataContext-model';
 
 class CardCreator {
-  private readonly data: CardProps;
+  private readonly data: DataContext;
+  private readonly id: number;
 
-  constructor(data: ResponseData) {
-    this.data = this.convertToCardProps(data);
+  constructor(data: DataContext, id: number) {
+    this.data = data;
+    this.id = id;
   }
 
   public getCard(): ReactNode {
-    return <Card key={this.data.id} {...this.data} />;
-  }
-
-  private convertToCardProps(data: ResponseData): CardProps {
-    const { id, name, description, image_url, volume, ibu, srm, abv } = data;
-    return { id, name, description, image_url, volume, ibu, srm, abv };
+    return <Card key={this.id} id={this.id} />;
   }
 }
 
