@@ -27,19 +27,20 @@ class QueryParser {
   private parseQueryString(queryString: string): void {
     const url = new URL(queryString);
     const sParams = new URLSearchParams(url.search);
-    this.pageQuery = this.checkPage(sParams.get('page'));
+    this.pageQuery = this.checkNumber(sParams.get('page'));
     this.countElements = this.checkCountPage(sParams.get('items'));
     this.searchQuery = this.deleteSpaceFromSearchString(sParams.get('search'));
+    this.idsElem = this.checkNumber(sParams.get('ids'));
   }
 
-  private checkPage(page: string | null): string | null {
-    if (!page || Array.isArray(page)) return null;
+  private checkNumber(num: string | null): string | null {
+    if (!num || Array.isArray(num)) return null;
 
-    const pageNumber = parseInt(page);
+    const parsedNum = parseInt(num);
 
-    if (isNaN(pageNumber)) return null;
+    if (isNaN(parsedNum)) return null;
 
-    return page;
+    return num;
   }
 
   private checkCountPage(count: string | null): string | null {

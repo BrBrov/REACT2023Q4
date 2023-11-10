@@ -45,6 +45,8 @@ function Pagination(): ReactNode {
   function checkEnteredPage(enteredPage: string | null): number {
     let pageConverted = 1;
 
+    if (Array.isArray(enteredPage)) return 1;
+
     if (enteredPage) pageConverted = parseInt(enteredPage);
 
     if (isNaN(pageConverted) || Array.isArray(enteredPage))
@@ -57,8 +59,6 @@ function Pagination(): ReactNode {
     let url: string = '?page=' + page + '&items=' + sParams.get('items');
 
     if (sParams.get('search')) url = url + '&search=' + sParams.get('search');
-
-    if (sParams.get('ids')) url += url + '&ids=' + sParams.get('ids');
 
     setNewParams(url, { replace: false });
   }

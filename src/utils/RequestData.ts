@@ -36,6 +36,22 @@ class RequestData {
     return !(!page && !items);
   }
 
+  public checkIdsParam(): boolean {
+    return !!this.queryParams.ids;
+  }
+
+  public getSingleCardData(): Promise<ResponseData | null> {
+    const url = 'https://api.punkapi.com/v2/beers?ids=' + this.queryParams.ids;
+
+    return fetch(url, { mode: 'cors', method: 'GET' })
+      .then((resp: Response) => resp.json())
+      .then((data: Array<ResponseData>) => {
+        if (!data.length) return null;
+
+        return data[0];
+      });
+  }
+
   public getURLForRedirect(): string {
     let url = 'main';
 
@@ -57,8 +73,6 @@ class RequestData {
     let url = `https://api.punkapi.com/v2/beers?page=${this.queryParams.page}&per_page=${this.queryParams.items}`;
 
     if (this.queryParams.search) url += `&beer_name=${this.storage.search}`;
-
-    if (this.queryParams.ids) url += `&ids=${this.queryParams.ids}`;
 
     return url;
   }

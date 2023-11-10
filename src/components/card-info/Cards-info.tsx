@@ -1,43 +1,44 @@
-import { ReactNode, Suspense, useContext } from 'react';
-import { Await, useNavigate, useSearchParams } from 'react-router-dom';
+import { ReactNode, Suspense } from 'react';
+import {
+  Await,
+  useLoaderData,
+  useNavigate,
+  useSearchParams,
+} from 'react-router-dom';
 
 import './Cards-info.scss';
 import ResponseData from '../../models/ResponseData';
 import Fallback from '../fallback/Fallback';
-import DataContext from '../../models/DataContext-model';
-import ContextResponseData from '../../context/DataContext';
 
 function CardsInfo(): ReactNode {
   const [sParams] = useSearchParams();
   const navigate = useNavigate();
-  const context = useContext<DataContext>(ContextResponseData);
+  const { data } = useLoaderData() as { data: ResponseData | null };
 
-  const ids = getIDs(sParams);
-
-  if (!ids) return null;
-
-  const closeURL: 0 | -1 = createCloseLink(sParams);
-
-  const data: ResponseData | null = context.getSingleCardData(ids);
+  if (!sParams.get('ids')) return null;
 
   if (!data)
     return (
-      <div className="main__single-card">
-        <div className="main__close-wrapper">
-          <div className="main__close-img" onClick={onClickCLose}>
-            <img
-              className="main__close-image"
-              src={'./close.svg'}
-              alt="Close card"
-            />
+      <Suspense fallback={<Fallback />}>
+        <Await resolve={data}>
+          <div className="main__single-card">
+            <div className="main__close-wrapper">
+              <div className="main__close-img" onClick={onClickCLose}>
+                <img
+                  className="main__close-image"
+                  src={'./close.svg'}
+                  alt="Close card"
+                />
+              </div>
+            </div>
+            <div className="main__card-wrong">
+              <span className="main__beer-name">
+                Card was not found on the page.
+              </span>
+            </div>
           </div>
-        </div>
-        <div className="main__card-wrong">
-          <span className="main__beer-name">
-            Card was not found on the page.
-          </span>
-        </div>
-      </div>
+        </Await>
+      </Suspense>
     );
 
   const pairings: ReactNode | Array<ReactNode> = createPairing(
@@ -85,15 +86,6 @@ function CardsInfo(): ReactNode {
     </Suspense>
   );
 
-  function getIDs(sParams: URLSearchParams): number | null {
-    const id: number | null = sParams.get('ids')
-      ? parseInt(sParams.get('ids')!)
-      : null;
-
-    if (!id || isNaN(id)) return null;
-
-    return id;
-  }
   function createPairing(
     pairings: Array<string>
   ): Array<ReactNode> | ReactNode {
@@ -113,6 +105,7 @@ function CardsInfo(): ReactNode {
   }
 
   function onClickCLose(): void {
+    const closeURL: 0 | -1 = createCloseLink(sParams);
     navigate(closeURL);
   }
 }
