@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouteObject } from 'react-router-dom';
+import { RouteObject } from 'react-router-dom';
 
 import ErrorBoundary from '../components/error-boundary/Error-Boundary';
 import routerLoader from '../utils/routerLoader';
@@ -25,6 +25,4 @@ const routes: Array<RouteObject> = [
   },
 ];
 
-const router = createBrowserRouter(routes);
-
-export default router;
+export default routes;

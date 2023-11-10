@@ -10,12 +10,12 @@ interface ResponseData {
   description: string;
   image_url: string | null;
   abv: number;
-  ibu: number;
+  ibu: number | null;
   target_fg: number;
   target_og: number;
-  ebc: number;
-  srm: number;
-  ph: number;
+  ebc: number | null;
+  srm: number | null;
+  ph: number | null;
   attenuation_level: number;
   volume: Volume;
   boil_volume: Volume;
