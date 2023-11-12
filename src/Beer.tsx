@@ -24,8 +24,6 @@ function Beer(): ReactNode {
     data: ResponseData[] | ServerError | null;
   };
 
-  console.log(data);
-
   if (ready === 'loading') return <Fallback />;
 
   if (!data)
