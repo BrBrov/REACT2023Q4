@@ -1,24 +1,22 @@
-import { ReactNode, useContext } from 'react';
+import { ReactNode } from 'react';
 
 import './Card.scss';
 import { useSearchParams } from 'react-router-dom';
-import ContextResponseData from '../../context/DataContext';
-import DataContext from '../../models/DataContext-model';
+import CardsNotFound from './CardsNotFound';
+import ResponseData from '../../models/ResponseData';
 
 function Card(props: { id: number }): ReactNode {
-  const context = useContext<DataContext>(ContextResponseData);
-
   const ids: number = props.id;
 
   const [sParams, setNewParams] = useSearchParams();
 
-  const card = context.getSingleCardData(ids);
-
-  if (!card) return <span className="card__beer-name">Card was not found</span>;
-
-  const { abv, srm, volume, name, description, ibu, image_url } = card;
+  const card: ResponseData | null = null; //TODO want to edit
 
   const urlToBack: string = createLinkToCardInfo(sParams);
+
+  if (!card) return <CardsNotFound />;
+
+  const { abv, srm, volume, name, description, ibu, image_url } = card;
 
   return (
     <>
@@ -37,7 +35,7 @@ function Card(props: { id: number }): ReactNode {
             </div>
           </div>
           <div className="card__description-wrapper">
-            <span className="card__volume">{`Volume: ${volume.value} ${volume.unit}`}</span>
+            <span className="card__volume">{`Volume: ${volume} ${volume}`}</span>
             <span className="card__description">{description}</span>
           </div>
         </div>

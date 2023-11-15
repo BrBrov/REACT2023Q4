@@ -1,6 +1,6 @@
 import Card from '../components/card/Card';
 import { ReactNode } from 'react';
-import DataContext from '../models/DataContext-model';
+import DataContext from '../context/DataContext-model';
 
 class CardCreator {
   private readonly data: DataContext;

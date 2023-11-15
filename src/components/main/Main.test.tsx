@@ -3,7 +3,7 @@ import Main from './Main';
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import ContextResponseData from '../../context/DataContext';
-import DataContext from '../../models/DataContext-model';
+import DataContext from '../../context/DataContext-model';
 import {
   fakeDataWithSixElems,
   fakeDataWithTwelveElems,

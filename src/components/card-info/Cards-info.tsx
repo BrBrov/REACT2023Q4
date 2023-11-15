@@ -9,6 +9,7 @@ import {
 import './Cards-info.scss';
 import ResponseData from '../../models/ResponseData';
 import Fallback from '../fallback/Fallback';
+import CardUndefined from './CardUndefined';
 
 function CardsInfo(): ReactNode {
   const [sParams] = useSearchParams();
@@ -21,22 +22,7 @@ function CardsInfo(): ReactNode {
     return (
       <Suspense fallback={<Fallback />}>
         <Await resolve={data}>
-          <div className="main__single-card">
-            <div className="main__close-wrapper">
-              <div className="main__close-img" onClick={onClickCLose}>
-                <img
-                  className="main__close-image"
-                  src={'./close.svg'}
-                  alt="Close card"
-                />
-              </div>
-            </div>
-            <div className="main__card-wrong">
-              <span className="main__beer-name">
-                Card was not found on the page.
-              </span>
-            </div>
-          </div>
+          <CardUndefined prop={onClickCLose} />
         </Await>
       </Suspense>
     );
