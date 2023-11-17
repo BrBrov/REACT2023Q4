@@ -12,9 +12,9 @@ import useGetAllCardsQuery from './redux/redux-query/useGetAllCards';
 function Beer(): ReactNode {
   const [sParams] = useSearchParams();
   const queryParams = new QueryParser(sParams);
-  const { data, isLoading } = useGetAllCardsQuery(queryParams);
+  const { data, isLoading, isFetching } = useGetAllCardsQuery(queryParams);
 
-  if (isLoading) return <Fallback />;
+  if (isLoading || isFetching) return <Fallback />;
 
   if (!data)
     return (

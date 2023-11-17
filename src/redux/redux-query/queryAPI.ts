@@ -4,6 +4,8 @@ import {
   fetchBaseQuery,
 } from '@reduxjs/toolkit/dist/query/react';
 import QueryParser from '../../utils/QueryParser';
+import ResponseData from '../../models/ResponseData';
+import ServerError from '../../models/ServerError';
 
 const queryApi = createApi({
   reducerPath: 'card',
@@ -11,14 +13,17 @@ const queryApi = createApi({
     baseUrl: 'https://api.punkapi.com/v2/beers',
   }),
   endpoints: (build) => ({
-    getSingleCard: build.query({
+    getSingleCard: build.query<ResponseData, string>({
       query: (id: string | null) => {
         if (!id) return {} as FetchArgs;
 
         return `?ids=${id}`;
       },
     }),
-    getAllCards: build.query({
+    getAllCards: build.query<
+      Array<ResponseData> | ServerError | null,
+      QueryParser
+    >({
       query: (arg: QueryParser) => {
         let url = '?page=';
         url += arg.page ? arg.page : 1;

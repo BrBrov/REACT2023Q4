@@ -1,4 +1,4 @@
-import { ReactNode, useRef } from 'react';
+import { ReactNode, SyntheticEvent } from 'react';
 
 import './Card.scss';
 import { useSearchParams } from 'react-router-dom';
@@ -7,7 +7,7 @@ import ResponseData from '../../models/ResponseData';
 
 function Card(props: { card: ResponseData }): ReactNode {
   const [sParams, setNewParams] = useSearchParams();
-  const idRef = useRef(props.card.id);
+  const id = props.card.id;
 
   if (!props) return <CardsNotFound />;
 
@@ -30,7 +30,7 @@ function Card(props: { card: ResponseData }): ReactNode {
             </div>
           </div>
           <div className="card__description-wrapper">
-            <span className="card__volume">{`Volume: ${volume} ${volume}`}</span>
+            <span className="card__volume">{`Volume: ${volume.value}`}</span>
             <span className="card__description">{description}</span>
           </div>
         </div>
@@ -52,12 +52,13 @@ function Card(props: { card: ResponseData }): ReactNode {
       ? `&search=${sParams.get('search')}`
       : '';
 
-    if (!sParams.get('ids')) linkToShowInfo += `&ids=${idRef.current}`;
-
+    if (!sParams.get('ids')) linkToShowInfo += `&ids=${id}`;
+    console.log(linkToShowInfo);
     return linkToShowInfo;
   }
 
-  function toCardInfo(): void {
+  function toCardInfo(e: SyntheticEvent): void {
+    e.stopPropagation();
     setNewParams(createLinkToCardInfo(sParams));
   }
 }

@@ -13,17 +13,17 @@ function CardsInfo(): ReactNode {
   const navigate = useNavigate();
   const queryParams = new QueryParser(sParams);
 
-  const { data, isLoading } = useGetSingleCardQuery(queryParams.ids);
+  const { data, isLoading, isFetching } = useGetSingleCardQuery(
+    queryParams.ids
+  );
 
   if (!queryParams.ids) return null;
 
+  if (isLoading || isFetching) return <Fallback />;
+
   if (!data) return <CardUndefined prop={onClickCLose} />;
 
-  if (isLoading) return <Fallback />;
-
   const card = data[0] as ResponseData;
-
-  console.log(data[0]);
 
   return (
     <div className="main__single-card">
