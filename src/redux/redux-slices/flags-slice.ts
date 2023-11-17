@@ -13,7 +13,7 @@ const flagsInit: FlagsStore = {
 const flagsSlice = createSlice({
   name: 'falgs',
   initialState: flagsInit,
-  reducers: { flagsReducer },
+  reducers: flagsReducer,
 });
 
 export default flagsSlice;

@@ -8,6 +8,9 @@ import Header from './components/header/Header';
 import ErrorButton from './components/error-button/Error-Button';
 import ServerError from './models/ServerError';
 import Fallback from './components/fallback/Fallback';
+import { useDispatch, useSelector } from 'react-redux';
+import { actionCards } from './redux/redux-slices/cards-operations';
+import BeerStore from './redux/redux-models/store-types';
 
 function Beer(): ReactNode {
   const navigator = useNavigation();
@@ -20,6 +23,11 @@ function Beer(): ReactNode {
   const { data } = useLoaderData() as {
     data: ResponseData[] | ServerError | null;
   };
+
+  const dispatcher = useDispatch();
+  dispatcher(actionCards({ cards: data }));
+  const selector = useSelector((state: BeerStore) => state.cards);
+  console.log(selector);
 
   if (ready === 'loading') return <Fallback />;
 

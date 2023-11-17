@@ -1,36 +1,46 @@
-import ActionEnum from '../redux-models/action-enum';
 import { FlagsStore } from '../redux-models/store-model';
-import { AnyAction } from '@reduxjs/toolkit';
+import { PayloadAction } from '@reduxjs/toolkit';
+import { FlagAction } from '../redux-models/actions-model';
 
-function flagsReducer(state: FlagsStore, action: AnyAction): FlagsStore {
-  switch (action.type) {
-    case ActionEnum.flagMain:
-      return {
-        ...state,
-        flags: {
-          ...state.flags,
-          loadingMainPage: action.dataBoolean,
-        },
-      };
-    case ActionEnum.flagCards:
-      return {
-        ...state,
-        flags: {
-          ...state.flags,
-          loadingCardsInfo: action.dataBoolean,
-        },
-      };
-    case ActionEnum.flagCard:
-      return {
-        ...state,
-        flags: {
-          ...state.flags,
-          loadingSingleCard: action.dataBoolean,
-        },
-      };
-    default:
-      return state;
-  }
+function flagsMainReducer(
+  state: FlagsStore,
+  action: PayloadAction<FlagAction>
+): FlagsStore {
+  return {
+    ...state,
+    flags: {
+      ...state.flags,
+      loadingMainPage: action.payload.flag,
+    },
+  };
 }
+
+function flagsCardsReducer(
+  state: FlagsStore,
+  action: PayloadAction<FlagAction>
+): FlagsStore {
+  return {
+    ...state,
+    flags: {
+      ...state.flags,
+      loadingCardsInfo: action.payload.flag,
+    },
+  };
+}
+
+function flagsCardReducer(
+  state: FlagsStore,
+  action: PayloadAction<FlagAction>
+): FlagsStore {
+  return {
+    ...state,
+    flags: {
+      ...state.flags,
+      loadingSingleCard: action.payload.flag,
+    },
+  };
+}
+
+const flagsReducer = { flagsMainReducer, flagsCardsReducer, flagsCardReducer };
 
 export default flagsReducer;

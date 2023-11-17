@@ -6,4 +6,8 @@ export const nameFlags = name;
 
 export const reducerFlags = reducer;
 
-export const actionFlags = actions.flagsReducer;
+export const actionMainFlag = actions.flagsMainReducer;
+
+export const actionCardsFlag = actions.flagsCardsReducer;
+
+export const actionCardFlag = actions.flagsCardReducer;
