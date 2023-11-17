@@ -7,7 +7,7 @@ function Redirect(): ReactNode {
     search: `?page=1` + `&items=6`,
   };
 
-  return <Navigate to={linkTO} replace={true} />;
+  return <Navigate to={linkTO} replace={false} />;
 }
 
 export default Redirect;
