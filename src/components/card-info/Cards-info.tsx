@@ -14,7 +14,8 @@ function CardsInfo(): ReactNode {
   const queryParams = new QueryParser(sParams);
 
   const { data, isLoading, isFetching } = useGetSingleCardQuery(
-    queryParams.ids!
+    queryParams.ids!,
+    { skip: !queryParams.ids }
   );
 
   if (!queryParams.ids) return null;
