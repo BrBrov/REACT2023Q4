@@ -13,7 +13,7 @@ const queryApi = createApi({
     baseUrl: 'https://api.punkapi.com/v2/beers',
   }),
   endpoints: (build) => ({
-    getSingleCard: build.query<ResponseData, string>({
+    getSingleCard: build.query<Array<ResponseData>, string>({
       query: (id: string | null) => {
         if (!id) return {} as FetchArgs;
 
