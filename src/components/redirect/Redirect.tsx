@@ -4,14 +4,7 @@ import { Navigate } from 'react-router-dom';
 function Redirect(): ReactNode {
   const linkTO = {
     pathname: 'main',
-    search:
-      `?page=1` +
-      `&items=6` +
-      `${
-        localStorage.getItem('search')
-          ? `&search=${localStorage.getItem('search')}`
-          : ``
-      }`,
+    search: `?page=1` + `&items=6`,
   };
 
   return <Navigate to={linkTO} replace={true} />;

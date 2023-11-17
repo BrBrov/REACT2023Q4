@@ -1,12 +1,8 @@
 class QueryParser {
-  private pageQuery: string | null = '1';
-  private countElements: string | null = '6';
-  private searchQuery: string | null = null;
-  private idsElem: string | null = null;
-
-  constructor(url: string) {
-    this.parseQueryString(url);
-  }
+  private readonly pageQuery: string | null = '1';
+  private readonly countElements: string | null = '6';
+  private readonly searchQuery: string | null = null;
+  private readonly idsElem: string | null = null;
 
   get page(): string | null {
     return this.pageQuery;
@@ -24,9 +20,7 @@ class QueryParser {
     return this.idsElem;
   }
 
-  private parseQueryString(queryString: string): void {
-    const url = new URL(queryString);
-    const sParams = new URLSearchParams(url.search);
+  constructor(sParams: URLSearchParams) {
     this.pageQuery = this.checkNumber(sParams.get('page'));
     this.countElements = this.checkCountPage(sParams.get('items'));
     this.searchQuery = this.deleteSpaceFromSearchString(sParams.get('search'));

@@ -1,11 +1,9 @@
 import { RouteObject } from 'react-router-dom';
 import infoRouter from './info-router';
-import loaderSingleCard from '../utils/loaderSingleCard';
 
 const pageRoutes: Array<RouteObject> = [
   {
     path: '',
-    loader: loaderSingleCard,
     lazy: async () => {
       const Header = await import('../components/header/Header').then(
         (module) => module.default

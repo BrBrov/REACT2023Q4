@@ -1,35 +1,20 @@
-import { ReactNode, useState } from 'react';
+import { ReactNode } from 'react';
 
 import './Beer.scss';
-import ResponseData from './models/ResponseData';
-import { Outlet, useLoaderData, useNavigation } from 'react-router-dom';
+import { Outlet, useSearchParams } from 'react-router-dom';
 import MissingPage from './components/missing-page/MissingPage';
 import Header from './components/header/Header';
 import ErrorButton from './components/error-button/Error-Button';
-import ServerError from './models/ServerError';
 import Fallback from './components/fallback/Fallback';
-import { useDispatch, useSelector } from 'react-redux';
-import { actionCards } from './redux/redux-slices/cards-operations';
-import BeerStore from './redux/redux-models/store-types';
+import QueryParser from './utils/QueryParser';
+import useGetAllCardsQuery from './redux/redux-query/useGetAllCards';
 
 function Beer(): ReactNode {
-  const navigator = useNavigation();
-  const [ready, setReady] = useState(navigator.state);
+  const [sParams] = useSearchParams();
+  const queryParams = new QueryParser(sParams);
+  const { data, isLoading } = useGetAllCardsQuery(queryParams);
 
-  if (ready !== navigator.state) {
-    setReady(navigator.state);
-  }
-
-  const { data } = useLoaderData() as {
-    data: ResponseData[] | ServerError | null;
-  };
-
-  const dispatcher = useDispatch();
-  dispatcher(actionCards({ cards: data }));
-  const selector = useSelector((state: BeerStore) => state.cards);
-  console.log(selector);
-
-  if (ready === 'loading') return <Fallback />;
+  if (isLoading) return <Fallback />;
 
   if (!data)
     return (

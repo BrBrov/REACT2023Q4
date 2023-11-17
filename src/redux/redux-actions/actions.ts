@@ -1,10 +1,6 @@
 import ActionEnum from '../redux-models/action-enum';
-import ResponseData from '../../models/ResponseData';
-import ServerError from '../../models/ServerError';
 import { PayloadAction } from '@reduxjs/toolkit';
 import {
-  CardAction,
-  CardsAction,
   FlagAction,
   ItemsAction,
   SearchAction,
@@ -45,24 +41,6 @@ export function flagCardToStore(value: boolean): PayloadAction<FlagAction> {
   return {
     type: ActionEnum.flagCard,
     payload: { flag: value },
-  };
-}
-
-export function cardsToStore(
-  data: Array<ResponseData> | ServerError | null
-): PayloadAction<CardsAction> {
-  return {
-    type: ActionEnum.data,
-    payload: { cards: data },
-  };
-}
-
-export function cardToStore(
-  card: ResponseData | null
-): PayloadAction<CardAction> {
-  return {
-    type: ActionEnum.card,
-    payload: { card: card },
   };
 }
 

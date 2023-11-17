@@ -3,15 +3,13 @@ import { reducerSearch } from '../redux-slices/search-operations';
 import { reducerFlags } from '../redux-slices/flags-operations';
 import { reducerViewMode } from '../redux-slices/view-operations';
 import { reducerItems } from '../redux-slices/items-operations';
-import { reducerCards } from '../redux-slices/cards-operations';
-import { reducerCard } from '../redux-slices/card-operations';
+import queryApi from '../redux-query/queryAPI';
 
 const reducers = combineReducers({
   search: reducerSearch,
   flags: reducerFlags,
   viewMode: reducerViewMode,
   itemsPerPage: reducerItems,
-  cards: reducerCards,
-  card: reducerCard,
+  [queryApi.reducerPath]: queryApi.reducer,
 });
 export default reducers;

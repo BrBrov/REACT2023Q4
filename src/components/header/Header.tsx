@@ -2,11 +2,20 @@ import { ReactNode, SyntheticEvent, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import './Header.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import BeerStore from '../../redux/redux-models/store-types';
+import { SearchStore } from '../../redux/redux-models/store-model';
+import { actionSearch } from '../../redux/redux-slices/search-operations';
 
 function Header(): ReactNode {
   const [sParams, setNewParams] = useSearchParams();
+  const selectorSearch: SearchStore = useSelector(
+    (state: BeerStore) => state.search
+  );
 
-  const [inputData, setInput] = useState<string | null>('');
+  const dispatchStore = useDispatch();
+
+  const [inputData, setInput] = useState<string | null>(selectorSearch.search);
 
   return (
     <>
@@ -27,9 +36,8 @@ function Header(): ReactNode {
 
   function onInput(event: SyntheticEvent): void {
     const input = event.target as HTMLInputElement;
+    dispatchStore(actionSearch({ search: input.value }));
     setInput(input.value);
-    //TODO
-    // context.setSearchString(input.value || null);
   }
 
   function onSearch(): void {

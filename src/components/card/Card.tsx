@@ -1,22 +1,17 @@
-import { ReactNode } from 'react';
+import { ReactNode, useRef } from 'react';
 
 import './Card.scss';
 import { useSearchParams } from 'react-router-dom';
 import CardsNotFound from './CardsNotFound';
 import ResponseData from '../../models/ResponseData';
 
-function Card(props: { id: number }): ReactNode {
-  const ids: number = props.id;
-
+function Card(props: { card: ResponseData }): ReactNode {
   const [sParams, setNewParams] = useSearchParams();
+  const idRef = useRef(props.card.id);
 
-  const card: ResponseData | null = null; //TODO want to edit
+  if (!props) return <CardsNotFound />;
 
-  const urlToBack: string = createLinkToCardInfo(sParams);
-
-  if (!card) return <CardsNotFound />;
-
-  const { abv, srm, volume, name, description, ibu, image_url } = card;
+  const { abv, srm, volume, name, description, ibu, image_url } = props.card;
 
   return (
     <>
@@ -57,13 +52,13 @@ function Card(props: { id: number }): ReactNode {
       ? `&search=${sParams.get('search')}`
       : '';
 
-    if (!sParams.get('ids')) linkToShowInfo += `&ids=${ids}`;
+    if (!sParams.get('ids')) linkToShowInfo += `&ids=${idRef.current}`;
 
     return linkToShowInfo;
   }
 
   function toCardInfo(): void {
-    setNewParams(urlToBack);
+    setNewParams(createLinkToCardInfo(sParams));
   }
 }
 
