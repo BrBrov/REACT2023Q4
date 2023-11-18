@@ -53,7 +53,7 @@ function Card(props: { card: ResponseData }): ReactNode {
       : '';
 
     if (!sParams.get('ids')) linkToShowInfo += `&ids=${id}`;
-    console.log(linkToShowInfo);
+
     return linkToShowInfo;
   }
 

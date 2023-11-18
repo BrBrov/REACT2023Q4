@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { Dispatch, ReactNode, useEffect } from 'react';
 
 import './Main.scss';
 import ErrorButton from '../error-button/Error-Button';
@@ -9,16 +9,27 @@ import QueryParser from '../../utils/QueryParser';
 import ResponseData from '../../models/ResponseData';
 import CardCreator from '../../utils/CardCreator';
 import NotFound from '../not-found/Not-Found';
+import { useDispatch } from 'react-redux';
+import { AnyAction } from '@reduxjs/toolkit';
+import { actionCardsFlag } from '../../redux/redux-slices/flags-operations';
+import { FlagAction } from '../../redux/redux-models/actions-model';
 
 function Main(): ReactNode {
   const [sParams] = useSearchParams();
   const queryParams = new QueryParser(sParams);
   const navigate = useNavigate();
+  const dispatchCardsInfo: Dispatch<AnyAction> = useDispatch();
 
-  const data = useGetAllCardsQuery(queryParams)
-    .data as Array<ResponseData> | null;
+  const { data, isLoading } = useGetAllCardsQuery(queryParams);
 
-  const cards: Array<ReactNode> | null = createCards(data);
+  useEffect(() => {
+    const flag: FlagAction = { flag: isLoading };
+    dispatchCardsInfo(actionCardsFlag(flag));
+  }, [dispatchCardsInfo, isLoading]);
+
+  const cards: Array<ReactNode> | null = createCards(
+    data as Array<ResponseData> | null
+  );
 
   return (
     <div className="main">

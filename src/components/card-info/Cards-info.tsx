@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import './Cards-info.scss';
@@ -7,20 +7,35 @@ import CardUndefined from './CardUndefined';
 import QueryParser from '../../utils/QueryParser';
 import useGetSingleCardQuery from '../../redux/redux-query/useGetSingleCard';
 import ResponseData from '../../models/ResponseData';
+import { useDispatch, useSelector } from 'react-redux';
+import BeerStore from '../../redux/redux-models/store-types';
+import { actionCardFlag } from '../../redux/redux-slices/flags-operations';
+import { FlagAction } from '../../redux/redux-models/actions-model';
 
 function CardsInfo(): ReactNode {
   const [sParams] = useSearchParams();
   const navigate = useNavigate();
   const queryParams = new QueryParser(sParams);
+  const dispatchCardFlag = useDispatch();
+  const selectorCardFlag = useSelector(
+    (state: BeerStore) => state.flags.flags.loadingSingleCard
+  );
 
   const { data, isLoading, isFetching } = useGetSingleCardQuery(
     queryParams.ids!,
     { skip: !queryParams.ids }
   );
 
+  useEffect(() => {
+    const flag: FlagAction = {
+      flag: isLoading,
+    };
+    dispatchCardFlag(actionCardFlag(flag));
+  }, [dispatchCardFlag, isLoading]);
+
   if (!queryParams.ids) return null;
 
-  if (isLoading || isFetching) return <Fallback />;
+  if (selectorCardFlag || isFetching) return <Fallback />;
 
   if (!data) return <CardUndefined prop={onClickCLose} />;
 
