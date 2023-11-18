@@ -13,20 +13,36 @@ import { actionMainFlag } from './redux/redux-slices/flags-operations';
 import { AnyAction } from '@reduxjs/toolkit';
 import { FlagAction } from './redux/redux-models/actions-model';
 import BeerStore from './redux/redux-models/store-types';
+import { actionItems } from './redux/redux-slices/items-operations';
 
 function Beer(): ReactNode {
   const [sParams] = useSearchParams();
   const queryParams = new QueryParser(sParams);
-  const dispatchIsLoading: Dispatch<AnyAction> = useDispatch();
+  const dispatch: Dispatch<AnyAction> = useDispatch();
   const selectorIsLoading: boolean = useSelector(
     (state: BeerStore) => state.flags.flags.loadingMainPage
+  );
+  const selectorItemPerPage = useSelector(
+    (state: BeerStore) => state.itemsPerPage.itemsPerPage
   );
   const { data, isLoading, isFetching } = useGetAllCardsQuery(queryParams);
 
   useEffect(() => {
     const flagData: FlagAction = { flag: isLoading };
-    dispatchIsLoading(actionMainFlag(flagData));
-  }, [dispatchIsLoading, isLoading, selectorIsLoading]);
+    dispatch(actionMainFlag(flagData));
+    if (
+      queryParams.items &&
+      selectorItemPerPage !== parseInt(queryParams.items)
+    ) {
+      dispatch(actionItems({ items: parseInt(queryParams.items) }));
+    }
+  }, [
+    dispatch,
+    isLoading,
+    queryParams.items,
+    selectorIsLoading,
+    selectorItemPerPage,
+  ]);
 
   if (selectorIsLoading || isFetching) return <Fallback />;
 
