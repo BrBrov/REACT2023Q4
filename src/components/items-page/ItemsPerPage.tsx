@@ -1,10 +1,14 @@
 import './ItemsPerPage.scss';
 import { ReactNode, SyntheticEvent } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { actionItems } from '../../redux/redux-slices/items-operations';
+import { ItemsAction } from '../../redux/redux-models/actions-model';
 
 function ItemsPerPage(): ReactNode {
   const [sParams, setNewParams] = useSearchParams();
   const items: string | null = sParams.get('items');
+  const dispatcher = useDispatch();
 
   return (
     <div className="items__wrapper">
@@ -38,6 +42,11 @@ function ItemsPerPage(): ReactNode {
     if (sParams.get('search')) url += '&search=' + sParams.get('search');
 
     if (sParams.get('ids')) url += '&ids=' + sParams.get('ids');
+
+    const items: ItemsAction = {
+      items: parseInt(target.value),
+    };
+    dispatcher(actionItems(items));
 
     setNewParams(url);
   }
