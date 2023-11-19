@@ -1,8 +1,8 @@
-import {describe, it, vi, expect } from "vitest";
-import {fakeDataWithSixElems} from "../../test/fakeData";
-import ResponseData from "../../models/ResponseData";
-import {render, screen, waitFor} from "@testing-library/react";
-import Card from "./Card";
+import { describe, it, vi, expect } from 'vitest';
+import { fakeDataWithSixElems } from '../../test/fakeData';
+import ResponseData from '../../models/ResponseData';
+import { render, screen, waitFor } from '@testing-library/react';
+import Card from './Card';
 
 vi.mock('react-router-dom', async () => {
   const actual =
@@ -37,16 +37,20 @@ vi.mock('react-router-dom', async () => {
 describe('Cards test', function () {
   it('Card view test', function () {
     fakeDataWithSixElems.map(async (card: ResponseData) => {
-      render(<Card card={card}/>);
+      render(<Card card={card} />);
       await waitFor(() => {
         expect(screen.getByText(card.name)).toBeInTheDocument();
-        expect(screen.getByAltText(`Image of ${card.description}`)).toBeInTheDocument();
+        expect(
+          screen.getByAltText(`Image of ${card.description}`)
+        ).toBeInTheDocument();
         expect(screen.getByText(`${card.description}`)).toBeInTheDocument();
-        expect(screen.getByText(`Volume: ${card.volume.value}`)).toBeInTheDocument();
+        expect(
+          screen.getByText(`Volume: ${card.volume.value}`)
+        ).toBeInTheDocument();
         expect(screen.getByText(`Alcohol: ${card.abv}%`)).toBeInTheDocument();
         expect(screen.getByText(`Color SRM: ${card.srm}`)).toBeInTheDocument();
         expect(screen.getByText(`Bitterness: ${card.ibu}`)).toBeInTheDocument();
       });
-    })
-  })
+    });
+  });
 });

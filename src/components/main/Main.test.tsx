@@ -21,41 +21,47 @@ describe('Test count list', function () {
   afterAll(() => mswServer.close());
 
   it('Count cards 6', async function () {
-    const {container} = renderMainWithRouter(6);
+    const { container } = renderMainWithRouter(6);
 
-    await waitFor(() => {
-      const child: Array<HTMLElement> = screen.getAllByAltText(/Image of /i);
-      expect(child.length).toEqual(6);
-    },
+    await waitFor(
+      () => {
+        const child: Array<HTMLElement> = screen.getAllByAltText(/Image of /i);
+        expect(child.length).toEqual(6);
+      },
       {
         container: container,
         timeout: 5000,
-      });
+      }
+    );
   });
 
   it('Count cards 12', async function () {
-    const {container} = renderMainWithRouter(12);
+    const { container } = renderMainWithRouter(12);
 
-    await waitFor(() => {
+    await waitFor(
+      () => {
         const child: Array<HTMLElement> = screen.getAllByAltText(/Image of /i);
         expect(child.length).toEqual(12);
       },
       {
         container: container,
         timeout: 5000,
-      });
+      }
+    );
   });
 
   it('Count cards 24', async function () {
-    const {container} = renderMainWithRouter(24);
+    const { container } = renderMainWithRouter(24);
 
-    await waitFor(() => {
+    await waitFor(
+      () => {
         const child: Array<HTMLElement> = screen.getAllByAltText(/Image of /i);
         expect(child.length).toEqual(24);
       },
       {
         container: container,
-        timeout: 5000
-      });
+        timeout: 5000,
+      }
+    );
   });
 });

@@ -19,8 +19,8 @@ function handleRequest({ params }: { params: PathParams }) {
 
   const items = parseInt(
     (per_page as string[] | undefined)?.[0] ||
-    (page as string[] | undefined)?.[0] ||
-    '0'
+      (page as string[] | undefined)?.[0] ||
+      '0'
   );
 
   if (items <= 6) {
