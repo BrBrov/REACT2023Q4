@@ -22,12 +22,15 @@ describe('CardsInfo Component', () => {
       </Provider>
     );
 
-    await waitFor(() => {
-      const cardNameElement = screen.getByText(/Buzz/);
-      expect(cardNameElement).toBeInTheDocument();
-    }, {
-      timeout: 5000,
-    });
+    await waitFor(
+      () => {
+        const cardNameElement = screen.getByText(/Buzz/);
+        expect(cardNameElement).toBeInTheDocument();
+      },
+      {
+        timeout: 5000,
+      }
+    );
   });
 
   it('does not render card when ids parameter is not present', async () => {
