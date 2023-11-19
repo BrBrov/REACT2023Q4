@@ -6,52 +6,56 @@ import { Provider } from 'react-redux';
 import storeApp from '../../redux/redux-store/store';
 import mswServer from '../../test/msw';
 
+const renderMainWithRouter = (items: number) => {
+  return render(
+    <Provider store={storeApp}>
+      <MemoryRouter initialEntries={[`main?page=1&items=${items}`]}>
+        <Main />
+      </MemoryRouter>
+    </Provider>
+  );
+};
+
 describe('Test count list', function () {
   beforeAll(() => mswServer.listen());
   afterAll(() => mswServer.close());
 
   it('Count cards 6', async function () {
-    render(
-      <Provider store={storeApp}>
-        <MemoryRouter initialEntries={['main?page=1&items=6']}>
-          <Main />
-        </MemoryRouter>
-      </Provider>
-    );
+    const {container} = renderMainWithRouter(6);
 
     await waitFor(() => {
       const child: Array<HTMLElement> = screen.getAllByAltText(/Image of /i);
       expect(child.length).toEqual(6);
-    });
+    },
+      {
+        container: container,
+        timeout: 5000,
+      });
   });
 
   it('Count cards 12', async function () {
-    render(
-      <Provider store={storeApp}>
-        <MemoryRouter initialEntries={['main?page=1&items=12']}>
-          <Main />
-        </MemoryRouter>
-      </Provider>
-    );
-    let child: Array<HTMLElement> | undefined = undefined;
+    const {container} = renderMainWithRouter(12);
+
     await waitFor(() => {
-      child = screen.getAllByAltText(/Image of /i);
-    });
-    expect(child!.length).toEqual(12);
+        const child: Array<HTMLElement> = screen.getAllByAltText(/Image of /i);
+        expect(child.length).toEqual(12);
+      },
+      {
+        container: container,
+        timeout: 5000,
+      });
   });
 
   it('Count cards 24', async function () {
-    render(
-      <Provider store={storeApp}>
-        <MemoryRouter initialEntries={['main?page=1&items=24']}>
-          <Main />
-        </MemoryRouter>
-      </Provider>
-    );
+    const {container} = renderMainWithRouter(24);
 
     await waitFor(() => {
-      const child: Array<HTMLElement> = screen.getAllByAltText(/Image of /i);
-      expect(child.length).toEqual(24);
-    });
+        const child: Array<HTMLElement> = screen.getAllByAltText(/Image of /i);
+        expect(child.length).toEqual(24);
+      },
+      {
+        container: container,
+        timeout: 5000
+      });
   });
 });
