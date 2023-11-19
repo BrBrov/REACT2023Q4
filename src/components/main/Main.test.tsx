@@ -13,7 +13,7 @@ describe('Test count list', function () {
   it('Count cards 6', async function () {
     render(
       <Provider store={storeApp}>
-        <MemoryRouter initialEntries={['?page=1&items=6']}>
+        <MemoryRouter initialEntries={['main?page=1&items=6']}>
           <Main />
         </MemoryRouter>
       </Provider>
@@ -28,22 +28,22 @@ describe('Test count list', function () {
   it('Count cards 12', async function () {
     render(
       <Provider store={storeApp}>
-        <MemoryRouter initialEntries={['?page=1&items=12']}>
+        <MemoryRouter initialEntries={['main?page=1&items=12']}>
           <Main />
         </MemoryRouter>
       </Provider>
     );
-
+    let child: Array<HTMLElement> | undefined = undefined;
     await waitFor(() => {
-      const child: Array<HTMLElement> = screen.getAllByAltText(/Image of /i);
-      expect(child.length).toEqual(12);
+      child = screen.getAllByAltText(/Image of /i);
     });
+    expect(child!.length).toEqual(12);
   });
 
   it('Count cards 24', async function () {
     render(
       <Provider store={storeApp}>
-        <MemoryRouter initialEntries={['?page=1&items=24']}>
+        <MemoryRouter initialEntries={['main?page=1&items=24']}>
           <Main />
         </MemoryRouter>
       </Provider>
