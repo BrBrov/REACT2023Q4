@@ -18,6 +18,7 @@ const renderMainWithRouter = (items: number) => {
 
 describe('Test count list', function () {
   beforeAll(() => mswServer.listen());
+  afterEach(() => mswServer.resetHandlers());
   afterAll(() => mswServer.close());
 
   it('Count cards 6', async function () {
