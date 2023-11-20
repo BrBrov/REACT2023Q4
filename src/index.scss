@@ -1,0 +1,27 @@
+$bg-descktop: url('./background.webp') no-repeat top/cover fixed;
+$bg-mobile: url('./background-mobile.webp') no-repeat top/cover fixed;
+
+body {
+  margin: 0;
+  padding: 0;
+  background: $bg-descktop;
+
+  @media screen and (max-width: 750px) {
+    background: $bg-mobile;
+  }
+}
+
+.beer {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding-bottom: 10px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+a {
+  text-decoration: none;
+}
