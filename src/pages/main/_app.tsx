@@ -1,5 +1,8 @@
 import type { AppProps } from 'next/app';
+import storeAppWrapper from '@/redux/redux-store/store';
 
-export default function Beer({ Component, pageProps }: AppProps) {
+function StartBeer({ Component, pageProps }: AppProps) {
   return <Component {...pageProps} />;
 }
+
+export default storeAppWrapper.withRedux(StartBeer);

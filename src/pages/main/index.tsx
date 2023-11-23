@@ -1,12 +1,7 @@
 import Head from 'next/head';
-import mpage from '@/styles/MainPage.module.scss';
-import { useRouter } from 'next/router';
+import Beer from '@/components/beer/Beer';
 
 export default function MainPage() {
-  const router = useRouter();
-
-  console.log(router.query);
-
   return (
     <>
       <Head>
@@ -15,8 +10,8 @@ export default function MainPage() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.svg" />
       </Head>
-      <div className={mpage.block}>
-        <span className={mpage.text}>Main Path</span>
+      <div className="beer">
+        <Beer />
       </div>
     </>
   );
