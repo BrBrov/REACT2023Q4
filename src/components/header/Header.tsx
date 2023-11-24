@@ -1,6 +1,6 @@
 import { ReactNode, SyntheticEvent, useState } from 'react';
 
-import './Header.module.scss';
+import style from './Header.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionSearch } from '@/redux/redux-slices/search-operations';
 import StoreType from '@/redux/redux-models/wrapper-type';
@@ -22,16 +22,20 @@ function Header(): ReactNode {
 
   return (
     <>
-      <header className="header">
+      <header className={style.header}>
         <input
-          className="header__input"
+          className={style.header__input}
           type="text"
           name="search"
           value={inputData || ''}
           onInput={onInput}
         />
-        <button className="header__button" type="button" onClick={onSearch}>
-          <span className="header__button-text">Search</span>
+        <button
+          className={style.header__button}
+          type="button"
+          onClick={onSearch}
+        >
+          <span className={style.header__buttonText}>Search</span>
         </button>
       </header>
     </>

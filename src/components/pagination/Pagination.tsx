@@ -1,35 +1,41 @@
-import './Pagination.scss';
+import pg from './Pagination.module.scss';
 import { ReactNode } from 'react';
-import { useSearchParams } from 'react-router-dom';
 import ItemsPerPage from '../items-page/ItemsPerPage';
+import { useRouter } from 'next/router';
+import QueryParser from '@/utils/QueryParser';
 
 function Pagination(): ReactNode {
-  const [sParams, setNewParams] = useSearchParams();
+  const router = useRouter();
+  const queryParams = new QueryParser(router.asPath);
 
   return (
-    <div className="pagination">
-      <div className="pagination__page-wrapper">
-        <span className="pagination__text-page">{'Page: '}</span>
-        <span className="pagination__page">{sParams.get('page')}</span>
+    <div className={pg.pagination}>
+      <div className={pg.wrapper}>
+        <span className={pg.pagination__textPage}>{'Page: '}</span>
+        <span className={pg.pagination__page}>{queryParams.page}</span>
       </div>
       <ItemsPerPage />
-      <div className="pagination__panel-wrapper">
+      <div className={pg.pagination__panel}>
         <button
           type="button"
-          className="pagination__button"
+          className={pg.pagination__button}
           onClick={onPageDown}
         >
-          <span className="pagination__button-text">⇦</span>
+          <span className={pg.pagination__buttonText}>⇦</span>
         </button>
-        <button type="button" className="pagination__button" onClick={onPageUp}>
-          <span className="pagination__button-text">⇨</span>
+        <button
+          type="button"
+          className={pg.pagination__button}
+          onClick={onPageUp}
+        >
+          <span className={pg.pagination__buttonText}>⇨</span>
         </button>
       </div>
     </div>
   );
 
   function onPageDown(): void {
-    let enteredPage: number = checkEnteredPage(sParams.get('page')) - 1;
+    let enteredPage: number = checkEnteredPage(queryParams.page) - 1;
 
     enteredPage = enteredPage < 1 ? 1 : enteredPage;
 
@@ -37,7 +43,7 @@ function Pagination(): ReactNode {
   }
 
   function onPageUp(): void {
-    const enteredPage: number = checkEnteredPage(sParams.get('page')) + 1;
+    const enteredPage: number = checkEnteredPage(queryParams.page) + 1;
 
     goToPage(enteredPage);
   }
@@ -55,12 +61,12 @@ function Pagination(): ReactNode {
     return pageConverted;
   }
 
-  function goToPage(page: number): void {
-    let url: string = '?page=' + page + '&items=' + sParams.get('items');
+  async function goToPage(page: number): Promise<void> {
+    let url: string = '?page=' + page + '&items=' + queryParams.items;
 
-    if (sParams.get('search')) url = url + '&search=' + sParams.get('search');
+    if (queryParams.search) url = url + '&search=' + queryParams.search;
 
-    setNewParams(url, { replace: false });
+    await router.push(url);
   }
 }
 

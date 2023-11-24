@@ -1,7 +1,6 @@
 import { Dispatch, ReactNode, useEffect } from 'react';
 
-import './Main.scss';
-import ErrorButton from '../error-button/Error-Button';
+import ErrorButton from '../error-button/ErrorButton';
 import Pagination from '../pagination/Pagination';
 import useGetAllCardsQuery from '../../redux/redux-query/useGetAllCards';
 import QueryParser from '../../utils/QueryParser';
@@ -13,8 +12,9 @@ import { AnyAction } from '@reduxjs/toolkit';
 import { actionCardsFlag } from '@/redux/redux-slices/flags-operations';
 import { FlagAction } from '@/redux/redux-models/actions-model';
 import { useRouter } from 'next/router';
+import mainStyles from './MainComponent.module.scss';
 
-function Main(): ReactNode {
+function MainComponent(): ReactNode {
   const router = useRouter();
 
   const queryParams = new QueryParser(router.asPath);
@@ -33,16 +33,16 @@ function Main(): ReactNode {
   );
 
   return (
-    <div className="main">
-      <main className="main__cards-wrapper">
-        <div className="main__main-wrapper">
-          <div className="main__cards-panel" onClick={onClickPanel}>
+    <div className={mainStyles.block}>
+      <div className={mainStyles.wrapper}>
+        <div className={mainStyles.segment}>
+          <div className={mainStyles.panel} onClick={onClickPanel}>
             {cards}
           </div>
-          <div className="main__card-info"></div>
+          <div className={mainStyles.info}></div>
         </div>
         <Pagination />
-      </main>
+      </div>
       <ErrorButton />
     </div>
   );
@@ -70,4 +70,4 @@ function Main(): ReactNode {
   }
 }
 
-export default Main;
+export default MainComponent;

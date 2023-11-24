@@ -1,6 +1,6 @@
 import { Dispatch, ReactNode, SetStateAction, useState } from 'react';
 
-import './Error-Button.module.scss';
+import btn from './ErrorButton.module.scss';
 
 type ErrorButtonState = {
   error: boolean;
@@ -19,19 +19,13 @@ function ErrorButton(): ReactNode {
   if (state.error) pageBroker();
 
   return (
-    <>
-      <footer className="footer__smell-section">
-        <div className="footer__button-wrapper">
-          <button
-            type="button"
-            className="footer__smell-button"
-            onClick={throwError}
-          >
-            <span className="footer__smell-text">Click for error!</span>
-          </button>
-        </div>
-      </footer>
-    </>
+    <div className={btn.section}>
+      <div className={btn.wrapper}>
+        <button type="button" className={btn.button} onClick={throwError}>
+          <span className={btn.text}>Click for error!</span>
+        </button>
+      </div>
+    </div>
   );
 }
 

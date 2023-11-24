@@ -1,4 +1,4 @@
-.main {
+.block {
   display: flex;
   width: 95%;
   max-width: 1440px;
@@ -10,7 +10,7 @@
   border-radius: 10px;
 }
 
-.main__cards-wrapper {
+.wrapper {
   display: flex;
   width: 100%;
   max-width: 980px;
@@ -23,7 +23,7 @@
   gap: 10px;
 }
 
-.main__main-wrapper {
+.segment {
   display: flex;
   width: 100%;
   flex-direction: row;
@@ -32,7 +32,7 @@
   gap: 25px;
 }
 
-.main__cards-panel {
+.panel {
   display: flex;
   min-width: 300px;
   height: calc(100vh - 230px);
@@ -48,11 +48,11 @@
   border-bottom: dashed #0b0118 2px;
 }
 
-.main__cards-panel::-webkit-scrollbar {
+.panel::-webkit-scrollbar {
   width: 0;
 }
 
-.main__card-info {
+.info {
   display: flex;
   align-self: flex-start;
   justify-content: center;

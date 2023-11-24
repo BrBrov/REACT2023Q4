@@ -1,54 +1,56 @@
-import './ItemsPerPage.scss';
+import item from './ItemsPerPage.module.scss';
 import { ReactNode, SyntheticEvent } from 'react';
-import { useSearchParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { actionItems } from '../../redux/redux-slices/items-operations';
-import { ItemsAction } from '../../redux/redux-models/actions-model';
+import { actionItems } from '@/redux/redux-slices/items-operations';
+import { ItemsAction } from '@/redux/redux-models/actions-model';
+import { useRouter } from 'next/router';
+import QueryParser from '@/utils/QueryParser';
 
 function ItemsPerPage(): ReactNode {
-  const [sParams, setNewParams] = useSearchParams();
-  const items: string | null = sParams.get('items');
+  const router = useRouter();
+  const queryParams = new QueryParser(router.asPath);
+  const items = queryParams.items;
   const dispatcher = useDispatch();
 
   return (
-    <div className="items__wrapper">
-      <label className="items__label" htmlFor="items-select">
+    <div className={item.wrapper}>
+      <label className={item.items__label} htmlFor="items-select">
         Items per page
       </label>
       <select
-        className="items__select-count"
+        className={item.items__selectCount}
         id="items-select"
         onChange={onSelectCount}
         value={items ? items : '6'}
       >
-        <option className="items__select-item" value="6">
+        <option className={item.items__selectItem} value="6">
           6
         </option>
-        <option className="items__select-item" value="12">
+        <option className={item.items__selectItem} value="12">
           12
         </option>
-        <option className="items__select-item" value="24">
+        <option className={item.items__selectItem} value="24">
           24
         </option>
       </select>
     </div>
   );
 
-  function onSelectCount(e: SyntheticEvent): void {
+  async function onSelectCount(e: SyntheticEvent): Promise<void> {
     const target = e.target as HTMLSelectElement;
 
-    let url = '&page=' + sParams.get('page') + `&items=` + target.value;
+    let url = '&page=' + queryParams.page + `&items=` + target.value;
 
-    if (sParams.get('search')) url += '&search=' + sParams.get('search');
+    if (queryParams.search) url += '&search=' + queryParams.search;
 
-    if (sParams.get('ids')) url += '&ids=' + sParams.get('ids');
+    if (queryParams.ids) url += '&ids=' + queryParams.ids;
 
     const items: ItemsAction = {
       items: parseInt(target.value),
     };
     dispatcher(actionItems(items));
 
-    setNewParams(url);
+    await router.push(url);
   }
 }
 

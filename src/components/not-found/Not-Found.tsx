@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-import './Not-Found.scss';
+import './Not-Found.module.scss';
 
 function NotFound(): ReactNode {
   return (

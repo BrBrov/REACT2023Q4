@@ -9,10 +9,9 @@ import { actionItems } from '@/redux/redux-slices/items-operations';
 import { actionMainFlag } from '@/redux/redux-slices/flags-operations';
 import { FlagAction } from '@/redux/redux-models/actions-model';
 import useGetAllCardsQuery from '@/redux/redux-query/useGetAllCards';
-import Fallback from '@/components/fallback/Fallback';
 import Header from '@/components/header/Header';
-import MissingPage from '@/components/missing-page/MissingPage';
-import ErrorButton from '@/components/error-button/Error-Button';
+import Main from '@/components/main/MainComponent';
+import beer from './Beer.module.scss';
 
 function Beer(): ReactNode {
   const router = useRouter();
@@ -25,7 +24,7 @@ function Beer(): ReactNode {
     (state: StoreType) => state.itemsPerPage.itemsPerPage
   );
 
-  const { data, isLoading, isFetching } = useGetAllCardsQuery(queryParams);
+  const { isLoading } = useGetAllCardsQuery(queryParams);
 
   useEffect(() => {
     const flagData: FlagAction = { flag: isLoading };
@@ -44,27 +43,32 @@ function Beer(): ReactNode {
     selectorItemPerPage,
   ]);
 
-  if (selectorIsLoading || isFetching) return <Fallback />;
+  // if (selectorIsLoading || isFetching) return <Fallback />;
+  //
+  // if (!data)
+  //   return (
+  //     <div className="missing__page">
+  //       <Header />
+  //       <MissingPage />
+  //       <div className="missing__error-button">
+  //         <ErrorButton />
+  //       </div>
+  //     </div>
+  //   );
+  //
+  // if ('statusCode' in data) {
+  //   const error = new Error(data.message);
+  //   error.name = data.error;
+  //   error.cause = data.statusCode;
+  //   throw error;
+  // }
 
-  if (!data)
-    return (
-      <div className="missing__page">
-        <Header />
-        <MissingPage />
-        <div className="missing__error-button">
-          <ErrorButton />
-        </div>
-      </div>
-    );
-
-  if ('statusCode' in data) {
-    const error = new Error(data.message);
-    error.name = data.error;
-    error.cause = data.statusCode;
-    throw error;
-  }
-
-  return <div className="beer__container"></div>;
+  return (
+    <div className={beer.beer__container}>
+      <Header />
+      <Main />
+    </div>
+  );
 }
 
 export default Beer;
