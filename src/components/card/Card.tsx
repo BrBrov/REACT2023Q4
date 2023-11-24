@@ -27,6 +27,8 @@ function Card(props: { card: ResponseData }): ReactNode {
                 className={style.card__image}
                 src={image_url ? image_url : '/image.png'}
                 alt={`Image of ${description}`}
+                width={'53'}
+                height={'150'}
               />
             </div>
           </div>
