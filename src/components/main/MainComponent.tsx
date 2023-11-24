@@ -13,6 +13,8 @@ import { actionCardsFlag } from '@/redux/redux-slices/flags-operations';
 import { FlagAction } from '@/redux/redux-models/actions-model';
 import { useRouter } from 'next/router';
 import mainStyles from './MainComponent.module.scss';
+import Header from '@/components/header/Header';
+import MissingPage from '@/components/missing-page/MissingPage';
 
 function MainComponent(): ReactNode {
   const router = useRouter();
@@ -37,7 +39,15 @@ function MainComponent(): ReactNode {
       <div className={mainStyles.wrapper}>
         <div className={mainStyles.segment}>
           <div className={mainStyles.panel} onClick={onClickPanel}>
-            {cards}
+            {cards || (
+              <div className="missing__page">
+                <Header />
+                <MissingPage />
+                <div className="missing__error-button">
+                  <ErrorButton />
+                </div>
+              </div>
+            )}
           </div>
           <div className={mainStyles.info}></div>
         </div>

@@ -21,7 +21,8 @@ class QueryParser {
   }
 
   constructor(url: string) {
-    const sParams: URLSearchParams = new URLSearchParams(url);
+    const sParams: URLSearchParams = new URL(url, 'https://test.com')
+      .searchParams;
     this.pageQuery = this.checkNumber(sParams.get('page'));
     this.countElements = this.checkCountPage(sParams.get('items'));
     this.searchQuery = this.deleteSpaceFromSearchString(sParams.get('search'));

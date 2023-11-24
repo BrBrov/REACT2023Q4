@@ -16,7 +16,5 @@ export function buildStore() {
   });
 }
 
-//
-
 const storeAppWrapper = createWrapper<BeerStore>(buildStore, { debug: true });
 export default storeAppWrapper;

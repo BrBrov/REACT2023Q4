@@ -1,15 +1,26 @@
 import item from './ItemsPerPage.module.scss';
-import { ReactNode, SyntheticEvent } from 'react';
-import { useDispatch } from 'react-redux';
+import { ReactNode, SyntheticEvent, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { actionItems } from '@/redux/redux-slices/items-operations';
 import { ItemsAction } from '@/redux/redux-models/actions-model';
 import { useRouter } from 'next/router';
 import QueryParser from '@/utils/QueryParser';
+import StoreType from '@/redux/redux-models/wrapper-type';
 
 function ItemsPerPage(): ReactNode {
   const router = useRouter();
+  const [items, SetItemsCount] = useState<string>('6');
+
   const queryParams = new QueryParser(router.asPath);
-  const items = queryParams.items;
+
+  const itemView = useSelector(
+    (state: StoreType) => state.itemsPerPage.itemsPerPage
+  );
+
+  useEffect(() => {
+    SetItemsCount(itemView.toString());
+  }, [itemView]);
+
   const dispatcher = useDispatch();
 
   return (
@@ -21,7 +32,7 @@ function ItemsPerPage(): ReactNode {
         className={item.items__selectCount}
         id="items-select"
         onChange={onSelectCount}
-        value={items ? items : '6'}
+        value={items}
       >
         <option className={item.items__selectItem} value="6">
           6
@@ -39,7 +50,7 @@ function ItemsPerPage(): ReactNode {
   async function onSelectCount(e: SyntheticEvent): Promise<void> {
     const target = e.target as HTMLSelectElement;
 
-    let url = '&page=' + queryParams.page + `&items=` + target.value;
+    let url = 'main?page=' + queryParams.page + `&items=` + target.value;
 
     if (queryParams.search) url += '&search=' + queryParams.search;
 

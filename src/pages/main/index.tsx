@@ -1,5 +1,7 @@
 import Head from 'next/head';
 import Beer from '@/components/beer/Beer';
+import { Suspense } from 'react';
+import Fallback from '@/components/fallback/Fallback';
 
 export default function MainPage() {
   return (
@@ -11,7 +13,9 @@ export default function MainPage() {
         <link rel="icon" href="/favicon.svg" />
       </Head>
       <div className="beer">
-        <Beer />
+        <Suspense fallback={<Fallback />}>
+          <Beer />
+        </Suspense>
       </div>
     </>
   );
