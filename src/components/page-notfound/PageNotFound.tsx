@@ -1,9 +1,10 @@
 import { ReactNode } from 'react';
 
 import './PageNotFound.scss';
-import { useNavigate } from 'react-router-dom';
+import {useRouter} from "next/router";
+
 function PageNotFound(): ReactNode {
-  const navigate = useNavigate();
+  const router = useRouter();
 
   return (
     <div className="page__not-found">
@@ -19,8 +20,8 @@ function PageNotFound(): ReactNode {
     </div>
   );
 
-  function onRedirect(): void {
-    navigate('/main?page=1&items=6', { replace: false });
+  async function onRedirect(): Promise<void> {
+    await router.push('main?page=1&items=6');
   }
 }
 

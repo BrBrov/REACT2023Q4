@@ -67,7 +67,7 @@ function Pagination(): ReactNode {
 
     if (queryParams.search) url = url + '&search=' + queryParams.search;
 
-    SetPage(() => queryParams.page);
+    SetPage(queryParams.page);
     await router.push(url);
   }
 }

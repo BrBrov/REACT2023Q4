@@ -1,11 +1,11 @@
-import { Dispatch, ReactNode, useEffect, useRef } from 'react';
+import {Dispatch, ReactNode, Suspense, useEffect, useRef} from 'react';
 
-import { useRouter } from 'next/router';
+import {useRouter} from 'next/router';
 import QueryParser from '@/utils/QueryParser';
-import { useDispatch, useSelector } from 'react-redux';
-import { AnyAction } from '@reduxjs/toolkit';
+import {useDispatch, useSelector} from 'react-redux';
+import {AnyAction} from '@reduxjs/toolkit';
 import StoreType from '@/redux/redux-models/wrapper-type';
-import { actionItems } from '@/redux/redux-slices/items-operations';
+import {actionItems} from '@/redux/redux-slices/items-operations';
 import Header from '@/components/header/Header';
 import Main from '@/components/main/MainComponent';
 import beer from './Beer.module.scss';
@@ -25,8 +25,8 @@ function Beer(): ReactNode {
 
   const views = useRef(
     <>
-      <Header />
-      <Main />
+      <Header/>
+      <Main/>
     </>
   );
 
@@ -35,20 +35,24 @@ function Beer(): ReactNode {
       queryParams.items &&
       selectorItemPerPage !== parseInt(queryParams.items)
     ) {
-      dispatch(actionItems({ items: parseInt(queryParams.items) }));
+      dispatch(actionItems({items: parseInt(queryParams.items)}));
     }
 
     views.current = selectorIsLoading ? (
-      <Fallback />
+      <Fallback/>
     ) : (
       <>
-        <Header />
-        <Main />
+        <Header/>
+        <Main/>
       </>
     );
   }, [dispatch, queryParams.items, selectorIsLoading, selectorItemPerPage]);
 
-  return <div className={beer.beer__container}>{views.current}</div>;
+  return (
+    <Suspense>
+      <div className={beer.beer__container}>{views.current}</div>
+    </Suspense>
+  );
 }
 
 export default Beer;
