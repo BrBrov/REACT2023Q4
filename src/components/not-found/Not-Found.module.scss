@@ -1,7 +1,7 @@
 @import './../../styles/fonts';
 @import './../../styles/colors';
 
-.main__result-apson {
+.main__result_apson {
   display: flex;
   width: 100%;
   min-height: calc(100vh - 240px);
@@ -10,7 +10,7 @@
   align-items: center;
 }
 
-.main__absent-wrapper {
+.main__absent_wrapper {
   display: flex;
   width: 55%;
   min-width: 280px;
@@ -26,7 +26,7 @@
   box-shadow: $box-shadow-card;
 }
 
-.main__not-found {
+.main__not_found {
   text-align: center;
   @include CardoBold(1.5em);
   color: $title-color;

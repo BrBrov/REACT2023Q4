@@ -42,7 +42,7 @@
   background: $btn-active-background;
 }
 
-.missing__button-text {
+.missing__button_text {
   @include Cardo(1em);
   color: $text-color;
 }

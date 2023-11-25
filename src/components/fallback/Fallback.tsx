@@ -1,5 +1,5 @@
 import { ReactNode, useEffect, useState } from 'react';
-import './Fallback.module.scss';
+import styles from './Fallback.module.scss';
 
 type Loading = {
   text: string;
@@ -30,8 +30,8 @@ function Fallback(): ReactNode {
 
   return (
     <>
-      <div className="fallback">
-        <span className="fallback__text">{loading.text}</span>
+      <div className={styles.fallback}>
+        <span className={styles.fallback__text}>{loading.text}</span>
       </div>
     </>
   );

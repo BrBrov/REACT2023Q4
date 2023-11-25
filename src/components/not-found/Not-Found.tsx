@@ -1,15 +1,15 @@
 import { ReactNode } from 'react';
 
-import './Not-Found.module.scss';
+import styles from './Not-Found.module.scss';
 
 function NotFound(): ReactNode {
   return (
-    <div className="main__result-apson">
-      <div className="main__absent-wrapper">
-        <span className="main__not-found">
+    <div className={styles.main__result_apson}>
+      <div className={styles.main__absent_wrapper}>
+        <span className={styles.main__not_found}>
           The beer you are looking for was not found!
         </span>
-        <span className="main__not-found">Try looking for another beer.</span>
+        <span className={styles.main__not_found}>Try looking for another beer.</span>
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import './MisingPage.module.scss';
+import styles from './MisingPage.module.scss';
 import { ReactNode } from 'react';
 import { useRouter } from 'next/router';
 
@@ -6,16 +6,16 @@ function MissingPage(): ReactNode {
   const router = useRouter();
 
   return (
-    <div className="missing__wrapper">
-      <span className="missing__text">
+    <div className={styles.missing__wrapper}>
+      <span className={styles.missing__text}>
         {'There are no pages with the requested beer...'}
       </span>
       <button
         type="button"
-        className="missing__button"
+        className={styles.missing__button}
         onClick={returnToFirstPage}
       >
-        <span className="missing__button-text">{'Go to previous page'}</span>
+        <span className={styles.missing__button_text}>{'Go to previous page'}</span>
       </button>
     </div>
   );

@@ -6,7 +6,6 @@ import useGetAllCardsQuery from '../../redux/redux-query/useGetAllCards';
 import QueryParser from '../../utils/QueryParser';
 import ResponseData from '../../models/ResponseData';
 import CardCreator from '../../utils/CardCreator';
-import NotFound from '../not-found/Not-Found';
 import {useDispatch} from 'react-redux';
 import { AnyAction } from '@reduxjs/toolkit';
 import { actionCardsFlag } from '@/redux/redux-slices/flags-operations';
@@ -16,6 +15,7 @@ import mainStyles from './MainComponent.module.scss';
 import Header from '@/components/header/Header';
 import MissingPage from '@/components/missing-page/MissingPage';
 import CardsInfo from "@/components/card-info/Cards-info";
+import NotFound from "@/components/not-found/Not-Found";
 
 function MainComponent(): ReactNode {
   const [mode, setMode] = useState<boolean>(false);
@@ -25,17 +25,17 @@ function MainComponent(): ReactNode {
 
   const dispatchCardsInfo: Dispatch<AnyAction> = useDispatch();
 
-  const { data, isLoading } = useGetAllCardsQuery(queryParams);
+  const { data, isFetching } = useGetAllCardsQuery(queryParams);
 
   useEffect(() => {
-    const flag: FlagAction = { flag: isLoading };
+    const flag: FlagAction = { flag: isFetching };
     dispatchCardsInfo(actionCardsFlag(flag));
     if (queryParams.items) {
       setMode(true);
     } else {
       setMode(false);
     }
-  }, [dispatchCardsInfo, isLoading, queryParams.items]);
+  }, [dispatchCardsInfo, isFetching, queryParams.items]);
 
   const cards: Array<ReactNode> | null = createCards(
     data as Array<ResponseData> | null

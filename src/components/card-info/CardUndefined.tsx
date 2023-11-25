@@ -1,19 +1,20 @@
 import { ReactNode } from 'react';
+import style from './Cards-info.module.scss';
 
 function CardUndefined({ prop }: { prop: () => void }): ReactNode {
   return (
-    <div className="main__single-card">
-      <div className="main__close-wrapper">
-        <div className="main__close-img" onClick={prop}>
+    <div className={style.card}>
+      <div className={style.top}>
+        <div className={style.close} onClick={prop}>
           <img
-            className="main__close-image"
+            className={style.close_img}
             src={'./close.svg'}
             alt="Close card"
           />
         </div>
       </div>
-      <div className="main__card-wrong">
-        <span className="main__beer-name">Card was not found on the page.</span>
+      <div className={style.main__card_wrong}>
+        <span className={style.main__beer_name}>Card was not found on the page.</span>
       </div>
     </div>
   );

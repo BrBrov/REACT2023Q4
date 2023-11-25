@@ -37,7 +37,7 @@ function CardsInfo(): ReactNode {
 
   if (selectorCardFlag || isFetching) return <Fallback />;
 
-  if (!data) return <CardUndefined prop={onClickCLose} />;
+  if (!data || !data.length) return <CardUndefined prop={onClickCLose} />;
 
   const card = data[0]! as ResponseData;
 
@@ -60,6 +60,7 @@ function CardsInfo(): ReactNode {
             className={style.main__image_beer}
             src={card.image_url ? card.image_url : './image.png'}
             alt="Image of beer"
+            loading="lazy"
           />
         </div>
         <div className={style.main__info_block}>
@@ -93,8 +94,14 @@ function CardsInfo(): ReactNode {
     ));
   }
 
-  function onClickCLose(): void {
-    router.back();
+  async function onClickCLose(): Promise<void> {
+    let url = 'main?page=';
+    url += queryParams.page ? queryParams.page : 1;
+    url += '&items=';
+    url += queryParams.items ? queryParams.items : 6;
+    url += queryParams.search ? `&search=${queryParams.search}` : '';
+
+    await router.push(url);
   }
 }
 

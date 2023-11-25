@@ -1,4 +1,4 @@
-import { ReactNode, SyntheticEvent, useState } from 'react';
+import {ReactNode, SyntheticEvent, useEffect, useState} from 'react';
 
 import style from './Header.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,6 +19,13 @@ function Header(): ReactNode {
   const dispatchStore = useDispatch();
 
   const [inputData, setInput] = useState<string | null>(selectorSearch);
+
+  useEffect(() => {
+    if(inputData !== queryParams.search) {
+      dispatchStore(actionSearch({ search: queryParams.search ?? '' }));
+      setInput(queryParams.search);
+    }
+  }, [queryParams.search, inputData]);
 
   return (
     <>
@@ -43,15 +50,14 @@ function Header(): ReactNode {
 
   function onInput(event: SyntheticEvent): void {
     const input = event.target as HTMLInputElement;
-    dispatchStore(actionSearch({ search: input.value }));
     setInput(input.value);
   }
 
   async function onSearch(): Promise<void> {
+    dispatchStore(actionSearch({ search: inputData ?? '' }));
     let url = `?page=1&items=` + queryParams.items;
 
     if (inputData) url += `&search=${inputData}`;
-
     await router.push(url);
   }
 }
