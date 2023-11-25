@@ -1,4 +1,4 @@
-import { Dispatch, ReactNode, useEffect } from 'react';
+import {Dispatch, ReactNode, useEffect, useState} from 'react';
 
 import ErrorButton from '../error-button/ErrorButton';
 import Pagination from '../pagination/Pagination';
@@ -7,7 +7,7 @@ import QueryParser from '../../utils/QueryParser';
 import ResponseData from '../../models/ResponseData';
 import CardCreator from '../../utils/CardCreator';
 import NotFound from '../not-found/Not-Found';
-import { useDispatch } from 'react-redux';
+import {useDispatch} from 'react-redux';
 import { AnyAction } from '@reduxjs/toolkit';
 import { actionCardsFlag } from '@/redux/redux-slices/flags-operations';
 import { FlagAction } from '@/redux/redux-models/actions-model';
@@ -15,8 +15,10 @@ import { useRouter } from 'next/router';
 import mainStyles from './MainComponent.module.scss';
 import Header from '@/components/header/Header';
 import MissingPage from '@/components/missing-page/MissingPage';
+import CardsInfo from "@/components/card-info/Cards-info";
 
 function MainComponent(): ReactNode {
+  const [mode, setMode] = useState<boolean>(false);
   const router = useRouter();
 
   const queryParams = new QueryParser(router.asPath);
@@ -28,7 +30,12 @@ function MainComponent(): ReactNode {
   useEffect(() => {
     const flag: FlagAction = { flag: isLoading };
     dispatchCardsInfo(actionCardsFlag(flag));
-  }, [dispatchCardsInfo, isLoading]);
+    if (queryParams.items) {
+      setMode(true);
+    } else {
+      setMode(false);
+    }
+  }, [dispatchCardsInfo, isLoading, queryParams.items]);
 
   const cards: Array<ReactNode> | null = createCards(
     data as Array<ResponseData> | null
@@ -49,7 +56,7 @@ function MainComponent(): ReactNode {
               </div>
             )}
           </div>
-          <div className={mainStyles.info}></div>
+          <div className={mainStyles.info}>{mode ? <CardsInfo/> : null}</div>
         </div>
         <Pagination />
       </div>

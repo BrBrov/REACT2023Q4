@@ -1,24 +1,24 @@
 import { ReactNode, useEffect } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
 
-import './Cards-info.scss';
+import style from './Cards-info.module.scss';
 import Fallback from '../fallback/Fallback';
 import CardUndefined from './CardUndefined';
 import QueryParser from '../../utils/QueryParser';
 import useGetSingleCardQuery from '../../redux/redux-query/useGetSingleCard';
 import ResponseData from '../../models/ResponseData';
 import { useDispatch, useSelector } from 'react-redux';
-import BeerStore from '../../redux/redux-models/store-types';
-import { actionCardFlag } from '../../redux/redux-slices/flags-operations';
-import { FlagAction } from '../../redux/redux-models/actions-model';
+import { actionCardFlag } from '@/redux/redux-slices/flags-operations';
+import { FlagAction } from '@/redux/redux-models/actions-model';
+import {useRouter} from "next/router";
+import StoreType from "@/redux/redux-models/wrapper-type";
+import Image from "next/image";
 
 function CardsInfo(): ReactNode {
-  const [sParams] = useSearchParams();
-  const navigate = useNavigate();
-  const queryParams = new QueryParser(sParams);
+  const router = useRouter();
+  const queryParams = new QueryParser(router.asPath);
   const dispatchCardFlag = useDispatch();
   const selectorCardFlag = useSelector(
-    (state: BeerStore) => state.flags.flags.loadingSingleCard
+    (state: StoreType) => state.flags.flags.loadingSingleCard
   );
 
   const { data, isLoading, isFetching } = useGetSingleCardQuery(
@@ -42,35 +42,37 @@ function CardsInfo(): ReactNode {
   const card = data[0]! as ResponseData;
 
   return (
-    <div className="main__single-card">
-      <div className="main__close-wrapper">
-        <div className="main__close-img" onClick={onClickCLose}>
-          <img
-            className="main__close-image"
+    <div className={style.card}>
+      <div className={style.top}>
+        <div className={style.close} onClick={onClickCLose}>
+          <Image
+            className={style.close_img}
             src={'./close.svg'}
             alt="Close card"
+            width={25}
+            height={25}
           />
         </div>
       </div>
-      <div className="main__info-wrapper">
-        <div className="main__img-beer">
+      <div className={style.main__info_wrapper}>
+        <div className={style.main__img_beer}>
           <img
-            className="main__image-beer"
+            className={style.main__image_beer}
             src={card.image_url ? card.image_url : './image.png'}
             alt="Image of beer"
           />
         </div>
-        <div className="main__info-block">
-          <span className="main__beer-name">{card.name}</span>
-          <span className="main__beer-tagline">{card.tagline}</span>
-          <div className="main__beer-charater">
-            <span className="main__beer-alcohol">{`Alcohol: ${card.abv}%`}</span>
-            <span className="main__beer-color">{`Color index: ${card.srm}`}</span>
-            <span className="main__beer-bitterness">{`Bitterness: ${card.ibu}`}</span>
+        <div className={style.main__info_block}>
+          <span className={style.main__beer_name}>{card.name}</span>
+          <span className={style.main__beer_tagline}>{card.tagline}</span>
+          <div className={style.main__beer_charater}>
+            <span className={style.main__beer_alcohol}>{`Alcohol: ${card.abv}%`}</span>
+            <span className={style.main__beer_color}>{`Color index: ${card.srm}`}</span>
+            <span className={style.main__beer_bitterness}>{`Bitterness: ${card.ibu}`}</span>
           </div>
-          <span className="brewers_tips">{`Brewers tips: \"${card.brewers_tips}\"`}</span>
-          <div className="main__beer-pairings">
-            <span className="main__pairing-title">{'Food pairing:'}</span>
+          <span className={style.brewers_tips}>{`Brewers tips: \"${card.brewers_tips}\"`}</span>
+          <div className={style.main__beer_pairings}>
+            <span className={style.main__pairing_title}>{'Food pairing:'}</span>
             {createPairing(card)}
           </div>
         </div>
@@ -85,21 +87,14 @@ function CardsInfo(): ReactNode {
     const pairings = card.food_pairing;
 
     return pairings.map((item: string, id: number) => (
-      <span key={id} className="main__food-pairing">
+      <span key={id} className={style.main__food_pairing}>
         {item}
       </span>
     ));
   }
 
-  function createCloseLink(sParams: URLSearchParams): 0 | -1 {
-    if (!sParams.get('ids')) return 0;
-
-    return -1;
-  }
-
   function onClickCLose(): void {
-    const closeURL: 0 | -1 = createCloseLink(sParams);
-    navigate(closeURL);
+    router.back();
   }
 }
 
