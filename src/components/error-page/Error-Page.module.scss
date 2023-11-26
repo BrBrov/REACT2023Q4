@@ -1,6 +1,14 @@
 @import './../../styles/fonts';
 @import './../../styles/colors';
 
+.error_wrapper {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
 .error {
   display: flex;
   width: 80%;
@@ -15,7 +23,7 @@
   box-shadow: $box-shadow-card;
 }
 
-.error__text-wrapper {
+.error__text_wrapper {
   display: flex;
   width: 80%;
   height: 80%;
@@ -34,7 +42,7 @@
   }
 }
 
-.error__page-reload {
+.error__page_reload {
   display: flex;
   width: 120px;
   height: 45px;
@@ -48,7 +56,7 @@
   color: $text-color;
 }
 
-.error__page-reload:hover {
+.error__page_reload:hover {
   @include CardoItalic(1em);
   color: $text-sign-color;
   font-weight: 700;
@@ -56,13 +64,13 @@
   box-shadow: 0 0 3px 5px #033359;
 }
 
-.error__page-reload:active {
+.error__page_reload:active {
   @include CardoItalic(1em);
   color: $title-color;
   background: $btn-active-background;
   box-shadow: 0 0 0 2px #035612;
 }
 
-.error__reload-text {
+.error__reload_text {
   text-decoration-style: dotted;
 }

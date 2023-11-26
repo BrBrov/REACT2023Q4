@@ -1,12 +1,32 @@
-import { ReactNode } from 'react';
+import { Component, ReactNode } from 'react';
 
 import ErrorPage from '../error-page/Error-Page';
 
-function ErrorBoundary(): ReactNode {
-  console.log("You caused this error: '" + '' + "'!!!");
-  console.log("Reason for error: '" + '' + "'!!!!");
+class ErrorBoundary extends Component<
+  { children: ReactNode },
+  { hasError: boolean }
+> {
+  constructor(
+    props: { children: ReactNode } | Readonly<{ children: ReactNode }>
+  ) {
+    super(props);
 
-  return <ErrorPage />;
+    this.state = { hasError: false };
+  }
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+  componentDidCatch(error: Error) {
+    console.log("You caused this error: '" + error.cause + "'!!!");
+    console.log("Reason for error: '" + error.message + "'!!!!");
+  }
+  render(): ReactNode {
+    if (this.state.hasError) {
+      return <ErrorPage />;
+    }
+
+    return this.props.children;
+  }
 }
 
 export default ErrorBoundary;

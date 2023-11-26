@@ -9,9 +9,9 @@ import ResponseData from '../../models/ResponseData';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCardFlag } from '@/redux/redux-slices/flags-operations';
 import { FlagAction } from '@/redux/redux-models/actions-model';
-import {useRouter} from "next/router";
-import StoreType from "@/redux/redux-models/wrapper-type";
-import Image from "next/image";
+import { useRouter } from 'next/router';
+import StoreType from '@/redux/redux-models/wrapper-type';
+import Image from 'next/image';
 
 function CardsInfo(): ReactNode {
   const router = useRouter();
@@ -67,11 +67,19 @@ function CardsInfo(): ReactNode {
           <span className={style.main__beer_name}>{card.name}</span>
           <span className={style.main__beer_tagline}>{card.tagline}</span>
           <div className={style.main__beer_charater}>
-            <span className={style.main__beer_alcohol}>{`Alcohol: ${card.abv}%`}</span>
-            <span className={style.main__beer_color}>{`Color index: ${card.srm}`}</span>
-            <span className={style.main__beer_bitterness}>{`Bitterness: ${card.ibu}`}</span>
+            <span
+              className={style.main__beer_alcohol}
+            >{`Alcohol: ${card.abv}%`}</span>
+            <span
+              className={style.main__beer_color}
+            >{`Color index: ${card.srm}`}</span>
+            <span
+              className={style.main__beer_bitterness}
+            >{`Bitterness: ${card.ibu}`}</span>
           </div>
-          <span className={style.brewers_tips}>{`Brewers tips: \"${card.brewers_tips}\"`}</span>
+          <span
+            className={style.brewers_tips}
+          >{`Brewers tips: \"${card.brewers_tips}\"`}</span>
           <div className={style.main__beer_pairings}>
             <span className={style.main__pairing_title}>{'Food pairing:'}</span>
             {createPairing(card)}

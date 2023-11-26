@@ -1,28 +1,32 @@
 import { ReactNode } from 'react';
 
-import './Error-Page.scss';
+import styles from './Error-Page.module.scss';
+import { useRouter } from 'next/router';
 
 function ErrorPage(): ReactNode {
+  const router = useRouter();
   return (
-    <>
-      <div className="error">
-        <div className="error__text-wrapper">
-          <span className="error__text">Something went wrong...</span>
-          <span className="error__text">Message: </span>
-          <span className="error__text"></span>
+    <div className={styles.error_wrapper}>
+      <div className={styles.error}>
+        <div className={styles.error__text_wrapper}>
+          <span className={styles.error__text}>Something went wrong...</span>
+          <span className={styles.error__text}>Message: </span>
+          <span className={styles.error__text}></span>
           <button
-            className="error__page-reload"
+            className={styles.error__page_reload}
             type="button"
             onClick={returnPage}
           >
-            <span className="error__reload-text">Reload the page</span>
+            <span className={styles.error__reload_text}>Reload the page</span>
           </button>
         </div>
       </div>
-    </>
+    </div>
   );
 
-  function returnPage(): void {}
+  function returnPage(): void {
+    router.push('main?page=1&items=6');
+  }
 }
 
 export default ErrorPage;
