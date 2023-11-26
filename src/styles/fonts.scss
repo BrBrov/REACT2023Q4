@@ -1,0 +1,39 @@
+@font-face {
+  font-family: 'TiltNeon';
+  src: url('./fonts/TiltNeon-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Cardo-Regular';
+  src: url('./fonts/Cardo-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Cardo-Italic';
+  src: url('./fonts/Cardo-Italic.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Cardo-Bold';
+  src: url('./fonts/Cardo-Bold.ttf') format('truetype');
+}
+
+@mixin Neon($font-size) {
+  font-family: 'TiltNeon', serif;
+  font-size: $font-size;
+}
+
+@mixin Cardo($font-size) {
+  font-family: 'Cardo-Regular', sans-serif;
+  font-size: $font-size;
+}
+
+@mixin CardoBold($font-size) {
+  font-family: 'Cardo-Bold', sans-serif;
+  font-size: $font-size;
+}
+
+@mixin CardoItalic($font-size) {
+  font-family: 'Cardo-Italic', cursive;
+  font-size: $font-size;
+}
