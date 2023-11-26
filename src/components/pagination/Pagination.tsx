@@ -1,5 +1,5 @@
 import pg from './Pagination.module.scss';
-import { ReactNode, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import ItemsPerPage from '../items-page/ItemsPerPage';
 import { useRouter } from 'next/router';
 import QueryParser from '@/utils/QueryParser';
@@ -7,7 +7,11 @@ import QueryParser from '@/utils/QueryParser';
 function Pagination(): ReactNode {
   const router = useRouter();
   const queryParams = new QueryParser(router.asPath);
-  const [page, SetPage] = useState<string | null>(queryParams.page);
+  const [page, SetPage] = useState<string | null>('');
+
+  useEffect(() => {
+    SetPage(queryParams.page);
+  }, [queryParams.page]);
 
   return (
     <div className={pg.pagination}>
@@ -35,18 +39,18 @@ function Pagination(): ReactNode {
     </div>
   );
 
-  function onPageDown(): void {
+  async function onPageDown(): Promise<void> {
     let enteredPage: number = checkEnteredPage(queryParams.page) - 1;
 
     enteredPage = enteredPage < 1 ? 1 : enteredPage;
 
-    goToPage(enteredPage);
+    await goToPage(enteredPage);
   }
 
-  function onPageUp(): void {
+  async function onPageUp(): Promise<void> {
     const enteredPage: number = checkEnteredPage(queryParams.page) + 1;
 
-    goToPage(enteredPage);
+    await goToPage(enteredPage);
   }
 
   function checkEnteredPage(enteredPage: string | null): number {
@@ -67,7 +71,6 @@ function Pagination(): ReactNode {
 
     if (queryParams.search) url = url + '&search=' + queryParams.search;
 
-    SetPage(queryParams.page);
     await router.push(url);
   }
 }

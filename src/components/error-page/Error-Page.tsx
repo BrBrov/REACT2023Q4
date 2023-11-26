@@ -1,20 +1,15 @@
 import { ReactNode } from 'react';
 
 import './Error-Page.scss';
-import { useNavigate, useRouteError } from 'react-router-dom';
 
 function ErrorPage(): ReactNode {
-  const navigate = useNavigate();
-
-  const err = useRouteError() as Error;
-
   return (
     <>
       <div className="error">
         <div className="error__text-wrapper">
           <span className="error__text">Something went wrong...</span>
-          <span className="error__text">Message: {err.message}</span>
-          <span className="error__text">{err.name}</span>
+          <span className="error__text">Message: </span>
+          <span className="error__text"></span>
           <button
             className="error__page-reload"
             type="button"
@@ -27,9 +22,7 @@ function ErrorPage(): ReactNode {
     </>
   );
 
-  function returnPage(): void {
-    navigate(-1);
-  }
+  function returnPage(): void {}
 }
 
 export default ErrorPage;
