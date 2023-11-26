@@ -15,7 +15,9 @@ function MissingPage(): ReactNode {
         className={styles.missing__button}
         onClick={returnToFirstPage}
       >
-        <span className={styles.missing__button_text}>{'Go to previous page'}</span>
+        <span className={styles.missing__button_text}>
+          {'Go to previous page'}
+        </span>
       </button>
     </div>
   );

@@ -1,4 +1,4 @@
-import {Dispatch, ReactNode, useEffect, useState} from 'react';
+import { Dispatch, ReactNode, useEffect, useState } from 'react';
 
 import ErrorButton from '../error-button/ErrorButton';
 import Pagination from '../pagination/Pagination';
@@ -6,7 +6,7 @@ import useGetAllCardsQuery from '../../redux/redux-query/useGetAllCards';
 import QueryParser from '../../utils/QueryParser';
 import ResponseData from '../../models/ResponseData';
 import CardCreator from '../../utils/CardCreator';
-import {useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { AnyAction } from '@reduxjs/toolkit';
 import { actionCardsFlag } from '@/redux/redux-slices/flags-operations';
 import { FlagAction } from '@/redux/redux-models/actions-model';
@@ -14,8 +14,9 @@ import { useRouter } from 'next/router';
 import mainStyles from './MainComponent.module.scss';
 import Header from '@/components/header/Header';
 import MissingPage from '@/components/missing-page/MissingPage';
-import CardsInfo from "@/components/card-info/Cards-info";
-import NotFound from "@/components/not-found/Not-Found";
+import CardsInfo from '@/components/card-info/Cards-info';
+import NotFound from '@/components/not-found/Not-Found';
+import FallbackAnimation from '@/components/fallback/FallbackAnimation';
 
 function MainComponent(): ReactNode {
   const [mode, setMode] = useState<boolean>(false);
@@ -37,16 +38,16 @@ function MainComponent(): ReactNode {
     }
   }, [dispatchCardsInfo, isFetching, queryParams.items]);
 
-  const cards: Array<ReactNode> | null = createCards(
-    data as Array<ResponseData> | null
-  );
-
-  return (
+  return isFetching ? (
+    <div className={mainStyles.block}>
+      <FallbackAnimation />
+    </div>
+  ) : (
     <div className={mainStyles.block}>
       <div className={mainStyles.wrapper}>
         <div className={mainStyles.segment}>
           <div className={mainStyles.panel} onClick={onClickPanel}>
-            {cards || (
+            {createCards(data as Array<ResponseData> | null) || (
               <div className="missing__page">
                 <Header />
                 <MissingPage />
@@ -56,7 +57,7 @@ function MainComponent(): ReactNode {
               </div>
             )}
           </div>
-          <div className={mainStyles.info}>{mode ? <CardsInfo/> : null}</div>
+          <div className={mainStyles.info}>{mode ? <CardsInfo /> : null}</div>
         </div>
         <Pagination />
       </div>

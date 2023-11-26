@@ -1,6 +1,7 @@
-import Card from '../components/card/Card';
-import { ReactNode } from 'react';
+import { lazy, ReactNode } from 'react';
 import ResponseData from '../models/ResponseData';
+
+const Card = lazy(() => import('../components/card/Card'));
 
 class CardCreator {
   private readonly data: ResponseData;

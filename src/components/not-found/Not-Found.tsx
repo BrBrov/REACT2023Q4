@@ -9,7 +9,9 @@ function NotFound(): ReactNode {
         <span className={styles.main__not_found}>
           The beer you are looking for was not found!
         </span>
-        <span className={styles.main__not_found}>Try looking for another beer.</span>
+        <span className={styles.main__not_found}>
+          Try looking for another beer.
+        </span>
       </div>
     </div>
   );

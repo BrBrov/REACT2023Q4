@@ -14,7 +14,9 @@ function CardUndefined({ prop }: { prop: () => void }): ReactNode {
         </div>
       </div>
       <div className={style.main__card_wrong}>
-        <span className={style.main__beer_name}>Card was not found on the page.</span>
+        <span className={style.main__beer_name}>
+          Card was not found on the page.
+        </span>
       </div>
     </div>
   );
