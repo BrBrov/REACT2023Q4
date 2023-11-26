@@ -25,7 +25,7 @@ function ErrorPage(): ReactNode {
   );
 
   function returnPage(): void {
-    router.push('main?page=1&items=6');
+    router.reload();
   }
 }
 
