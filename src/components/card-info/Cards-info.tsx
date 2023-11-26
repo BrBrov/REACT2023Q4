@@ -35,7 +35,12 @@ function CardsInfo(): ReactNode {
 
   if (!queryParams.ids) return null;
 
-  if (selectorCardFlag || isFetching) return <Fallback />;
+  if (selectorCardFlag || isFetching)
+    return (
+      <div className={style.loading}>
+        <Fallback />
+      </div>
+    );
 
   if (!data || !data.length) return <CardUndefined prop={onClickCLose} />;
 

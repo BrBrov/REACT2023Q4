@@ -64,7 +64,7 @@ function Card(props: { card: ResponseData }): ReactNode {
 
   async function toCardInfo(e: SyntheticEvent): Promise<void> {
     e.stopPropagation();
-    const queryParams = new URLSearchParams(router.asPath);
+    const queryParams = new URL(router.asPath, 'https://test.com').searchParams;
     await router.push(createLinkToCardInfo(queryParams));
   }
 }
