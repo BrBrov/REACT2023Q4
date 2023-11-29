@@ -1,0 +1,68 @@
+@import 'generalStyles';
+
+.form_wrapper {
+  display: flex;
+  box-sizing: border-box;
+  width: 320px;
+  padding: 5px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  box-shadow: $shadow-elem;
+  background: $background;
+}
+
+.form_style {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 7px;
+}
+
+.form_record {
+  display: flex;
+  width: 100%;
+  height: 30px;
+  flex-direction: row;
+  justify-content: stretch;
+  align-items: center;
+  gap: 7px;
+}
+
+.form_label {
+  font-size: 1em;
+  color: $text-color;
+}
+
+.button_wrapper {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.button_uncontrolled {
+  font-size: 1em;
+  color: $text-color;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#name,
+#age,
+#email,
+#password,
+#password_repeat {
+  width: 165px;
+  outline: none;
+  border-radius: 3px;
+}
+
+#countries {
+  width: 230px;
+}
