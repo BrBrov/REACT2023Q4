@@ -1,9 +1,9 @@
 interface CustomForm {
   name: string;
   age: number;
-  email: number;
+  email: string;
   password: string;
-  gender: 'male' | 'female';
+  gender: string;
   accept: boolean;
   picture: string;
   country: string;

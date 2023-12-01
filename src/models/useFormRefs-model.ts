@@ -6,7 +6,7 @@ interface FormRefsObject {
   emailRef: RefObject<HTMLInputElement>;
   passwordRef: RefObject<HTMLInputElement>;
   repeatPasswordRef: RefObject<HTMLInputElement>;
-  genderRef: RefObject<HTMLInputElement>;
+  genderRef: RefObject<HTMLSelectElement>;
   licenseRef: RefObject<HTMLInputElement>;
   avatarRef: RefObject<HTMLInputElement>;
   countryRef: RefObject<HTMLSelectElement>;
