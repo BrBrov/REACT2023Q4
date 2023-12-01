@@ -1,12 +1,12 @@
-interface CustomForm {
+interface Card {
   name: string;
   age: number;
   email: string;
   password: string;
   gender: string;
-  accept: boolean;
+  license: boolean;
   picture: string;
   country: string;
 }
 
-export default CustomForm;
+export default Card;

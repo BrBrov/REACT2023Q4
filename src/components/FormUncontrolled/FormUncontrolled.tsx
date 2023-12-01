@@ -1,6 +1,6 @@
 import { ReactNode, SyntheticEvent, useState } from 'react';
 import './../../styles/formStyle.scss';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import getCountryState from '../../redux/countries/getState';
 import useFormRefs from '../FormControlled/useFormRefs';
 import FormRefsObject from '../../models/useFormRefs-model';
@@ -10,15 +10,22 @@ import formScheme from '../../utils/formScheme';
 import { ValidationError } from 'yup';
 import ErrorFormIndicator from '../../models/ErrorFormIndicator';
 import createFormErrorStructure from '../../utils/formErrorStructure';
+import { useNavigate } from 'react-router-dom';
+import createCardRecord from '../../utils/createCardRecord';
+import CardRecord from '../../models/CardRecord';
+import cardAction from '../../redux/cards/actions';
 
 function FormUncontrolled(): ReactNode {
   const formObject: FormRefsObject = useFormRefs();
+  const navigate = useNavigate();
 
   const country: Array<string> = useSelector(getCountryState);
 
   const [errors, setErrors] = useState<ErrorFormIndicator>(
     createFormErrorStructure(null)
   );
+
+  const dispatcher = useDispatch();
 
   return (
     <div className="form_wrapper">
@@ -195,8 +202,12 @@ function FormUncontrolled(): ReactNode {
 
     formScheme
       .validate(FormDataObj, { abortEarly: false })
-      .then(() => {
+      .then((result: FormSchemeData) => {
+        const cardRecord: CardRecord = createCardRecord(result, false);
+        dispatcher(cardAction(cardRecord));
+
         setErrors(createFormErrorStructure(null));
+        navigate('/');
       })
       .catch((err: ValidationError) => {
         const errStruct = createFormErrorStructure(err.inner);
