@@ -19,7 +19,10 @@ function createFormErrorStructure(errors: Array<ValidationError> | null) {
 
   errors.forEach((err: ValidationError) => {
     if (err.path) {
-      errorStructure[`${err.path}`] = new ErrorRecord(err);
+      const property = err.path.includes('.')
+        ? err.path.slice(0, err.path.indexOf('.'))
+        : err.path;
+      errorStructure[`${property}`] = new ErrorRecord(err);
     }
   });
 

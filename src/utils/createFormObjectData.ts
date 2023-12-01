@@ -24,8 +24,8 @@ async function CreateFormObjectData(
 function generateAvatar(
   obj: FileList | null | undefined
 ): Promise<Avatar | null> {
-  return new Promise((resolve, reject) => {
-    if (!obj || !obj.length) return reject(null);
+  return new Promise((resolve) => {
+    if (!obj || !obj.length) return resolve(null);
 
     const file: File = obj[0];
 
@@ -39,7 +39,8 @@ function generateAvatar(
 
     reader.onloadend = (res: ProgressEvent<FileReader>) => {
       avatarObj.pic = res.target!.result ? <string>res.target!.result : null;
-      resolve(avatarObj);
+
+      return resolve(avatarObj);
     };
 
     reader.readAsDataURL(file);
@@ -47,6 +48,3 @@ function generateAvatar(
 }
 
 export default CreateFormObjectData;
-
-// type:"image/png"
-// type:"image/jpeg"

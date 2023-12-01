@@ -24,48 +24,89 @@ function FormUncontrolled(): ReactNode {
     <div className="form_wrapper">
       <form action="#" onSubmit={handlerSubmit} className="form_style">
         <div className="form_record">
-          <div className="from_field">
-            <label htmlFor="name" className="form_label">
-              Name:
-            </label>
-            <input id="name" type="text" ref={formObject.nameRef} />
+          <div className="form_field">
+            <div className="label_wrapper">
+              <label htmlFor="name" className="form_label">
+                Name:
+              </label>
+            </div>
+            <div className="input_wrapper">
+              <input
+                id="name"
+                className="input_text"
+                type="text"
+                ref={formObject.nameRef}
+              />
+            </div>
           </div>
           {errors.name ? (
             <span className="form_error">{errors.name.message}</span>
           ) : null}
         </div>
         <div className="form_record">
-          <div className="from_field">
-            <label htmlFor="age">Age:</label>
-            <input id="age" type="number" ref={formObject.ageRef} />
+          <div className="form_field">
+            <div className="label_wrapper">
+              <label htmlFor="age" className="form_label">
+                Age:
+              </label>
+            </div>
+            <input
+              id="age"
+              className="input_text"
+              type="number"
+              ref={formObject.ageRef}
+            />
           </div>
           {errors.age?.status ? (
             <span className="form_error">{errors.age.message}</span>
           ) : null}
         </div>
         <div className="form_record">
-          <div className="from_field">
-            <label htmlFor="email">Email:</label>
-            <input id="email" type="email" ref={formObject.emailRef} />
+          <div className="form_field">
+            <div className="label_wrapper">
+              <label htmlFor="email" className="form_label">
+                Email:
+              </label>
+            </div>
+            <input
+              id="email"
+              className="input_text"
+              type="text"
+              ref={formObject.emailRef}
+            />
           </div>
           {errors.email ? (
             <span className="form_error">{errors.email.message}</span>
           ) : null}
         </div>
         <div className="form_record">
-          <div className="from_field">
-            <label htmlFor="password">Password:</label>
-            <input id="password" type="password" ref={formObject.passwordRef} />
+          <div className="form_field">
+            <div className="label_wrapper">
+              <label htmlFor="password" className="form_label">
+                Password:
+              </label>
+            </div>
+            <input
+              id="password"
+              className="input_text"
+              type="password"
+              ref={formObject.passwordRef}
+            />
           </div>
           {errors.password ? (
             <span className="form_error">{errors.password.message}</span>
           ) : null}
         </div>
         <div className="form_record">
-          <div className="from_field">
-            <label htmlFor="password_repeat">Password repeat:</label>
+          <div className="form_field">
+            <div className="label_wrapper">
+              <label htmlFor="password_repeat" className="form_label">
+                Password repeat:
+              </label>
+            </div>
             <input
               id="password_repeat"
+              className="input_text"
               type="password"
               ref={formObject.repeatPasswordRef}
             />
@@ -75,9 +116,17 @@ function FormUncontrolled(): ReactNode {
           ) : null}
         </div>
         <div className="form_record">
-          <div className="from_field">
-            <label htmlFor="gender">Gender:</label>
-            <select id="gender" ref={formObject.genderRef}>
+          <div className="form_field">
+            <div className="label_wrapper">
+              <label htmlFor="gender" className="form_label">
+                Gender:
+              </label>
+            </div>
+            <select
+              id="gender"
+              className="input_text"
+              ref={formObject.genderRef}
+            >
               <option value="male">Male</option>
               <option value="female">Female</option>
             </select>
@@ -87,26 +136,37 @@ function FormUncontrolled(): ReactNode {
           ) : null}
         </div>
         <div className="form_record">
-          <div className="from_field">
-            <label htmlFor="lincense">Accept Terms and Conditions</label>
+          <div className="form_license">
             <input id="lincense" type="checkbox" ref={formObject.licenseRef} />
+            <label htmlFor="lincense" className="form_label">
+              Accept Terms and Conditions
+            </label>
           </div>
           {errors.license ? (
             <span className="form_error">{errors.license.message}</span>
           ) : null}
         </div>
-        <div className="form_record">
-          <div className="from_field">
-            <label htmlFor="avatar">Avatar</label>
-            <input id="avatar" type="file" ref={formObject.avatarRef} />
-          </div>
+        <div className="form_avatar">
+          <label htmlFor="avatar" className="form_label">
+            Avatar
+          </label>
+          <input
+            id="avatar"
+            type="file"
+            name="file"
+            ref={formObject.avatarRef}
+          />
           {errors.avatar ? (
             <span className="form_error">{errors.avatar.message}</span>
           ) : null}
         </div>
         <div className="form_record">
-          <div className="from_field">
-            <label htmlFor="countries">Country</label>
+          <div className="form_field">
+            <div className="label_wrapper">
+              <label htmlFor="countries" className="form_label">
+                Country
+              </label>
+            </div>
             <select id="countries" ref={formObject.countryRef}>
               {country.map((item: string, id: number) => (
                 <option key={id} value={item}>
@@ -133,7 +193,7 @@ function FormUncontrolled(): ReactNode {
 
     const FormDataObj: FormSchemeData = await CreateFormObjectData(formObject);
 
-    await formScheme
+    formScheme
       .validate(FormDataObj, { abortEarly: false })
       .then(() => {
         setErrors(createFormErrorStructure(null));
