@@ -207,7 +207,7 @@ function FormUncontrolled(): ReactNode {
     formUncontrolledSchema
       .validate(FormDataObj, { abortEarly: false })
       .then((result: FormSchemeData) => {
-        const cardRecord: CardRecord = createCardRecord(result, false);
+        const cardRecord: CardRecord = createCardRecord(result);
         dispatcher(cardAction(cardRecord));
 
         setErrors(createFormErrorStructure(null));

@@ -7,7 +7,7 @@ interface FormSchemeData {
   password: string;
   repeatPassword: string;
   gender: string;
-  license: NonNullable<boolean | undefined>;
+  license?: NonNullable<boolean | undefined>;
   avatar: Avatar | null;
   country: string;
 }

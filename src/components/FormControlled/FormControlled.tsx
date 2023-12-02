@@ -1,13 +1,18 @@
 import { ReactNode } from 'react';
-import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import getCountryState from '../../redux/countries/getState';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import formControlledSchema from '../../utils/formControlledSchema';
 import FormCtrlData from '../../models/formControlledType';
+import createCardRecordForCtrlForm from '../../utils/createCardRecordForCtrlForm';
+import CardRecord from '../../models/CardRecord';
+import cardAction from '../../redux/cards/actions';
 
 function FormControlled(): ReactNode {
+  const navigate = useNavigate();
+  const dispatcher = useDispatch();
   const country: Array<string> = useSelector(getCountryState);
   const {
     register,
@@ -18,8 +23,13 @@ function FormControlled(): ReactNode {
   });
 
   console.log('Error -> \n', errors);
-  const onSubmit: SubmitHandler<FormCtrlData> = (data) =>
-    console.log(data.avatar);
+  const onSubmit: SubmitHandler<FormCtrlData> = function (data: FormCtrlData) {
+    createCardRecordForCtrlForm(data).then((record: CardRecord) => {
+      dispatcher(cardAction(record));
+      navigate('/');
+    });
+  };
+
   return (
     <div className="form_wrapper">
       <form action="#" className="form_style" onSubmit={handleSubmit(onSubmit)}>

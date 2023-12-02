@@ -1,6 +1,7 @@
 import FormRefsObject from '../models/useFormRefs-model';
 import FormSchemeData from '../models/formScheme-type';
 import Avatar from '../models/avatar-model';
+import generateAvatar from './generateAvatar';
 
 async function CreateFormObjectData(
   formData: FormRefsObject
@@ -19,32 +20,6 @@ async function CreateFormObjectData(
     avatar: avatar,
     country: formData.countryRef.current?.value,
   } as unknown as FormSchemeData;
-}
-
-function generateAvatar(
-  obj: FileList | null | undefined
-): Promise<Avatar | null> {
-  return new Promise((resolve) => {
-    if (!obj || !obj.length) return resolve(null);
-
-    const file: File = obj[0];
-
-    const avatarObj: Avatar = {
-      size: file.size,
-      ext: file.type,
-      pic: '',
-    };
-
-    const reader = new FileReader();
-
-    reader.onloadend = (res: ProgressEvent<FileReader>) => {
-      avatarObj.pic = res.target!.result ? <string>res.target!.result : null;
-
-      return resolve(avatarObj);
-    };
-
-    reader.readAsDataURL(file);
-  });
 }
 
 export default CreateFormObjectData;

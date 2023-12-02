@@ -1,14 +1,11 @@
 import FormSchemeData from '../models/formScheme-type';
 import CardRecord from '../models/CardRecord';
 
-function createCardRecord(
-  form: FormSchemeData,
-  isControlled: boolean
-): CardRecord {
-  return {
+function createCardRecord(form: FormSchemeData): CardRecord {
+  return <CardRecord>{
+    controlled: false,
     license: form.license,
     age: form.age!,
-    controlled: isControlled,
     country: form.country,
     email: form.country,
     gender: form.gender,
