@@ -1,13 +1,13 @@
 import Avatar from './avatar-model';
 
 interface FormSchemeData {
-  name: string | null;
-  age: number | null;
-  email: string | null;
-  password: string | null;
-  repeatPassword: string | null;
+  name: string;
+  age: number;
+  email: string;
+  password: string;
+  repeatPassword: string;
   gender: string;
-  license: boolean;
+  license: NonNullable<boolean | undefined>;
   avatar: Avatar | null;
   country: string;
 }

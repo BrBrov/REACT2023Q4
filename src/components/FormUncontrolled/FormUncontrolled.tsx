@@ -2,18 +2,18 @@ import { ReactNode, SyntheticEvent, useState } from 'react';
 import './../../styles/formStyle.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import getCountryState from '../../redux/countries/getState';
-import useFormRefs from '../FormControlled/useFormRefs';
+import useFormRefs from '../../utils/useFormRefs';
 import FormRefsObject from '../../models/useFormRefs-model';
 import FormSchemeData from '../../models/formScheme-type';
 import CreateFormObjectData from '../../utils/createFormObjectData';
-import formScheme from '../../utils/formScheme';
 import { ValidationError } from 'yup';
 import ErrorFormIndicator from '../../models/ErrorFormIndicator';
 import createFormErrorStructure from '../../utils/formErrorStructure';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import createCardRecord from '../../utils/createCardRecord';
 import CardRecord from '../../models/CardRecord';
 import cardAction from '../../redux/cards/actions';
+import formUncontrolledShema from '../../utils/formUncontrolledShema';
 
 function FormUncontrolled(): ReactNode {
   const formObject: FormRefsObject = useFormRefs();
@@ -192,6 +192,10 @@ function FormUncontrolled(): ReactNode {
           </button>
         </div>
       </form>
+      <NavLink to={'/'} className="app_link uncontrolled_text">
+        {' '}
+        Return to start page
+      </NavLink>
     </div>
   );
 
@@ -200,7 +204,7 @@ function FormUncontrolled(): ReactNode {
 
     const FormDataObj: FormSchemeData = await CreateFormObjectData(formObject);
 
-    formScheme
+    formUncontrolledShema
       .validate(FormDataObj, { abortEarly: false })
       .then((result: FormSchemeData) => {
         const cardRecord: CardRecord = createCardRecord(result, false);
