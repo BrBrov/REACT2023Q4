@@ -18,7 +18,14 @@ const formScheme: ObjectSchema<FormSchemeData> = object().shape({
     .required(msgForEmptyField)
     .email('Entered email is wrong')
     .defined(),
-  password: string().required(msgForEmptyField).defined(),
+  password: string()
+    .matches(
+      /(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{6,}/g,
+      'Must be 1 number, 1 uppercased and 1 lowercased letter, 1 special character'
+    )
+    .min(6, 'Must be 6 and more character')
+    .required(msgForEmptyField)
+    .defined(),
   repeatPassword: string()
     .oneOf([ref('password')], 'First and second passwords is not equal')
     .required(msgForEmptyField)
