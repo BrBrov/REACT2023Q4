@@ -36,9 +36,13 @@ function FormControlled(): ReactNode {
                 className="input_text"
                 type="text"
                 {...register('name')}
+                aria-invalid={errors.name ? 'true' : 'false'}
               />
             </div>
           </div>
+          {errors.name ? (
+            <span className="form_error">{errors.name.message}</span>
+          ) : null}
         </div>
         <div className="form_record">
           <div className="form_field">
@@ -52,8 +56,12 @@ function FormControlled(): ReactNode {
               className="input_text"
               type="number"
               {...register('age')}
+              aria-invalid={errors.age ? 'true' : 'false'}
             />
           </div>
+          {errors.age ? (
+            <span className="form_error">{errors.age.message}</span>
+          ) : null}
         </div>
         <div className="form_record">
           <div className="form_field">
@@ -67,8 +75,12 @@ function FormControlled(): ReactNode {
               className="input_text"
               type="text"
               {...register('email')}
+              aria-invalid={errors.email ? 'true' : 'false'}
             />
           </div>
+          {errors.email ? (
+            <span className="form_error">{errors.email.message}</span>
+          ) : null}
         </div>
         <div className="form_record">
           <div className="form_field">
@@ -82,8 +94,12 @@ function FormControlled(): ReactNode {
               className="input_text"
               type="password"
               {...register('password')}
+              aria-invalid={errors.password ? 'true' : 'false'}
             />
           </div>
+          {errors.password ? (
+            <span className="form_error">{errors.password.message}</span>
+          ) : null}
         </div>
         <div className="form_record">
           <div className="form_field">
@@ -97,8 +113,12 @@ function FormControlled(): ReactNode {
               className="input_text"
               type="password"
               {...register('repeatPassword')}
+              aria-invalid={errors.repeatPassword ? 'true' : 'false'}
             />
           </div>
+          {errors.repeatPassword ? (
+            <span className="form_error">{errors.repeatPassword.message}</span>
+          ) : null}
         </div>
         <div className="form_record">
           <div className="form_field">
@@ -107,19 +127,35 @@ function FormControlled(): ReactNode {
                 Gender:
               </label>
             </div>
-            <select id="gender" className="input_text" {...register('gender')}>
+            <select
+              id="gender"
+              className="input_text"
+              {...register('gender')}
+              aria-invalid={errors.gender ? 'true' : 'false'}
+            >
               <option value="male">Male</option>
               <option value="female">Female</option>
             </select>
           </div>
+          {errors.gender ? (
+            <span className="form_error">{errors.gender.message}</span>
+          ) : null}
         </div>
         <div className="form_record">
           <div className="form_license">
-            <input id="lincense" type="checkbox" {...register('license')} />
+            <input
+              id="lincense"
+              type="checkbox"
+              {...register('license')}
+              aria-invalid={errors.license ? 'true' : 'false'}
+            />
             <label htmlFor="lincense" className="form_label">
               Accept Terms and Conditions
             </label>
           </div>
+          {errors.license ? (
+            <span className="form_error">{errors.license.message}</span>
+          ) : null}
         </div>
         <div className="form_avatar">
           <label htmlFor="avatar" className="form_label">
@@ -129,8 +165,11 @@ function FormControlled(): ReactNode {
             id="avatar"
             type="file"
             {...register('avatar')}
-            accept="image/png, image/jpeg"
+            aria-invalid={errors.avatar ? 'true' : 'false'}
           />
+          {errors.avatar ? (
+            <span className="form_error">{errors.avatar.message}</span>
+          ) : null}
         </div>
         <div className="form_record">
           <div className="form_field">
@@ -139,7 +178,11 @@ function FormControlled(): ReactNode {
                 Country
               </label>
             </div>
-            <select id="countries" {...register('country')}>
+            <select
+              id="countries"
+              {...register('country')}
+              aria-invalid={errors.country ? 'true' : 'false'}
+            >
               {country.map((item: string, id: number) => (
                 <option key={id} value={item}>
                   {item}
@@ -147,6 +190,9 @@ function FormControlled(): ReactNode {
               ))}
             </select>
           </div>
+          {errors.country ? (
+            <span className="form_error">{errors.country.message}</span>
+          ) : null}
         </div>
         <div className="button_wrapper">
           <button type="submit" className="button_uncontrolled">
@@ -154,7 +200,7 @@ function FormControlled(): ReactNode {
           </button>
         </div>
       </form>
-      <NavLink to={'/'} className="app_link uncontrolled_text">
+      <NavLink to={'/'} className="app_link controlled_text">
         Return to start page
       </NavLink>
     </div>

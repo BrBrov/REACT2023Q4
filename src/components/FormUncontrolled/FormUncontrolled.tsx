@@ -13,7 +13,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import createCardRecord from '../../utils/createCardRecord';
 import CardRecord from '../../models/CardRecord';
 import cardAction from '../../redux/cards/actions';
-import formUncontrolledShema from '../../utils/formUncontrolledShema';
+import formUncontrolledSchema from '../../utils/formUncontrolledShema';
 
 function FormUncontrolled(): ReactNode {
   const formObject: FormRefsObject = useFormRefs();
@@ -204,7 +204,7 @@ function FormUncontrolled(): ReactNode {
 
     const FormDataObj: FormSchemeData = await CreateFormObjectData(formObject);
 
-    formUncontrolledShema
+    formUncontrolledSchema
       .validate(FormDataObj, { abortEarly: false })
       .then((result: FormSchemeData) => {
         const cardRecord: CardRecord = createCardRecord(result, false);

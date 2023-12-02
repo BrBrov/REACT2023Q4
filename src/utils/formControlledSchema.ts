@@ -20,7 +20,7 @@ const formControlledSchema: ObjectSchema<FormCtrlData> = formScheme.shape({
       function (value: FileList | undefined): boolean {
         if (!value || !value[0]) return false;
 
-        if (!value[0].type.match(/[jpeg]|[png]/g)) return false;
+        if (!value[0].type.match(/(png|jp?eg)/g)) return false;
 
         return true;
       }

@@ -19,7 +19,7 @@ const formScheme = object().shape({
   password: string()
     .matches(
       /(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{6,}/g,
-      'Must be 1 number, 1 uppercased and 1 lowercased letter, 1 special character'
+      'Must be 1 number, 1 uppercase and 1 lowercase letter, 1 special character'
     )
     .min(6, 'Must be 6 and more character')
     .required(msgForEmptyField)
@@ -29,7 +29,7 @@ const formScheme = object().shape({
     .required(msgForEmptyField)
     .defined(),
   gender: string().required().defined(),
-  license: boolean().required(),
+  license: boolean().oneOf([true], 'You have to accept conditions'),
   country: string().required().defined(),
 });
 
