@@ -1,0 +1,30 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(180deg, #c5efe4, #b6f1d9, #a0f1d9, #8ff3d8);
+}
+
+#app {
+  display: flex;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 100vh;
+  padding: 30px 50px;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.app_link {
+  text-decoration: none;
+  color: #4d114a;
+}
+
+.app_link:hover {
+  color: #270260;
+  text-decoration: underline dotted 2px #88023e;
+}
+
+.app_link:active {
+  color: #02412f;
+}
