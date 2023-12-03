@@ -4,6 +4,7 @@ import CardRecord from '../models/CardRecord';
 function createCardRecord(form: FormSchemeData): CardRecord {
   return {
     controlled: false,
+    newRecord: true,
     license: form.license,
     age: form.age!,
     country: form.country,

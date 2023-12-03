@@ -20,6 +20,22 @@
   background: linear-gradient(180deg, #778898, #85a1b7, #8bb4d2, #86c2ec);
 }
 
+@keyframes showNewCard {
+  0% {
+    background: linear-gradient(180deg, #b08787, #b67b7b, #b96363, #bd4646);
+  }
+  50% {
+    background: linear-gradient(180deg, #b0a487, #b4a874, #b9ad5a, #bdb23e);
+  }
+  100% {
+    background: linear-gradient(180deg, #93b087, #82b671, #77b756, #6bb937);
+  }
+}
+
+.new_card {
+  animation: showNewCard infinite 1500ms;
+}
+
 .card_wrapper {
   display: flex;
   width: 100%;

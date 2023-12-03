@@ -13,9 +13,11 @@ function Card(props: CardRecord): ReactNode {
     avatar,
     password,
     license,
+    newRecord,
   } = props;
 
-  const wrapperClass = controlled ? 'bg_control' : 'bg_uncontrol';
+  let wrapperClass = controlled ? 'bg_control' : 'bg_uncontrol';
+  wrapperClass = newRecord ? 'new_card' : wrapperClass;
 
   return (
     <div className={`card ${wrapperClass}`}>

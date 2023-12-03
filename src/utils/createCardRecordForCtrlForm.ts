@@ -10,6 +10,7 @@ async function createCardRecordForCtrlForm(
 
   return {
     controlled: true,
+    newRecord: true,
     name: form.name,
     age: form.age,
     email: form.email,

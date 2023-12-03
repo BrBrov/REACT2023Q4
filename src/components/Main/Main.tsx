@@ -1,14 +1,32 @@
-import { ReactNode } from 'react';
+import { ReactNode, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import './Main.scss';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import getCards from '../../redux/cards/getCards';
 import CardRecord from '../../models/CardRecord';
 import Card from '../Cards/Card';
+import cardActionUpdAll from '../../redux/cards/actionUpdAll';
 
 function Main(): ReactNode {
-  const cards = useSelector(getCards);
-  console.log(cards);
+  const cards: Array<CardRecord> = useSelector(getCards);
+  const dispatcher = useDispatch();
+
+  useEffect(() => {
+    if (cards.some((card: CardRecord) => card.newRecord)) {
+      const newCardsForStore: Array<CardRecord> = cards.map(
+        (card: CardRecord) => {
+          return {
+            ...card,
+            newRecord: false,
+          };
+        }
+      );
+      setTimeout(() => {
+        dispatcher(cardActionUpdAll(newCardsForStore));
+      }, 5000);
+    }
+  }, [cards, dispatcher]);
+
   return (
     <>
       <header className="main_header">
