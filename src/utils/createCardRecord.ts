@@ -2,7 +2,7 @@ import FormSchemeData from '../models/formScheme-type';
 import CardRecord from '../models/CardRecord';
 
 function createCardRecord(form: FormSchemeData): CardRecord {
-  return <CardRecord>{
+  return {
     controlled: false,
     license: form.license,
     age: form.age!,
@@ -11,8 +11,8 @@ function createCardRecord(form: FormSchemeData): CardRecord {
     gender: form.gender,
     name: form.name!,
     password: form.password!,
-    picture: <string>form.avatar?.pic,
-  };
+    avatar: <string>form.avatar?.pic,
+  } as unknown as CardRecord;
 }
 
 export default createCardRecord;

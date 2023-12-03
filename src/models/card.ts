@@ -5,7 +5,7 @@ interface Card {
   password: string;
   gender: string;
   license: boolean;
-  picture: string;
+  avatar: string;
   country: string;
 }
 

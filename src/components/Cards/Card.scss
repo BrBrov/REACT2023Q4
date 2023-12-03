@@ -1,0 +1,69 @@
+@import './../../styles/generalStyles';
+
+.card {
+  display: flex;
+  box-sizing: border-box;
+  width: 300px;
+  padding: 7px 10px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  box-shadow: $shadow-elem;
+}
+
+.bg_uncontrol {
+  background: linear-gradient(180deg, #987584, #b9819f, #de88bb, #ee7dc0);
+}
+
+.bg_control {
+  background: linear-gradient(180deg, #778898, #85a1b7, #8bb4d2, #86c2ec);
+}
+
+.card_wrapper {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 5px;
+}
+
+.image_wrapper {
+  display: flex;
+  width: 280px;
+  min-height: 280px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 7px;
+}
+
+.image_avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 7px;
+}
+
+.user_wrapper {
+  display: flex;
+  box-sizing: border-box;
+  width: 100%;
+  height: 40px;
+  padding: 3px 5px;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 20px;
+  border: 2px dotted #d9cd07;
+  border-radius: 5px;
+}
+
+.text_title {
+  font-size: 1em;
+  color: $text-color;
+}
+
+.text_value {
+  font-size: 1em;
+  color: $input-text;
+}

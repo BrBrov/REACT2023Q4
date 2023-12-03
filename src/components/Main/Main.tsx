@@ -1,8 +1,14 @@
 import { ReactNode } from 'react';
 import { NavLink } from 'react-router-dom';
 import './Main.scss';
+import { useSelector } from 'react-redux';
+import getCards from '../../redux/cards/getCards';
+import CardRecord from '../../models/CardRecord';
+import Card from '../Cards/Card';
 
 function Main(): ReactNode {
+  const cards = useSelector(getCards);
+  console.log(cards);
   return (
     <>
       <header className="main_header">
@@ -13,9 +19,13 @@ function Main(): ReactNode {
           Controlled form
         </NavLink>
       </header>
-      <main className="main_container">
-        <span>Here will register cards</span>
-      </main>
+      {!cards.length ? null : (
+        <main className="main_container">
+          {cards.map((card: CardRecord, index: number) => (
+            <Card key={index} {...card} />
+          ))}
+        </main>
+      )}
     </>
   );
 }
