@@ -42,6 +42,8 @@ function FormUncontrolled(): ReactNode {
                 id="name"
                 className="input_text"
                 type="text"
+                defaultValue={''}
+                autoComplete={'on'}
                 ref={formObject.nameRef}
               />
             </div>
@@ -61,6 +63,8 @@ function FormUncontrolled(): ReactNode {
               id="age"
               className="input_text"
               type="number"
+              defaultValue={''}
+              autoComplete={'on'}
               ref={formObject.ageRef}
             />
           </div>
@@ -79,6 +83,8 @@ function FormUncontrolled(): ReactNode {
               id="email"
               className="input_text"
               type="text"
+              defaultValue={''}
+              autoComplete={'on'}
               ref={formObject.emailRef}
             />
           </div>
@@ -97,6 +103,8 @@ function FormUncontrolled(): ReactNode {
               id="password"
               className="input_text"
               type="password"
+              defaultValue={''}
+              autoComplete={'on'}
               ref={formObject.passwordRef}
             />
           </div>
@@ -115,6 +123,8 @@ function FormUncontrolled(): ReactNode {
               id="password_repeat"
               className="input_text"
               type="password"
+              defaultValue={''}
+              autoComplete={'on'}
               ref={formObject.repeatPasswordRef}
             />
           </div>
@@ -132,8 +142,11 @@ function FormUncontrolled(): ReactNode {
             <select
               id="gender"
               className="input_text"
+              defaultValue={''}
+              autoComplete={'on'}
               ref={formObject.genderRef}
             >
+              <option value="">- Your gender -</option>
               <option value="male">Male</option>
               <option value="female">Female</option>
             </select>
@@ -144,7 +157,13 @@ function FormUncontrolled(): ReactNode {
         </div>
         <div className="form_record">
           <div className="form_license">
-            <input id="lincense" type="checkbox" ref={formObject.licenseRef} />
+            <input
+              id="lincense"
+              type="checkbox"
+              ref={formObject.licenseRef}
+              defaultValue={''}
+              autoComplete={'on'}
+            />
             <label htmlFor="lincense" className="form_label">
               Accept Terms and Conditions
             </label>
@@ -161,6 +180,8 @@ function FormUncontrolled(): ReactNode {
             id="avatar"
             type="file"
             name="file"
+            defaultValue={''}
+            autoComplete={'on'}
             ref={formObject.avatarRef}
           />
           {errors.avatar ? (
@@ -174,7 +195,13 @@ function FormUncontrolled(): ReactNode {
                 Country
               </label>
             </div>
-            <select id="countries" ref={formObject.countryRef}>
+            <select
+              id="countries"
+              ref={formObject.countryRef}
+              defaultValue={''}
+              autoComplete={'on'}
+            >
+              <option value={''}>- Your country -</option>
               {country.map((item: string, id: number) => (
                 <option key={id} value={item}>
                   {item}
@@ -206,8 +233,8 @@ function FormUncontrolled(): ReactNode {
 
     formUncontrolledSchema
       .validate(FormDataObj, { abortEarly: false })
-      .then((result: FormSchemeData) => {
-        const cardRecord: CardRecord = createCardRecord(result);
+      .then((value: FormSchemeData) => {
+        const cardRecord: CardRecord = createCardRecord(value);
         dispatcher(cardAction(cardRecord));
 
         setErrors(createFormErrorStructure(null));

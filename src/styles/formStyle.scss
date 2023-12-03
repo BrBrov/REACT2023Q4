@@ -95,6 +95,19 @@
   cursor: pointer;
 }
 
+.button_controlled {
+  font-size: 1em;
+  color: $text-color;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background: linear-gradient(180deg, #0bb08d, #10d0a8, #0ce3b7, #02fcc5);
+}
+
+.button_controlled:disabled {
+  background: linear-gradient(180deg, #abadac, #bac9c9, #a7d0c3, #9ae8d3);
+}
+
 .input_text {
   font-size: 1em;
   border: none;
@@ -114,10 +127,15 @@
 
 #countries {
   width: 230px;
+  outline: none;
+  border: none;
+  border-radius: 3px;
+  background: #b0e8c3;
 }
 
 #gender {
-  width: 80px;
+  appearance: none;
+  width: 130px;
   outline: none;
   border: none;
   border-radius: 3px;

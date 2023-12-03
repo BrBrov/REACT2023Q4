@@ -28,7 +28,7 @@ const formScheme = object().shape({
     .oneOf([ref('password')], 'First and second passwords is not equal')
     .required(msgForEmptyField)
     .defined(),
-  gender: string().required().defined(),
+  gender: string().required().oneOf(['male', 'female'], 'Check your gender'),
   license: boolean().oneOf([true], 'You have to accept conditions'),
   country: string().required().defined(),
 });

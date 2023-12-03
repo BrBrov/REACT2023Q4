@@ -17,13 +17,13 @@ function FormControlled(): ReactNode {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm<FormCtrlData>({
     resolver: yupResolver<FormCtrlData>(formControlledSchema),
   });
 
-  console.log('Error -> \n', errors);
   const onSubmit: SubmitHandler<FormCtrlData> = function (data: FormCtrlData) {
+    console.log('Error -> \n', errors);
     createCardRecordForCtrlForm(data).then((record: CardRecord) => {
       dispatcher(cardAction(record));
       navigate('/');
@@ -45,6 +45,8 @@ function FormControlled(): ReactNode {
                 id="name"
                 className="input_text"
                 type="text"
+                defaultValue={''}
+                autoComplete={'on'}
                 {...register('name')}
                 aria-invalid={errors.name ? 'true' : 'false'}
               />
@@ -65,7 +67,9 @@ function FormControlled(): ReactNode {
               id="age"
               className="input_text"
               type="number"
+              defaultValue={''}
               {...register('age')}
+              autoComplete={'on'}
               aria-invalid={errors.age ? 'true' : 'false'}
             />
           </div>
@@ -84,7 +88,9 @@ function FormControlled(): ReactNode {
               id="email"
               className="input_text"
               type="text"
+              defaultValue={''}
               {...register('email')}
+              autoComplete={'on'}
               aria-invalid={errors.email ? 'true' : 'false'}
             />
           </div>
@@ -103,7 +109,9 @@ function FormControlled(): ReactNode {
               id="password"
               className="input_text"
               type="password"
+              defaultValue={''}
               {...register('password')}
+              autoComplete={'on'}
               aria-invalid={errors.password ? 'true' : 'false'}
             />
           </div>
@@ -122,7 +130,9 @@ function FormControlled(): ReactNode {
               id="password_repeat"
               className="input_text"
               type="password"
+              defaultValue={''}
               {...register('repeatPassword')}
+              autoComplete={'on'}
               aria-invalid={errors.repeatPassword ? 'true' : 'false'}
             />
           </div>
@@ -140,9 +150,12 @@ function FormControlled(): ReactNode {
             <select
               id="gender"
               className="input_text"
+              defaultValue={''}
               {...register('gender')}
+              autoComplete={'on'}
               aria-invalid={errors.gender ? 'true' : 'false'}
             >
+              <option value="">- Your gender -</option>
               <option value="male">Male</option>
               <option value="female">Female</option>
             </select>
@@ -156,7 +169,9 @@ function FormControlled(): ReactNode {
             <input
               id="lincense"
               type="checkbox"
+              defaultValue={''}
               {...register('license')}
+              autoComplete={'on'}
               aria-invalid={errors.license ? 'true' : 'false'}
             />
             <label htmlFor="lincense" className="form_label">
@@ -174,7 +189,9 @@ function FormControlled(): ReactNode {
           <input
             id="avatar"
             type="file"
+            defaultValue={''}
             {...register('avatar')}
+            autoComplete={'on'}
             aria-invalid={errors.avatar ? 'true' : 'false'}
           />
           {errors.avatar ? (
@@ -190,9 +207,12 @@ function FormControlled(): ReactNode {
             </div>
             <select
               id="countries"
+              defaultValue={''}
               {...register('country')}
               aria-invalid={errors.country ? 'true' : 'false'}
+              autoComplete={'on'}
             >
+              <option value={''}>- Your country -</option>
               {country.map((item: string, id: number) => (
                 <option key={id} value={item}>
                   {item}
@@ -205,7 +225,11 @@ function FormControlled(): ReactNode {
           ) : null}
         </div>
         <div className="button_wrapper">
-          <button type="submit" className="button_uncontrolled">
+          <button
+            type="submit"
+            className="button_controlled"
+            disabled={!isValid}
+          >
             Submit
           </button>
         </div>

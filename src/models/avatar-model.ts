@@ -1,6 +1,6 @@
 interface Avatar {
-  size: number | null;
-  pic: string | null;
+  size?: number | null;
+  pic?: string | null;
   ext: string;
 }
 
