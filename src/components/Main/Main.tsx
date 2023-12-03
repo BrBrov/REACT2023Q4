@@ -37,7 +37,13 @@ function Main(): ReactNode {
           Controlled form
         </NavLink>
       </header>
-      {!cards.length ? null : (
+      {!cards.length ? (
+        <main className="main_container">
+          <div className="empty_cards">
+            <span className="empty_text">Here is not any cards...</span>
+          </div>
+        </main>
+      ) : (
         <main className="main_container">
           {cards.map((card: CardRecord, index: number) => (
             <Card key={index} {...card} />

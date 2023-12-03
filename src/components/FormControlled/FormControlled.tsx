@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import getCountryState from '../../redux/countries/getState';
@@ -20,15 +20,29 @@ function FormControlled(): ReactNode {
     formState: { errors, isValid },
   } = useForm<FormCtrlData>({
     resolver: yupResolver<FormCtrlData>(formControlledSchema),
+    mode: 'onChange',
+    reValidateMode: 'onChange',
   });
 
+  const [firstStart, resetStartStatus] = useState<boolean>(true);
+  const [isButton, buttonViewSet] = useState<boolean>(false);
+
   const onSubmit: SubmitHandler<FormCtrlData> = function (data: FormCtrlData) {
-    console.log('Error -> \n', errors);
     createCardRecordForCtrlForm(data).then((record: CardRecord) => {
       dispatcher(cardAction(record));
       navigate('/');
     });
   };
+
+  useEffect(() => {
+    if (!firstStart) {
+      if (!isValid) {
+        buttonViewSet(true);
+      } else {
+        buttonViewSet(false);
+      }
+    }
+  }, [firstStart, isValid]);
 
   return (
     <div className="form_wrapper">
@@ -45,7 +59,6 @@ function FormControlled(): ReactNode {
                 id="name"
                 className="input_text"
                 type="text"
-                defaultValue={''}
                 autoComplete={'on'}
                 {...register('name')}
                 aria-invalid={errors.name ? 'true' : 'false'}
@@ -67,7 +80,6 @@ function FormControlled(): ReactNode {
               id="age"
               className="input_text"
               type="number"
-              defaultValue={''}
               {...register('age')}
               autoComplete={'on'}
               aria-invalid={errors.age ? 'true' : 'false'}
@@ -88,7 +100,6 @@ function FormControlled(): ReactNode {
               id="email"
               className="input_text"
               type="text"
-              defaultValue={''}
               {...register('email')}
               autoComplete={'on'}
               aria-invalid={errors.email ? 'true' : 'false'}
@@ -109,7 +120,6 @@ function FormControlled(): ReactNode {
               id="password"
               className="input_text"
               type="password"
-              defaultValue={''}
               {...register('password')}
               autoComplete={'on'}
               aria-invalid={errors.password ? 'true' : 'false'}
@@ -130,7 +140,6 @@ function FormControlled(): ReactNode {
               id="password_repeat"
               className="input_text"
               type="password"
-              defaultValue={''}
               {...register('repeatPassword')}
               autoComplete={'on'}
               aria-invalid={errors.repeatPassword ? 'true' : 'false'}
@@ -150,7 +159,6 @@ function FormControlled(): ReactNode {
             <select
               id="gender"
               className="input_text"
-              defaultValue={''}
               {...register('gender')}
               autoComplete={'on'}
               aria-invalid={errors.gender ? 'true' : 'false'}
@@ -169,7 +177,6 @@ function FormControlled(): ReactNode {
             <input
               id="lincense"
               type="checkbox"
-              defaultValue={''}
               {...register('license')}
               autoComplete={'on'}
               aria-invalid={errors.license ? 'true' : 'false'}
@@ -189,7 +196,6 @@ function FormControlled(): ReactNode {
           <input
             id="avatar"
             type="file"
-            defaultValue={''}
             {...register('avatar')}
             autoComplete={'on'}
             aria-invalid={errors.avatar ? 'true' : 'false'}
@@ -207,7 +213,6 @@ function FormControlled(): ReactNode {
             </div>
             <select
               id="countries"
-              defaultValue={''}
               {...register('country')}
               aria-invalid={errors.country ? 'true' : 'false'}
               autoComplete={'on'}
@@ -228,7 +233,10 @@ function FormControlled(): ReactNode {
           <button
             type="submit"
             className="button_controlled"
-            disabled={!isValid}
+            disabled={isButton}
+            onClick={() => {
+              if (firstStart) resetStartStatus(false);
+            }}
           >
             Submit
           </button>
