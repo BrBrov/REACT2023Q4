@@ -1,0 +1,20 @@
+@import './../../styles/fonts';
+@import './../../styles/colors';
+
+.fallback {
+  display: flex;
+  box-sizing: border-box;
+  width: 320px;
+  height: calc(100vw / 3);
+  padding: 10px 10px 10px 100px;
+  justify-content: flex-start;
+  align-items: center;
+  background: $card-background;
+  border-radius: 5px;
+  box-shadow: $box-shadow-card;
+}
+
+.fallback__text {
+  @include Neon(2em);
+  color: $title-color;
+}

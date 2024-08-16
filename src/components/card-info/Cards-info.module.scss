@@ -1,0 +1,165 @@
+@import './../../styles/fonts';
+@import './../../styles/colors';
+
+.card {
+  display: flex;
+  width: 100%;
+  min-width: calc(100vw / 3);
+  min-height: calc(100vh - 230px);
+  box-sizing: border-box;
+  padding: 5px;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 15px;
+  background: $card-background;
+  border-radius: 10px;
+  box-shadow: $box-shadow-card;
+}
+
+.loading {
+  display: flex;
+  width: 100%;
+  min-width: calc(100vw / 3);
+  min-height: calc(100vh - 230px);
+  box-sizing: border-box;
+  padding: 5px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  border-radius: 10px;
+  box-shadow: $box-shadow-card;
+}
+
+.top {
+  display: flex;
+  width: 100%;
+  height: 30px;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.close {
+  display: flex;
+  width: 30px;
+  height: 30px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.close_img {
+  object-fit: fill;
+  width: 25px;
+  height: 25px;
+}
+
+.close_img:hover {
+  width: 27px;
+  height: 27px;
+}
+
+.close_img:active {
+  width: 24px;
+  height: 24px;
+}
+
+.main__info_wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+}
+
+.main__img_beer {
+  max-height: 290px;
+}
+
+.main__image_beer {
+  object-fit: fill;
+  max-height: 290px;
+}
+
+.main__info_block {
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 7px;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-self: flex-start;
+  gap: 7px;
+  border-radius: 5px;
+  border: $card-decription-border;
+}
+
+.main__beer_name {
+  align-self: center;
+  box-sizing: border-box;
+  padding: 0 3px;
+  @include Neon(1.2em);
+  color: $title-color;
+  text-decoration: $text-sign-color underline solid;
+}
+
+.main__beer_tagline {
+  box-sizing: border-box;
+  padding: 0 3px;
+  @include CardoBold(1em);
+  color: $text-color;
+  text-decoration: $text-sign-color underline solid;
+}
+
+.main__beer_charater {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 5px;
+}
+
+.main__beer_alcohol,
+.main__beer_color,
+.main__beer_bitterness {
+  @include CardoItalic(0.8em);
+  text-decoration: $text-color underline dashed;
+  color: $text-sign-color;
+}
+
+.brewers_tips {
+  align-self: center;
+  text-indent: 5px;
+  @include CardoBold(0.9em);
+  color: $text-color;
+}
+
+.main__beer_pairings {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 3px;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 5px;
+}
+
+.main__pairing_title {
+  @include CardoBold(1em);
+  color: $title-color;
+}
+
+.main__food_pairing {
+  @include Cardo(0.9em);
+  color: $text-color;
+}
+
+.main__card_wrong {
+  display: flex;
+  width: 98%;
+  height: calc(100vh / 1.6);
+  justify-content: center;
+  align-items: center;
+}
